@@ -67,21 +67,61 @@ namespace Task11
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("\nBy running for couple of seconds which seemed as couple hours" +
-                    "\nYou manage to reache end of the tunnel where it splits in 3 seperate tunnels. On every tunnel entrence you see number:" +
-                    "\n\n1st tunnel has number 1" +
-                    "\n2nd tunnel has number 54" +
-                    "\n3rd tunnel has number 117" +
-                    "\n\nNear the entrance you see a word:\n" +
+                    "\nYou manage to reache end of the tunnel where it splits in 3 seperate tunnels. On every tunnel entrence you see number:");
+                Console.Write("\n\n1st tunnel has number ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("1");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("\n2nd tunnel has number ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("54");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("\n3rd tunnel has number ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("117");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("\n\nNear the entrance of tunnels on the wall you see a riddle:\n" +
                     "One is three - Two is one - Three is zero.");
+                Console.Write("\nYour choice 1, 2 or 3: ");
 
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 choice = Console.ReadLine();
-                if(choice != null && choice.ToLower() == "2")
-                { Console.WriteLine("You live for the next day"); }
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                if(choice != null && (choice.ToLower() == "2" || choice.ToLower() == "54"))
+                { 
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("\nYou go into the tunnel and find a door with a lock near");
+                    Console.WriteLine("On the door you find scratches that looks like some ones writing");
+                    Console.WriteLine("You lean over to take a better look and you see\n");
+                    Console.Write("First is last - Last is middle - Middle is first");
+                    Console.WriteLine("\nOn the wall near by you see date 11-2023-07");
+
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("\nYour answer? (Write only numbers): ");
+                    choice = Console.ReadLine();
+
+                    Console.ForegroundColor= ConsoleColor.Green;
+                    if(choice != null && choice == "20230711")
+                    {
+                        Console.WriteLine("\nYou enter the code and the lock clicks." +
+                            " Door opens and you see exit to outside. " +
+                            "You climb outside and run to your home...");
+                        Console.WriteLine("\nYou survived.\n\n The End!");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("You entered wrong code. Monster reaches you" +
+                            ". And slays you!");
+                        Console.WriteLine("You are dead!");
+                        Console.WriteLine("\n\n The End!");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Sorry bud. Wrong Choice");
+                    Console.WriteLine("You entered the tunnel and reached dead end");
                     Console.WriteLine("You are dead!");
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }

@@ -1,4 +1,4 @@
-﻿namespace Task_6
+﻿namespace Task6
 {
     internal class Program
     {

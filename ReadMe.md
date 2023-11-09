@@ -18,3 +18,7 @@
 ## Lesson 5 (2023-11-08)
 
 - String manipulation
+
+## Lesson 6 (2023-11-09)
+
+- Going over the completed left over tasks from other days

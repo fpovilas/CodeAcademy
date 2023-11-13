@@ -21,7 +21,7 @@
 
                         Console.Write(wordToCharArray);
                     }
-                    else { Console.Write(word); }
+                    else { Console.Write(word.ToUpper()); }
                     break;
                 case 2:
                     Console.Write("Please enter a word: ");

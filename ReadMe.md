@@ -31,4 +31,4 @@
 ## Lesson 8 (2023-11-14)
 
 - Do While loop
-- Task numeration continues Lesson 7
+- Task numeration continues in Lesson 7

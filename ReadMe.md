@@ -22,3 +22,13 @@
 ## Lesson 6 (2023-11-09)
 
 - Going over the completed left over tasks from other days
+
+## Lesson 7 (2023-11-13)
+
+- While loop
+- Continuation is in Lesson 8
+
+## Lesson 8 (2023-11-14)
+
+- Do While loop
+- Task numeration continues Lesson 7

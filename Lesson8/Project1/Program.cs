@@ -45,7 +45,7 @@
 
             do
             {
-                randomNumber = random.Next(1, 33);
+                randomNumber = random.Next(1, 34);
                 oponentNumber = randomNumber % 3;
 
                 Console.Clear();

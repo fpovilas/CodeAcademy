@@ -32,3 +32,8 @@
 
 - Do While loop
 - Task numeration continues in Lesson 7
+
+## Lesson 9 (2023-11-15)
+
+- Methods
+- Recursion

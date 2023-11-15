@@ -3,7 +3,7 @@
 <details>
 <summary>2023-10</summary>
 
-## Lesson 1 (2023-10-30)
+## [Lesson 1 (2023-10-30)](/Lesson1)
 
 - Variables and Printing out to Console
 

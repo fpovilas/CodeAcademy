@@ -56,4 +56,10 @@
 
 - For Loop
 
+#### [Lesson 12 (2023-11-21)](/Lesson12)
+
+- Debugging
+- StringBuilder
+- StopWatch
+
 </details>

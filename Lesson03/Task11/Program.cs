@@ -271,7 +271,7 @@ namespace Task11
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong choice buddy");
                 Console.WriteLine("You are dead!");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Reset();
             }
         }
     }

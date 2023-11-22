@@ -62,4 +62,9 @@
 - StringBuilder
 - StopWatch
 
+#### [Lesson 13 (2023-11-22)](/Lesson13)
+
+- Arrays
+- String Array functions
+
 </details>

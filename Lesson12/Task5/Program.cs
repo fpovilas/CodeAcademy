@@ -5,10 +5,9 @@
         static void Main(string[] args)
         {
             string name1 = "John";
-            // string name2 = "john"; // Wrong Line
-            string name2 = name1;
+            string name2 = "john"; 
 
-            if(name1.Equals(name2))
+            if(name1.ToLower().Equals(name2.ToLower())) // Added ToLower to both strings
             {
                 Console.WriteLine("Names are the same.");
             }

@@ -38,7 +38,6 @@ namespace Task3
                         Console.WriteLine("Array is symetrical");
                     else
                         Console.WriteLine("Array is not symetrical");
-
                     break;
                 case "3.3":
                      break;

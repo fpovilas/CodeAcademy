@@ -1,4 +1,6 @@
-﻿namespace Task1
+﻿using System.Diagnostics.Metrics;
+
+namespace Task1
 {
     internal class Program
     {
@@ -15,6 +17,9 @@
             string[] arraySubTask4;
             int amountOfPostivieNums;
             string sentece;
+            string[] deckType;
+            string[] deckFace;
+            string[] deck;
 
             #endregion
 
@@ -62,6 +67,12 @@
                     Print1DArrayStringGE5(arraySubTask4);
                     break;
                 case "1.5":
+                    deckFace = new string[] { "Queen", "King", "Ace", "Joker"};
+                    deckType = new string[] { "Hearts", "Diamonds", "Clubs", "Spades" };
+                    deck = ConstructDeck(deckFace, deckType);
+
+                    Print1DArrayString(deck);
+
                     break;
                 default:
                     Console.WriteLine("There is only 5 tasks or wrong choice");
@@ -76,7 +87,7 @@
                 1.2 Print only positives from array
                 1.3 Amount of VAT to Pay
                 1.4 Take sentence return array of string where word is > 5
-                1.5
+                1.5 Construct Deck out of 2 arrays
                 """);
         }
 
@@ -94,6 +105,24 @@
         private static void Print1DArrayDouble(double[] array)
         {
             foreach (var i in array) Console.Write(i + " ");
+        }
+
+        private static void Print1DArrayString(string[] array)
+        {
+            int j = 1;
+            foreach (var i in array)
+            {
+                if (j % 4 == 0)
+                {
+                    Console.Write($"{i, 15}.");
+                    Console.WriteLine();
+                }
+                else
+                    Console.Write($"{i, 15}, ");
+
+                j++;
+            }
+                
         }
 
         private static double ReturnAVG(int[] arr)
@@ -151,6 +180,24 @@
                 if(item.Length >= 5)
                     Console.WriteLine(item);
             }
+        }
+
+        private static string[] ConstructDeck(string[] deckFace, string[] deckType)
+        {
+            string[] constructedDeck = new string[deckType.Length * deckType.Length];
+
+            int counter = 0;
+
+            for(int i = 0; i < deckType.Length; i++)
+            {
+                for(int j = 0; j < deckFace.Length; j++)
+                {
+                    constructedDeck[counter] = $"{deckFace[i]} of {deckType[j]}";
+                    counter++;
+                }
+            }
+
+            return constructedDeck;
         }
     }
 };

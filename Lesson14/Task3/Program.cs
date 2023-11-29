@@ -117,42 +117,36 @@ namespace Task3
 
         private static bool isSymetrical(int[,] valueArray)
         {
-            int symmetricalH = 0;
-            int symmetricalV = 0;
-            bool symetrical = false;
+            bool symetrical = true;
+
+            if (valueArray.GetLength(0) != valueArray.GetLength(1))
+            {
+                return false;
+            }
 
             // Checking if it symmetrical Vertically
-            for (int i = 0; i < valueArray.GetLength(0) / 2; i++)
+            for (int i = 0; i < valueArray.GetLength(0); i++)
             {
-                for (int j = 0; j < Math.Ceiling((decimal)valueArray.GetLength(1) / 2); j++)
+                for (int j = 0; j < valueArray.GetLength(1) / 2; j++)
                 {
-                    if (valueArray[i, j] == valueArray[valueArray.GetLength(0) - i - 1, valueArray.GetLength(1) - j - 1])
+                    if (valueArray[i, j] != valueArray[i, valueArray.GetLength(1) - j - 1])
                     {
-                        symmetricalH++;
+                        return false;
                     }
-
-                    else { return false; }
                 }
             }
 
             // Checking if it symmetrical Horizontaly
             for (int i = 0; i < valueArray.GetLength(0) / 2; i++)
             {
-                for (int j = 0; j < Math.Ceiling((decimal)valueArray.GetLength(1) / 2); j++)
+                for (int j = 0; j < valueArray.GetLength(1); j++)
                 {
-                    if (valueArray[j, i] == valueArray[valueArray.GetLength(1) - j - 1, valueArray.GetLength(0) - i - 1])
+                    if (valueArray[i, j] != valueArray[valueArray.GetLength(1) - i - 1, j])
                     {
-                        symmetricalV++;
+                        return false;
                     }
-
-                    else { return false; }
                 }
             }
-
-
-            if (symmetricalH == Math.Ceiling((decimal)valueArray.GetLength(0) / 2) &&
-                symmetricalV == Math.Ceiling((decimal)valueArray.GetLength(0) / 2))
-                symetrical = true;
 
             return symetrical;
         }

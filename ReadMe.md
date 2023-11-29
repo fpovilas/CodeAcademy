@@ -76,8 +76,12 @@
 
 - Continuation of Lesson14
 
-#### [Lesson 16 (2023-11-28)](/Lesson15)
+#### [Lesson 16 (2023-11-28)](/Lesson16)
 
 - Lists
+
+#### [Lesson 17 (2023-11-29)](/Lesson17)
+
+- Random variable and it methods
 
 </details>

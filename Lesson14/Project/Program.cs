@@ -32,7 +32,7 @@ namespace Project
 
         private static void PrintBoard(string[,] gameBoard)
         {
-            Console.Write($"{0,4}|{1,4}|{2,4}|\n");
+            Console.Write($"{'|',3}{0,3}|{1,3}|{2,3}|\n");
             Console.Write($"---------------\n");
             for (int i = 0; i < gameBoard.GetLength(0); i++)
             {

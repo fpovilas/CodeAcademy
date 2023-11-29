@@ -68,7 +68,7 @@ namespace Task1
 
                     break;
                 case "1.6":
-                    wordsToAscii = new List<string> { "Povilas", "Tomas", "Ieva", "Petras", "1", "u" };
+                    wordsToAscii = new List<string> { "Povilas", "Tomas", "Ieva", "Petras", "OMG", "WTF" };
 
                     asciiSumIsPrime = AsciiSumPrime(wordsToAscii);
 
@@ -199,7 +199,7 @@ namespace Task1
                     sum += (int)c;
                 }
 
-                for (int i = 1; i < sum; i++)
+                for (int i = 1; i <= sum; i++)
                 {
                     if(sum % i == 0)
                         divisions++;

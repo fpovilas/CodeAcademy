@@ -10,15 +10,41 @@ namespace Project
 
             string[] playerNames;
             string[,] gameBoard;
+            int[] coords;
+            int whichPlayerTurn;
 
             #endregion
 
             playerNames = new string[2];
             gameBoard = new string[3,3];
+            whichPlayerTurn = 1;
 
             PopulatePlayerNames(ref playerNames);
 
-            PrintBoard(gameBoard);
+            while (true)
+            {
+                PrintBoard(gameBoard);
+
+                switch (whichPlayerTurn)
+                {
+                    case 1:
+                        coords = GetYX();
+
+                        gameBoard[coords[0], coords[1]] = "x";
+
+                        whichPlayerTurn = 2;
+                        break;
+                    case 2:
+                        coords = GetYX();
+
+                        gameBoard[coords[0], coords[1]] = "o";
+
+                        whichPlayerTurn = 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private static void PopulatePlayerNames(ref string[] playerNames)
@@ -32,6 +58,8 @@ namespace Project
 
         private static void PrintBoard(string[,] gameBoard)
         {
+            Console.Clear();
+
             Console.Write($"{'|',3}{0,3}|{1,3}|{2,3}|\n");
             Console.Write($"---------------\n");
             for (int i = 0; i < gameBoard.GetLength(0); i++)
@@ -43,6 +71,20 @@ namespace Project
                 }
                 Console.WriteLine();
             }
+        }
+
+        private static int[] GetYX()
+        {
+            int[] coord = new int[2];
+            Console.Write("Please enter X coordinate: ");
+            if(!int.TryParse(Console.ReadLine(), out coord[0]))
+            { coord[0] = 0; }
+
+            Console.Write("Please enter Y coordinate: ");
+            if (!int.TryParse(Console.ReadLine(), out coord[1]))
+            { coord[1] = 0; }
+
+            return coord;
         }
     }
 }

@@ -72,7 +72,7 @@
 - Multidimensional Arrays
 - Foreach loop
 
-#### [Lesson 15 (2023-11-27)](/Lesson15)
+#### [Lesson 15 (2023-11-27)](/Lesson15/ReadMe.md)
 
 - Continuation of Lesson14
 
@@ -83,5 +83,9 @@
 #### [Lesson 17 (2023-11-29)](/Lesson17)
 
 - Random variable and it methods
+
+#### [Lesson 18 (2023-11-30)](/Lesson18/ReadMe.md)
+
+- Finishing up tasks that were left uncompleted
 
 </details>

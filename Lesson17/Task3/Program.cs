@@ -35,8 +35,18 @@ namespace Task3
             #endregion
 
             int[,] exExMatrix = FillMatrixWithDistinctNumbers(x, y);
+            int[,] shadowMatrix = FillMatrixWithDistinctNumbers(x, y);
+            string[,] xOutMatrix = CheckTwoTicketsForMatchingNums(exExMatrix, shadowMatrix, out List<int> correctNum, out List<int> guessNum);
 
             PrintMatrix(exExMatrix);
+            Console.WriteLine("---");
+            PrintMatrix(xOutMatrix);
+            Console.WriteLine("---");
+            
+            for(int i = 0; i < correctNum.Count; i++)
+            {
+                Console.WriteLine($"To guess No. {correctNum[i]} has taken {guessNum[i]} times");
+            }
         }
 
         private static int GenerateRandomNumber(int minNum, int maxNum)
@@ -82,29 +92,41 @@ namespace Task3
         {
             int[,] mat = new int[x, y];
             List<int> mat1D = new List<int> {};
+            int num;
 
-            for (int i = 0; i < x; i++)
+            for (int i = 0; i < y; i++)
             {
-                for (int j = 0; j < y; j++)
+                for (int j = 0; j < x; j++)
                 {
-                    int num;
-
                     do
                     { num = GenerateRandomNumber(1, 9) + i * 10; }
                     while (DoArrayContainsThisNum(mat1D, num));
 
-                    mat[i, j] = num;
+                    mat1D.Add(num);
+                    mat[j, i] = num;
                 }
             }
 
             return mat;
         }
 
-        private static void PrintMatrix(int[,] matrix)
+        private static void PrintMatrix(int[,] matrix) // Prints INT
         {
             for(int i = 0; i<matrix.GetLength(0); i++)
             {
                 for(int j = 0; j<matrix.GetLength(1); j++)
+                {
+                    Console.Write(matrix[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void PrintMatrix(string[,] matrix) // Prints String
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     Console.Write(matrix[i, j] + " ");
                 }
@@ -138,6 +160,40 @@ namespace Task3
             }
 
             return false;
+        }
+
+        private static string[,] CheckTwoTicketsForMatchingNums(int[,] originalTicket, int[,] compareTicket, out List<int> correctNum, out List<int> guessNum)
+        {
+            string[,] xOutMatrix = new string[originalTicket.GetLength(0), originalTicket.GetLength(1)];
+            int counter = 1;
+            correctNum = new List<int> {};
+            guessNum = new List<int> {};
+
+            for (int i = 0; i < originalTicket.GetLength(0); i++)
+            {
+                for (int j = 0; j < originalTicket.GetLength(1); j++)
+                {
+                    for(int k = 0; k < originalTicket.GetLength(1); k++)
+                    {
+                        if ((originalTicket[i, j] != compareTicket[i, k]))
+                        {
+                            xOutMatrix[i, j] = originalTicket[i, j].ToString();
+                            counter++;
+                            continue;
+                        }
+                        else
+                        {
+                            xOutMatrix[i, j] = "x";
+                            correctNum.Add(originalTicket[i,j]);
+                            guessNum.Add(counter);
+                            counter = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return xOutMatrix;
         }
     }
 }

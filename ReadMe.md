@@ -88,4 +88,8 @@
 
 - Finishing up tasks that were left uncompleted
 
+#### [Lesson 19 (2023-12-04)](/Lesson19/)
+
+- Dictionary
+
 </details>

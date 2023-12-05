@@ -71,6 +71,8 @@
 
 - Multidimensional Arrays
 - Foreach loop
+--
+- Haven't completed Project1 (Tic Tac Toe)
 
 #### [Lesson 15 (2023-11-27)](/Lesson15/ReadMe.md)
 
@@ -83,6 +85,8 @@
 #### [Lesson 17 (2023-11-29)](/Lesson17)
 
 - Random variable and it methods
+--
+- Haven't completed Task3 (Improve Tic Tac Toe)
 
 #### [Lesson 18 (2023-11-30)](/Lesson18/ReadMe.md)
 
@@ -91,5 +95,11 @@
 #### [Lesson 19 (2023-12-04)](/Lesson19/)
 
 - Dictionary
+--
+- Haven't completed Task3.3 and Task4
+
+#### [Lesson 20 (2023-12-05)](/Lesson20/)
+
+- Project - Brain War
 
 </details>

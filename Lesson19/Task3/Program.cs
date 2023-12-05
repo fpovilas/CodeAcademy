@@ -1,4 +1,4 @@
-﻿namespace Task_3
+﻿namespace Task3
 {
     internal class Program
     {
@@ -10,7 +10,7 @@
 
             switch (choice)
             {
-                case "1.1":
+                case "3.1":
                     Dictionary<string, int> wordAndWordCount = new Dictionary<string, int>();
                     bool loop = true;
 
@@ -31,7 +31,7 @@
 
                     PrintDictionaryWordAndCount(wordAndWordCount);
                     break;
-                case "1.2":
+                case "3.2":
                     Dictionary<string, List<string>> movieTitleAndGenre = new Dictionary<string, List<string>>()
                     {
                         {"Title #1", new List<string>{"Horror", "Detective"} },
@@ -51,7 +51,7 @@
                     PrintDictionaryTitles(movieTitleAndGenre, chosenGenre);
                     
                     break;
-                case "1.3":
+                case "3.3":
                     
                     break;
                 default:
@@ -63,9 +63,9 @@
         private static void PrintMenu()
         {
             Console.WriteLine("""
-            1.1 Lets user enter words and check how much time it has appeared
-            1.2 Dictionary with movie Titles and Genres. Allows to select a Genre and prints titles
-            1.3 
+            3.1 Lets user enter words and check how much time it has appeared
+            3.2 Dictionary with movie Titles and Genres. Allows to select a Genre and prints titles
+            3.3 
             """);
         }
 

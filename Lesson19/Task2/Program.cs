@@ -10,7 +10,7 @@
 
             switch (choice)
             {
-                case "1.1":
+                case "2.1":
                     Dictionary<string, int> cityAndPopulation = new Dictionary<string, int>()
                     {
                         {"Šiauliai", 100653},
@@ -26,7 +26,7 @@
 
                     PrintDictionaryCityAndPopulation(cityAndPopulation, cityChoice);
                     break;
-                case "1.2":
+                case "2.2":
                     Dictionary<string, string> wordAndTranslation = new Dictionary<string, string>()
                     {
                         {"Hello", "Labas"},
@@ -42,7 +42,7 @@
 
                     PrintDictionaryTranslatedWord(wordAndTranslation, wordToTranslate);
                     break;
-                case "1.3":
+                case "2.3":
                     Dictionary<string, List<int>> nameAndGrades = new Dictionary<string, List<int>>()
                     {
                         {"Povilas", new List<int>{10, 5, 6} },
@@ -58,7 +58,7 @@
 
                     PrintDictionaryNameAndGrades(nameAndGrades, chosenStudent);
                     break;
-                case "1.4":
+                case "2.4":
                     Dictionary<string, int> monthAndDayCount = new Dictionary<string, int>()
                     {
                         {"January", 31},
@@ -86,10 +86,10 @@
         private static void PrintMenu()
         {
             Console.WriteLine("""
-            1.1 Dictionary that stores City name as Key and Population as Value.
-            1.2 Dictionary that stores English word as Key and Translation to Lithuanian as Value. Prints translation when entered in english.
-            1.3 Dictionary that stores Student name as Key and Grades as Value. Displays grades when name is entered
-            1.4 Dictionary that stores Months name as Key and Day number as Value. Displays moths that has less tha 31 days
+            2.1 Dictionary that stores City name as Key and Population as Value.
+            2.2 Dictionary that stores English word as Key and Translation to Lithuanian as Value. Prints translation when entered in english.
+            2.3 Dictionary that stores Student name as Key and Grades as Value. Displays grades when name is entered
+            2.4 Dictionary that stores Months name as Key and Day number as Value. Displays moths that has less tha 31 days
             """);
         }
 

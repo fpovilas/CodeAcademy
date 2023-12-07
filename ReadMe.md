@@ -102,4 +102,13 @@
 
 - Project - Brain War
 
+#### [Lesson 21 (2023-12-06)](/Lesson20/)
+
+- Project - Brain War (Continuing project)
+
+#### [Lesson 22 (2023-12-07)](/Lesson20/)
+
+- Project - Brain War (Continuing project. Doing Advanced stuff)
+- Need to Complete multi-theme function
+
 </details>

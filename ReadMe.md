@@ -111,4 +111,8 @@
 - Project - Brain War (Continuing project. Doing Advanced stuff)
 - Need to Complete multi-theme function
 
+#### [Lesson 23 (2023-12-11)](/Lesson20/)
+
+- Project - Brain War. Presentation
+
 </details>

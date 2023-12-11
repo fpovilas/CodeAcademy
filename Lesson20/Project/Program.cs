@@ -6,9 +6,9 @@
         {
             #region Variables
 
-            Dictionary<string, int> playerAndScore = new()
+            Dictionary<string, Dictionary<int, int>> playerAndScore = new()
             {
-                { "Povilas Frišmantas", 0 }
+                { "Povilas Frišmantas", new Dictionary < int, int >(){ { 1, 0 }, { 2, 0 } } }
             };
             bool stopGame = false;
             bool isLoggedIn = false;
@@ -102,8 +102,6 @@
                         Console.WriteLine("\nWrong choice please try again.\n");
                         break;
                 }
-
-                //isLoggedIn = int.TryParse(Console.ReadLine(), out int choice);
             } while (!stopGame);
         }
 
@@ -157,7 +155,7 @@
             return answer.ToLower() == "y";
         }
 
-        private static void PrintCreatedPlayer(Dictionary<string, int> player, string firstName, string lastName)
+        private static void PrintCreatedPlayer(Dictionary<string, Dictionary<int,int>> player, string firstName, string lastName)
         {
             Console.ForegroundColor= ConsoleColor.DarkMagenta;
 
@@ -217,19 +215,10 @@
 
         private static void PrintPossibleAnswers(Dictionary<int, List<string>> possibleAnswers, int questionToPrint)
         {
-            for(int i = 0; i < possibleAnswers[questionToPrint].Count; i++)
+            Console.WriteLine();
+            for (int i = 0; i < possibleAnswers[questionToPrint].Count; i++)
             {
-                switch (i)
-                {
-                    case 0 or 2:
-                        Console.Write($"{i + 1, 3}. {possibleAnswers[questionToPrint][i], -35} ");
-                        break;
-                    case 1 or 3:
-                        Console.WriteLine($"{i + 1, 3}. {possibleAnswers[questionToPrint][i], -35}");
-                        break;
-                    default:
-                        break;
-                }
+                Console.WriteLine($"{i + 1,3}. {possibleAnswers[questionToPrint][i],-35}");
             }
         }
 
@@ -270,11 +259,11 @@
             Console.ResetColor();
         }
 
-        private static void PrintParticipants(Dictionary<string, int> players)
+        private static void PrintParticipants(Dictionary<string, Dictionary<int, int>> players)
         {
             Console.Clear();
 
-            foreach(KeyValuePair<string, int> player in players)
+            foreach(KeyValuePair<string, Dictionary<int, int>> player in players)
             {
                 Console.WriteLine($"{player.Key}");
             }
@@ -285,28 +274,38 @@
             Console.ReadKey(true);
         }
 
-        private static void PrintScoreBoard(Dictionary<string, int> players)
+        private static void PrintScoreBoard(Dictionary<string, Dictionary<int, int>> players)
         {
-            Dictionary<string, int> workablePlayers = players;
+            Dictionary<int, string> questionThemes = new() // Question themes
+            {
+                { 1, "General Knowlagde Questions" },
+                { 2, "Films" }
+            };
+            Dictionary<string, Dictionary<int, int>> workablePlayers = players;
 
-            workablePlayers = workablePlayers.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            Dictionary<string, int> playerAndSummedScore = CreateSummedScoreDictionary(workablePlayers);
+
+            playerAndSummedScore = playerAndSummedScore.OrderByDescending(x => x.Value).ToDictionary(x  => x.Key, x => x.Value);
 
             Console.Clear();
 
             int counter = 1;
 
-            foreach(var player in workablePlayers)
+            foreach(var player in playerAndSummedScore)
             {
                 if (counter <= 10)
                 {
-                    double percentage = (double)player.Value / 20 * 100;
                     if (counter <= 3)
                     {
-                        Console.Write($"{player.Key} {player.Value}/20 {(percentage == 0 ? "0" : percentage):#.##}% ");
+                        Console.Write($"{player.Key} ");
                         AddStar(counter);
                         Console.WriteLine();
+                        PrintPlayerScore(workablePlayers[player.Key], questionThemes);
                     }
-                    else { Console.WriteLine($"{player.Key} {player.Value}/20 {(percentage == 0 ? "0" : percentage):#.##}% "); }
+                    else
+                    {
+                        PrintPlayerScore(workablePlayers[player.Key], questionThemes);
+                    }
                 }
                 else { return; }
                 counter++;
@@ -337,6 +336,17 @@
                 2. Films
                 """);
             Console.ResetColor();
+        }
+
+        private static void PrintPlayerScore(Dictionary<int, int> playerScore, Dictionary<int, string> questionThemes)
+        {
+            int theme = 1;
+            foreach (var score in playerScore)
+            {
+                double percentage = (double)score.Value / 20 * 100;
+                Console.WriteLine($"\t{score.Value}/20 {(percentage == 0 ? "0" : percentage):#.##}% -- {questionThemes[theme]}");
+                theme++;
+            }
         }
 
         #endregion
@@ -413,9 +423,26 @@
             userKey = string.Join(" ", new string[] { firstName, lastName });
         }
 
-        private static void CreateUser(Dictionary<string, int> player, string firstName, string lastName)
+        private static void CreateUser(Dictionary<string, Dictionary<int, int>> player, string firstName, string lastName)
         {
-            player.Add($"{firstName} {lastName}", 0);
+            player.Add($"{firstName} {lastName}", new Dictionary<int, int> { { 1, 0 }, { 2, 0 } });
+        }
+
+        private static Dictionary<string, int> CreateSummedScoreDictionary(Dictionary<string, Dictionary<int, int>> workablePlayers)
+        {
+            Dictionary<string, int> playerAndSummedScore = new Dictionary<string, int>();
+            int sum = 0;
+
+            foreach (var player in workablePlayers)
+            {
+                foreach (var score in player.Value)
+                {
+                    sum += score.Value;
+                }
+                playerAndSummedScore.Add(player.Key, sum);
+            }
+
+            return playerAndSummedScore;
         }
 
         #endregion
@@ -430,7 +457,7 @@
 
         private static void PrepareForGame(out Dictionary<int, string> questions, out Dictionary<int, List<string>> possibleAnswers, out Dictionary<int, string> answers, int category)
         {
-            Dictionary<int, string> questionsGeneral = new Dictionary<int, string>()
+            Dictionary<int, string> questionsGeneral = new ()
             {
                 {1, "What year did the Titanic sink in the Atlantic Ocean on 15 April, on its maiden voyage from Southampton?"},
                 {2, "What is the title of the first ever Carry On film made and released in 1958?"},
@@ -453,7 +480,7 @@
                 {19, "Which year was the first Tonka truck made – 1945, 1947 or 1949?"},
                 {20, "Who invented the tin can for preserving food in 1810?"}
         };
-            Dictionary<int, List<string>> possibleAnswersGeneral = new Dictionary<int, List<string>>()
+            Dictionary<int, List<string>> possibleAnswersGeneral = new ()
             {
                 {1, new List<string> {"1912", "2012", "1946", "2023"} },
                 {2, new List<string> {"Mask", "Carry on Sergeant", "21st Jump street", "Vimpire" } },
@@ -476,7 +503,7 @@
                 {19, new List < string > { "1947", "1945", "1960", "1949" }},
                 {20, new List < string > { "James Winchester", "Peter Durand", "Jack Solomon", "Bob McLeslie" }}
             };
-            Dictionary<int, string> answersGeneral = new Dictionary<int, string>()
+            Dictionary<int, string> answersGeneral = new ()
             {
                 { 1, "1912" },
                 { 2, "Carry on Sergeant" },
@@ -500,7 +527,7 @@
                 { 20, "Peter Durand" }
             };
 
-            Dictionary<int, string> questionsFilm = new Dictionary<int, string>()
+            Dictionary<int, string> questionsFilm = new ()
             {
                 { 1, "In which year was The Godfather first released?" },
                 { 2, "Which actor won the best actor Oscar for the films Philadelphia (1993) and Forrest Gump (1994)?" },
@@ -523,7 +550,7 @@
                 { 19, "What is the name of the 2015 film about a frontiersman on a fur trading expedition in the 1820s and his fight for survival after being mauled by a bear?"},
                 { 20, "Which film starring Chris Hemsworth and Daniel Brühl, charts the Formula 1 rivalry of James Hunt and Niki Lauda?"}
         };
-            Dictionary<int, List<string>> possibleAnswersFilm = new Dictionary<int, List<string>>()
+            Dictionary<int, List<string>> possibleAnswersFilm = new ()
             {
                 { 1, new List<string> {"1972", "1965", "1975", "1983"} },
                 { 2, new List < string > { "Johnny Depp", "Jason Stathma", "Tom Hanks", "Triple H" }},
@@ -546,7 +573,7 @@
                 { 19, new List < string > { "Path of the Panther", "The Revenant", "Kid 90", "The Right Stuff" }},
                 { 20, new List < string > { "Rush", "Grand Prix", "Senna", "Weekend of a Champion" }}
             };
-            Dictionary<int, string> answersFilm = new Dictionary<int, string>()
+            Dictionary<int, string> answersFilm = new ()
             {
                 { 1, "1972"},
                 { 2, "Tom Hanks"},
@@ -591,7 +618,7 @@
             answers = categorisedAnswers[category];
         }
 
-        private static void PlayGame(Dictionary<string, int> player, string userKey, int category)
+        private static void PlayGame(Dictionary<string, Dictionary<int, int>> player, string userKey, int category)
         {
             bool stopGame = false;
 
@@ -602,6 +629,8 @@
             int questionCounter = 1;
             int howMuchQuestions = questions.Count;
             List<int> alreadyUsedQuestions = new();
+
+            player[userKey][category] = 0;
 
             do
             {
@@ -614,7 +643,7 @@
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine($"\n{questionCounter}/{howMuchQuestions}");
-                Console.WriteLine($"Score: {player[userKey]}/{questionCounter - 1}");
+                Console.WriteLine($"Score: {player[userKey][category]}/{questionCounter - 1}");
                 Console.ResetColor();
 
                 int answerNumber = GetChoice();
@@ -623,13 +652,13 @@
 
                 if (answer == chosenAnswer)
                 {
-                    player[userKey]++;
+                    player[userKey][category]++;
                 }
 
                 if (questionCounter == howMuchQuestions)
                 {
                     stopGame = true;
-                    PrintEndGameScore(player[userKey], questionCounter);
+                    PrintEndGameScore(player[userKey][category], questionCounter);
                 }
 
                 questionCounter++;

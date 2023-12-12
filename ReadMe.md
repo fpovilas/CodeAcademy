@@ -115,4 +115,8 @@
 
 - Project - Brain War. Presentation
 
+#### [Lesson 24 (2023-12-12)](/Lesson24/)
+
+- OOP (Object Oriented Programming)
+
 </details>

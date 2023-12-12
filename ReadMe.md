@@ -91,6 +91,10 @@
 #### [Lesson 18 (2023-11-30)](/Lesson18/ReadMe.md)
 
 - Finishing up tasks that were left uncompleted
+</details>
+
+<details>
+<summary>2023-12 December</summary>
 
 #### [Lesson 19 (2023-12-04)](/Lesson19/)
 

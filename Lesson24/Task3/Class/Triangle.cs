@@ -13,6 +13,14 @@
             KrastineC = c;
         }
 
+        public double Area()
+        {
+            return (KrastineA * KrastineB / 2);
+        }
 
+        public double Perimeter()
+        {
+            return (KrastineA + KrastineB + KrastineC);
+        }
     }
 }

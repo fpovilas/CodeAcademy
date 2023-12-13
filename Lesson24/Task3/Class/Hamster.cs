@@ -4,7 +4,10 @@
     {
         public string Name { get; set; }
 
-        public Hamster() { }
+        public Hamster()
+        {
+            Name = string.Empty;
+        }
         public Hamster(string name)
         {
             Name = name;

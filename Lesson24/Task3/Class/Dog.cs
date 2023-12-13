@@ -5,7 +5,11 @@
         public string Name { get; set; }
         public string Breed { get; set; }
 
-        public Dog() { }
+        public Dog()
+        {
+            Name = string.Empty;
+            Breed = string.Empty;
+        }
         public Dog(string name, string breed)
         {
             Name = name;

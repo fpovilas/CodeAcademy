@@ -123,4 +123,8 @@
 
 - OOP (Object Oriented Programming)
 
+#### [Lesson 25 (2023-12-13)](/Lesson25/)
+
+- Completing all tasks that was left in Lesson24
+
 </details>

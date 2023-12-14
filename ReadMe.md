@@ -123,8 +123,12 @@
 
 - OOP (Object Oriented Programming)
 
-#### [Lesson 25 (2023-12-13)](/Lesson25/)
+#### [Lesson 25 (2023-12-13)](/Lesson24/)
 
 - Completing all tasks that was left in Lesson24
+
+#### [Lesson 26 (2023-12-14)](/Lesson26/)
+
+- Methods in Class
 
 </details>

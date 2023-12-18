@@ -26,6 +26,7 @@ namespace Task1
                 7. Example with Movie Class
                 8. Example with Book Class
                 9. Example with Computer Class
+                10. Additional task with Overloading
                 """);
         }
 
@@ -181,6 +182,21 @@ namespace Task1
                     };
 
                     CanIRunIt(computers, 4);
+
+                    break;
+                case 10:
+                    FlightBooking flightBookingIdividual = new();
+                    flightBookingIdividual.CreateBooking("Povilas", "0W34556X");
+
+                    flightBookingIdividual.GetBooking("Individual");
+
+                    FlightBooking flightBookingGroup = new();
+                    flightBookingGroup.CreateBooking(new() { "Petras", "Inga" }, "0546WXA5", "Saule");
+
+                    flightBookingGroup.GetBooking("Group");
+
+                    //FlightBooking flightBookingCorporate = new();
+                    //flightBookingCorporate.CreateBooking("Mokykla", new() { new() { "Ieva" }, "054Z48WY" });
 
                     break;
                 default:

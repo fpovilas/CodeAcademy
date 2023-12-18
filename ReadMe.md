@@ -130,5 +130,11 @@
 #### [Lesson 26 (2023-12-14)](/Lesson26/)
 
 - Methods in Class
+- Method overloading
+
+#### [Lesson 27 (2023-12-18)](/Lesson27/)
+
+- Class inheritance
+- Virtual methods
 
 </details>

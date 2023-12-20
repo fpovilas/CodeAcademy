@@ -138,10 +138,14 @@
 - Class inheritance
 - Virtual methods
 
-#### [Lesson 28 (2023-12-18)](/Lesson27/)
+#### [Lesson 28 (2023-12-19)](/Lesson27/)
 
 - Continuing Lesson27
 -- Task2 3rd subtask not done
--- Task4 2nd subtask nor done
+-- Task4 2nd subtask not done
+
+#### [Lesson 29 (2023-12-20)](/Lesson29/)
+
+- Abstraction
 
 </details>

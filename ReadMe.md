@@ -71,8 +71,7 @@
 
 - Multidimensional Arrays
 - Foreach loop
---
-- Haven't completed Project1 (Tic Tac Toe)
+    - Haven't completed Project1 (Tic Tac Toe)
 
 #### [Lesson 15 (2023-11-27)](/Lesson15/ReadMe.md)
 
@@ -99,8 +98,7 @@
 #### [Lesson 19 (2023-12-04)](/Lesson19/)
 
 - Dictionary
---
-- Haven't completed Task3.3 and Task4
+    - Haven't completed Task3.3 and Task4
 
 #### [Lesson 20 (2023-12-05)](/Lesson20/)
 
@@ -141,11 +139,16 @@
 #### [Lesson 28 (2023-12-19)](/Lesson27/)
 
 - Continuing Lesson27
--- Task2 3rd subtask not done
--- Task4 2nd subtask not done
+    - Task2 3rd subtask not done
+    - Task4 2nd subtask not done
 
 #### [Lesson 29 (2023-12-20)](/Lesson29/)
 
 - Abstraction
+
+#### [Lesson 30 (2023-12-21)](/Lesson30/)
+
+- Accessibility (Access modifiers)
+    - Task 2 and 4 not completed
 
 </details>

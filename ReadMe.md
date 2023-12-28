@@ -151,12 +151,17 @@
 - Accessibility (Access modifiers)
     - Task 2 and 4 not completed
 
-#### [Lesson 31 (2023-12-27)](/Lesson30/)
+#### [Lesson 31 (2023-12-27)](/Lesson31/)
 
 - Stream
     - File class
     - StreamReader/StreamWriter
     - FileStream
         - Task 3 not completed
+
+#### [Lesson 32 (2023-12-28)](/Lesson32/)
+
+- Generics
+
 
 </details>

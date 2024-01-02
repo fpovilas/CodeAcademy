@@ -2,9 +2,18 @@
 {
     internal class Validation<T>
     {
-        private T VariableToCheck { get; set; }
+        private T VariableToCheck
+        {
+            get => VariableToCheck;
+            set { }
+        }
 
         public Validation(T variableToCheck)
+        {
+            VariableToCheck = variableToCheck;
+        }
+
+        public void SetVariableToCheck(T variableToCheck)
         {
             VariableToCheck = variableToCheck;
         }

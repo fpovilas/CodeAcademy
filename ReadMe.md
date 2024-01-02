@@ -163,5 +163,14 @@
 
 - Generics
 
+</details>
+<details>
+<summary>2024-01 January</summary>
+
+#### [Lesson 33 (2024-01-02)](/Lesson33/)
+
+- Generics
+    - Continuation
+    - New Tasks
 
 </details>

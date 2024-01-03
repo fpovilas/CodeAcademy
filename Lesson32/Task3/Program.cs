@@ -21,8 +21,8 @@ namespace Task3
 
         public static void ShowValues<T1, T2>(T1 t1, T2 t2)
         {
-            Console.WriteLine($"TypeOne is {t1.GetType().Name} value: {t1}\n"
-                              + $"TypeTwo is {t2.GetType().Name} value: {t2}");
+            Console.WriteLine($"TypeOne is {t1?.GetType().Name} value: {t1}\n"
+                              + $"TypeTwo is {t2?.GetType().Name} value: {t2}");
         }
     }
 }

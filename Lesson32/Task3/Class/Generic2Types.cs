@@ -13,8 +13,8 @@
 
         public override string ToString()
         {
-            return $"TypeOne is {TypeOne.GetType().Name} value: {TypeOne}\n"
-                   + $"TypeTwo is {TypeTwo.GetType().Name} value: {TypeTwo}";
+            return $"TypeOne is {TypeOne?.GetType().Name} value: {TypeOne}\n"
+                   + $"TypeTwo is {TypeTwo?.GetType().Name} value: {TypeTwo}";
         }
     }
 }

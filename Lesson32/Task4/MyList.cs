@@ -30,7 +30,7 @@
         public void RemoveElement(T item)
         {
             int index = Array.IndexOf(MyArray, item);
-            MyArray[index] = default(T);
+            MyArray[index] = default!;
             Index--;
             MyArray = SortArray();
         }
@@ -54,13 +54,13 @@
         private T[] SortArray()
         {
             T temp;
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < Size -1; i++)
             {
                 if (MyArray[i] == null && MyArray[i + 1] != null)
                 {
                     temp = MyArray[i + 1];
                     MyArray[i] = temp;
-                    MyArray[i + 1] = default(T);
+                    MyArray[i + 1] = default!;
                 }
             }
 

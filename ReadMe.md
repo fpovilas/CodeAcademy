@@ -180,4 +180,9 @@
     - Continuation
     - New Tasks
 
+#### [Lesson 35 (2024-01-04)](/Lesson35/)
+
+- Exception Handeling (Try Catch Finally)
+- Custom exceptions
+
 </details>

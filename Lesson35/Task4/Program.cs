@@ -1,4 +1,5 @@
-﻿using Task4.Class;
+﻿using System.Security;
+using Task4.Class;
 
 namespace Task4
 {
@@ -21,20 +22,22 @@ namespace Task4
                         readFile = new(null);
                         break;
                     case 3:
-                        throw new NotImplementedException("Case not Implemented");
+                        //Hard to reproduce need INT16.MAXVALUE characters
+                        throw new PathTooLongException("need INT16.MAXVALUE characters to reproduce. Fake PathTooLongException");
                     case 4:
-                        throw new NotImplementedException("Case not Implemented");
+                        readFile = new("D:\\Users\\Povka\\Coding\\Users\\Povka\\Coding\\");
+                        break;
                     case 5:
-                        throw new NotImplementedException("Case not Implemented");
+                        throw new IOException("File needs to be locked. Fake IOException");
                     case 6:
-                        throw new NotImplementedException("Case not Implemented");
+                        throw new UnauthorizedAccessException("Fake UnauthorizedAccessException");
                     case 7:
                         readFile = new("test.txt");
                         break;
                     case 8:
-                        throw new NotImplementedException("Case not Implemented");
+                        throw new NotSupportedException("Fake NotSupportedException");
                     case 9:
-                        throw new NotImplementedException("Case not Implemented");
+                        throw new SecurityException("Fake SecurityException");
                     default:
                         Console.WriteLine("Wrong choice");
                         break;
@@ -44,11 +47,35 @@ namespace Task4
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (PathTooLongException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             catch (FileNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch (NotImplementedException ex)
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (NotSupportedException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

@@ -190,4 +190,10 @@
 - this keyword
 - Extensions methods
 
+#### [Lesson 37 (2024-01-08)](/Lesson37/)
+
+- Delegates
+- Anonymous Methods
+ -- Task2 and 3 *NOT* Completed
+
 </details>

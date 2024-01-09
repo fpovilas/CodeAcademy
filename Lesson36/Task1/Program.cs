@@ -121,7 +121,7 @@ namespace Task1
             5. Create email
             6. Returns searched value if it is in List<T>
             7. Return new List<T> of every other value in List<T>
-            8. Return every other line from a text file
+            8. Return every other line from a text file. Extend File Class
             """);
         }
 

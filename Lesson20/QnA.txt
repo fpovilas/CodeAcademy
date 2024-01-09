@@ -1,0 +1,96 @@
+Basic Knowledge Questions
+
+{1, "What year did the Titanic sink in the Atlantic Ocean on 15 April, on its maiden voyage from Southampton?"},
+{2, "What is the title of the first ever Carry On film made and released in 1958?"},
+{3, "What is the name of the biggest technology company in South Korea?"},
+{4, "Which singer fronted the 1970s pop group Showaddywaddy?"},
+{5, "Which now famous TV chef started cooking at the age of eight in his parents’ pub, ‘The Cricketers, in Clavering, Essex?"},
+{6, "Which Dutch darts player won the 2012 BDO World Championship at the Lakeside Country Club, Frimley Green on 15 January?"},
+{7, "Which metal was discovered by Hans Christian Oersted in 1825?"},
+{8, "What is the capital of Portugal?"},
+{9, "How many breaths does the human body take daily?"},
+{10, "Who was the Prime Minister of Great Britain from 1841 to 1846?"},
+{11, "What is the chemical symbol for silver?"},
+{12, "Who invented Cat’s Eyes in 1934 to improve road safety?"},
+{13, "What is the world’s smallest bird?"},
+{14, "Who played ‘Bodie’ and ‘Doyle’ in The Professionals?"},
+{15, "What is the doll, Barbie’s, full name?"},
+{16, "What does Paul Hunn hold the record for, which registered at 118.1 decibels?"},
+{17, "What did Al Capone’s business card state his occupation was?"},
+{18, "What is the lifespan of a dragonfly?"},
+{19, "Which year was the first Tonka truck made – 1945, 1947 or 1949?"},
+{20, "Who invented the tin can for preserving food in 1810?"}
+
+
+Answers
+
+{1, "1912"},
+{2, "Carry on Sergeant"},
+{3, "Samsung"},
+{4, "Dave Bartram"},
+{5, "Jamie Oliver"},
+{6, "Christian Kist"},
+{7, "Aluminium"},
+{8, "Lisbon"},
+{9, "20,000 daily"},
+{10, "Robert Peel"},
+{11, "Ag"},
+{12, "Percy Shaw"},
+{13, "Bee Hummingbird"},
+{14, "Lewis Collins and Martin Shaw"},
+{15, "Barbara Millicent Roberts"},
+{16, "The loudest burp"},
+{17, "A used furniture salesman"},
+{18, "24 hours"},
+{19, "1947"},
+{20, "Peter Durand"}
+
+-------------
+
+Questions
+
+{ 1, "In which year was The Godfather first released?" },
+{ 2, "Which actor won the best actor Oscar for the films Philadelphia (1993) and Forrest Gump (1994)?" },
+{ 3, "How many self-referential cameos did Alfred Hitchcock make in his films from 1927-1976 – 33, 35 or 37?" },
+{ 4, "Which 1982 film was greatly accepted by film fans for its portrayal of the love between a young, fatherless suburban boy and a lost, benevolent and homesick visitor from another planet?" },
+{ 5, "Which actress played Mary Poppins in the 1964 film Mary Poppins?" },
+{ 6, "In which 1963 classic film did Charles Bronson appear?" },
+{ 7, "In which 1995 film did Sandra Bullock play the character Angela Bennett – Wrestling Ernest Hemingway, The Net or 28 Days?" },
+{ 8, "Which New Zealand female director directed these films – In the Cut (2003), The Water Diary (2006) and Bright Star (2009)?" },
+{ 9, "Which actor provided the voice for the character Nemo in the 2003 film Finding Nemo?" },
+{ 10, "Which prisoner dubbed ‘the most violent prisoner in Britain’ was the subject of a 2009 film?"},
+{ 11, "What 2008 film starring Chritian Bale has this quote: “I believe whatever doesn’t kill you, simply makes you…stranger,”?"},
+{ 12, "American actress who played the part of Tokyo underworld boss O-Ren Ishii in KillBill Vol I & II"},
+{ 13, "In which film did Hugh Jackman star as a rival magician of the character played by Christian Bale?"},
+{ 14, "The film director, Frank Capra, famous for It’s a Wonderful Life, was born in which mediteranean country?"},
+{ 15, "Which British action actor played the part of Lee Christmas alongside Sylvester Stallone in the film The Expendables?"},
+{ 16, "Which American actor starred alongside Kim Bassinger in the film 9½ Weeks?"},
+{ 17, "Which former Doctor Who actress played the part of Nebula in ‘Avengers:Infinity War’?"},
+{ 18, "Who starred as Juno MacGuff opposite Michael Cera in the 2007 film Juno?"},
+{ 19, "What is the name of the 2015 film about a frontiersman on a fur trading expedition in the 1820s and his fight for survival after being mauled by a bear?"},
+{ 20, "Which film starring Chris Hemsworth and Daniel Brühl, charts the Formula 1 rivalry of James Hunt and Niki Lauda?"}
+
+
+
+Answers
+
+{ 1, "1972"},
+{ 2, "Tom Hanks"},
+{ 3, "37"},
+{ 4, "E.T. The Extra-Terrestrial"},
+{ 5, "Julie Andrews"},
+{ 6, "The Great Escape"},
+{ 7, "The Net"},
+{ 8, "Jane Campion"},
+{ 9, "Alexander Gould"},
+{ 10, "Charles Bronson (the film was titled Bronson)"},
+{ 11, "The Dark Knight"},
+{ 12, "Lucy Liu"},
+{ 13, "The Prestige"},
+{ 14, "Italy"},
+{ 15, "Jason Statham"},
+{ 16, "Mickey Rourke"},
+{ 17, "Karen Gillan"},
+{ 18, "Ellen Page/Elliot Page"},
+{ 19, "The Revenant"},
+{ 20, "Rush"}

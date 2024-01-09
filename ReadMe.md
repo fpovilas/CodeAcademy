@@ -194,6 +194,6 @@
 
 - Delegates
 - Anonymous Methods
- -- Task2 and 3 *NOT* Completed
+ - Task2 and 3 *NOT* Completed
 
 </details>

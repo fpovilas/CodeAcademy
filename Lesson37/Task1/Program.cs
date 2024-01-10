@@ -16,7 +16,7 @@
             {
                 case 1:
                     PersonInfo personInfo = new(GetInfo);
-                    Console.WriteLine(personInfo("Povilas", "Frišmantas", 26));
+                    Console.WriteLine(personInfo("Povilas", "Povilas", 95));
                     break;
                 case 2:
                     Numbers numbers = new(GetTwoNumbers);

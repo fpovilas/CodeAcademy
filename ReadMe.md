@@ -196,4 +196,10 @@
 - Anonymous Methods
     - Task2 and 3 ***NOT*** Completed
 
+#### [Lesson 38 (2024-01-08)](/Lesson37/)
+
+- **Continuation** of ***Lesson37***
+- Delegates
+- Anonymous Methods
+
 </details>

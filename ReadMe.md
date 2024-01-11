@@ -190,16 +190,22 @@
 - this keyword
 - Extensions methods
 
-#### [Lesson 37 (2024-01-08)](/Lesson37/)
+#### [Lesson 37 (2024-01-09)](/Lesson37/)
 
 - Delegates
 - Anonymous Methods
     - Task2 and 3 ***NOT*** Completed
 
-#### [Lesson 38 (2024-01-08)](/Lesson37/)
+#### [Lesson 38 (2024-01-10)](/Lesson37/)
 
 - **Continuation** of ***Lesson37***
 - Delegates
 - Anonymous Methods
+
+#### [Lesson 39 (2024-01-11)](/Lesson39/)
+
+- lambda expressions
+- LINQ
+    - - Task2 and 3 ***NOT*** Completed
 
 </details>

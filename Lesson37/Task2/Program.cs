@@ -7,7 +7,7 @@
         private delegate List<int> EveryOtherNumber(List<int> list, int step);
         private delegate string? GetMethodType(object o);
 
-        static void Main(string[] args)
+        static void Main()
         {
             PrintMenu();
             int choice = GetChoice();

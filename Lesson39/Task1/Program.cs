@@ -98,7 +98,7 @@ namespace Task1
                     PrintList(listOfPeople);
 
                     Console.Write("List where name starts with letter A: ");
-                    PrintList(listOfPeople.Select(ppl => ppl).Where(ppl => ppl.Age >= 40).ToList());
+                    PrintList(listOfPeople.Select(ppl => ppl).Where(ppl => ppl.Age >= 40).OrderBy(ppl => ppl.Name).ToList());
                     break;
                 default:
                     Console.WriteLine($"Wrong choice... {choice}");

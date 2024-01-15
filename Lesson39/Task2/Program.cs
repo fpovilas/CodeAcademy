@@ -61,7 +61,18 @@ namespace Task2
             PrintText("Default List<string>: ");
             PrintList(listOfStrings);
             PrintText("Print only UPPERCASE words: ");
-            //Func<string,string> upperCaseString
+
+            #region Different example 
+
+            //Func<string, bool> func = workableString => workableString.All(char.IsUpper);
+            //List<string> newListOfStrings = listOfStrings.Where(func).ToList();
+
+            #endregion
+
+            Func<List<string>, List<string>> upperCaseString = workableList => workableList
+                    .Where(str => str.All(char.IsUpper)).ToList();
+            List<string> newListOfStrings = upperCaseString(listOfStrings);
+            PrintList(newListOfStrings);
         }
 
         private static void PrintList<Type>(List<Type> list)

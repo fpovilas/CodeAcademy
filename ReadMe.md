@@ -206,6 +206,12 @@
 
 - lambda expressions
 - LINQ
-    - - Task2 and 3 ***NOT*** Completed
+
+#### [Lesson 40 (2024-01-15)](/Lesson40/)
+
+- Continuing Lesson 39 task for first half (2h)
+- Interfaces
+    - IComparable
+
 
 </details>

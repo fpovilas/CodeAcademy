@@ -209,9 +209,16 @@
 
 #### [Lesson 40 (2024-01-15)](/Lesson40/)
 
-- Continuing Lesson 39 task for first half (2h)
+- Continuing Lesson 39 tasks for first half (2h)
 - Interfaces
     - IComparable
+
+#### [Lesson 41 (2024-01-16)](/Lesson41/)
+
+- Continuing Lesson 40 tasks first half of lesson
+- Additional Tasks
+    - Need to remake all tasks with ***IComparable<T>***
+    - ***Task3*** not completed
 
 
 </details>

@@ -217,8 +217,6 @@
 
 - Continuing Lesson 40 tasks first half of lesson
 - Additional Tasks
-    - Need to remake all tasks with ***IComparable<T>***
-    - ***Task3*** not completed
 
 #### [Lesson 42 (2024-01-17)](/Lesson42/)
 

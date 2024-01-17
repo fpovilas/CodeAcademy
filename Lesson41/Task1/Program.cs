@@ -1,6 +1,7 @@
 ﻿using Task1.Class;
 using Task1.Comparer;
 using Task1.Interfaces;
+using Task3.Interface;
 
 namespace Task1
 {
@@ -76,6 +77,28 @@ namespace Task1
             PrintList(carps);
             PrintList(cats);
             PrintList(dogs);
+
+            Separator();
+
+            List<IWriteable> listOfAnimals = [
+                new Bass("Bass The Mighty"),
+                new Bass("Cruel Bass"),
+                new Bass("A Friendly Bass"),
+                new Carp("Huge Carp"),
+                new Carp("Baby Carp"),
+                new Carp("Carp The Great"),
+                new Cat("Whisky", true),
+                new Cat("Pouncer", false),
+                new Cat("Agar", true),
+                new Dog("Howler", false),
+                new Dog("Hela", true),
+                new Dog("Goofy", false)
+            ];
+            PrintText("List of IWritable: ");
+            PrintList(listOfAnimals);
+            PrintText("Adding to File named Task1.txt");
+            foreach (var animal in listOfAnimals)
+                animal.WriteToFile(@"D:\Projektai\Programavimas\CodeAcademy\Lesson41\Task1.txt");
         }
 
         private static void Separator()

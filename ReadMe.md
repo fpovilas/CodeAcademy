@@ -220,5 +220,9 @@
     - Need to remake all tasks with ***IComparable<T>***
     - ***Task3*** not completed
 
+#### [Lesson 42 (2024-01-17)](/Lesson42/)
+
+- Continuing [Lesson41](/Lesson41/) tasks
+- Started Project - ***ATM***
 
 </details>

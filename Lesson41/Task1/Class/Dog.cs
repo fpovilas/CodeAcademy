@@ -1,8 +1,9 @@
 ﻿using Task1.Interfaces;
+using Task3.Interface;
 
 namespace Task1.Class
 {
-    internal class Dog(string name, bool isFemale) : IAnimal, IMammal
+    internal class Dog(string name, bool isFemale) : IAnimal, IMammal, IWriteable
     {
         private string Name { get; set; } = name;
         private bool IsFemale { get; set; } = isFemale;
@@ -25,5 +26,11 @@ namespace Task1.Class
         }
 
         public override string ToString() => $"{Name} is {(IsFemale ? "female" : "male")}";
+
+        public void WriteToFile(string fileName)
+        {
+            using StreamWriter writer = new(fileName, true);
+            writer.WriteLine(ToString());
+        }
     }
 }

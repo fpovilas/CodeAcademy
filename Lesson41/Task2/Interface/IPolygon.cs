@@ -2,6 +2,6 @@
 {
     internal interface IPolygon
     {
-        public double GetArea();
+        public double? GetArea();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Task2.Class;
-using Task2.Comparer;
-using Task2.Interface;
+using Task3.Interface;
 
 namespace Task2
 {
@@ -8,8 +7,6 @@ namespace Task2
     {
         static void Main()
         {
-            IPolygonComparer polygonComparer = new();
-
             Console.WriteLine($"Triangle Area {new Triangle(3,5).GetArea()}");
 
             Separator();
@@ -24,7 +21,7 @@ namespace Task2
 
             #region Triangle
 
-            List<IPolygon> trianglePolygons = [
+            List<Triangle> trianglePolygons = [
                     new Triangle(5, 6),
                     new Triangle(7, 8),
                     new Triangle(6, 1),
@@ -35,7 +32,7 @@ namespace Task2
             PrintList(trianglePolygons);
 
             // Sorting Triangles
-            trianglePolygons.Sort(polygonComparer);
+            trianglePolygons.Sort();
             PrintText("Sorted list: ");
             PrintList(trianglePolygons);
 
@@ -45,7 +42,7 @@ namespace Task2
 
             #region Quadrilateral
 
-            List<IPolygon> quadrilateralPolygons = [
+            List<Quadrilateral> quadrilateralPolygons = [
                     new Quadrilateral(5, 6),
                     new Quadrilateral(7, 8),
                     new Quadrilateral(6, 1),
@@ -56,7 +53,7 @@ namespace Task2
             PrintList(quadrilateralPolygons);
 
             // Sorting Quadrilaterals
-            quadrilateralPolygons.Sort(polygonComparer);
+            quadrilateralPolygons.Sort();
             PrintText("Sorted list: ");
             PrintList(quadrilateralPolygons);
 
@@ -66,7 +63,7 @@ namespace Task2
 
             #region Hexagon
 
-            List<IPolygon> hexagonPolygons = [
+            List<Hexagon> hexagonPolygons = [
                     new Hexagon(5),
                     new Hexagon(8),
                     new Hexagon(6),
@@ -77,11 +74,33 @@ namespace Task2
             PrintList(hexagonPolygons);
 
             // Sorting Hexagons
-            hexagonPolygons.Sort(polygonComparer);
+            hexagonPolygons.Sort();
             PrintText("Sorted list: ");
             PrintList(hexagonPolygons);
 
             #endregion
+
+            Separator();
+
+            List<IWriteable> listOfObjects = [
+                new Triangle(7, 5),
+                new Quadrilateral(5, 7),
+                new Hexagon(2),
+                new Triangle(7, 2),
+                new Quadrilateral(9, 5),
+                new Triangle(3, 5),
+                new Hexagon(1),
+                new Triangle(2, 10),
+                new Quadrilateral(2, 7),
+                new Hexagon(10),
+                new Triangle(7, 2),
+                new Quadrilateral(1, 9)
+            ];
+            PrintText("Default list: ");
+            PrintList(listOfObjects);
+            PrintText("Writing list to File");
+            foreach (IWriteable writeable in listOfObjects)
+                writeable.WriteToFile(@"D:\Projektai\Programavimas\CodeAcademy\Lesson41\Task2.txt");
         }
 
         private static void Separator()

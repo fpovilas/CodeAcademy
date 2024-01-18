@@ -223,4 +223,8 @@
 - Continuing [Lesson41](/Lesson41/) tasks
 - Started Project - ***ATM***
 
+#### [Lesson 43 (2024-01-18)](/Lesson42/)
+
+- Continuing Project - ***ATM***
+
 </details>

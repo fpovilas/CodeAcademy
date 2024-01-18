@@ -1,16 +1,17 @@
 ﻿namespace ATM.Class
 {
-    internal class Account(double moneyInAccount = 0)
+    internal class Account(string pass, double moneyInAccount = 0, string cardNum = "000000000")
     {
-        private Guid CardNumber { get; } = Guid.NewGuid();
-        private double MoneyInAccount { get; set; } = moneyInAccount;
+        private string CardNumber { get; } = cardNum;
+        internal double MoneyInAccount { get; set; } = moneyInAccount;
+        private string Password { get; set; } = pass;
+        private bool IsBlocked { get; set; } = false;
 
-        private Guid GetCardNumber() => CardNumber;
+        public string GetCardNumber() => CardNumber;
+        public double GetMoneyInAccount() => MoneyInAccount;
+        public string GetPassword() => Password;
+        public bool GetIsBlocked() => IsBlocked;
 
-        private double GetMoneyInAccount() => MoneyInAccount;
-
-        private void AddMoney(double amount) => MoneyInAccount += amount;
-
-        private void WithdrawMoney(double amount) => MoneyInAccount -= amount;
+        public void SetIsBlocked() => IsBlocked = true;
     }
 }

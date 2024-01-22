@@ -1,5 +1,7 @@
 ﻿using ATM.Class;
 using ATM.Exceptions;
+using System.Threading.Channels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ATM
 {
@@ -9,78 +11,168 @@ namespace ATM
         {
             bool isLoggedIn = false;
 
-            List<User> users = [
+            /*List<User> users = [
                     new("Povilas", new Account("1234", 100, "123456789")),
                     new("Petras", new Account("4321", 1000, "987654321"))
-                ];
+                ];*/
+            string pathToUsers = @"D:\Projektai\Programavimas\CodeAcademy\Lesson42\ATM\DB\Users.txt";
+            List<User> users = GetUsers(pathToUsers);
 
-            do
+            User? user = null;
+            string cardNumber = string.Empty;
+
+            int amount = 0;
+
+            do // Loop for log in
             {
                 Console.Clear();
                 Logo();
                 Console.Write("Please enter a Card Number: ");
 
-                string cardNumber = string.Empty;
-
+                // Trying to get CardNumber
                 try { cardNumber = GetCardNumber(); }
-                catch(CardEmptyException exception)
+                catch (CardEmptyException exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(exception.Message);
                     Console.ReadKey(true);
+                    Console.ResetColor();
                     continue;
                 }
-                
-                User? user = null;
 
+                // Trying to get User
                 try { user = GetUser(users, cardNumber); }
-                catch(UserNotFoundException exception)
-                { 
+                catch (UserNotFoundException exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(exception.Message);
                     Console.ReadKey(true);
+                    Console.ResetColor();
                     continue;
                 }
 
-                if (cardNumber == user!.GetAccount().GetCardNumber())
+                bool isBlocked = user!.GetAccount().GetIsBlocked();
+                int retries = 0;
+
+                while (!isBlocked)
                 {
-                    bool isBlocked = false;
-                    int retries = 0;
+                    Console.Clear();
+                    Logo();
+                    Console.Write("Please enter a Password: ");
+                    string password = GetPassword();
 
-                    while (!isBlocked)
+                    if (user.GetAccount().GetIsBlocked())
                     {
-                        Console.Clear();
-                        Logo();
-                        Console.Write("Please enter a Password: ");
-                        string password = GetPassword();
-
-                        if (user.GetAccount().GetIsBlocked())
+                        isBlocked = user.GetAccount().GetIsBlocked();
+                        continue;
+                    }
+                    else
+                    {
+                        if (password == user.GetAccount().GetPassword())
                         {
-                            isBlocked = user.GetAccount().GetIsBlocked();
-                            continue;
+                            isLoggedIn = true;
+                            break;
                         }
                         else
                         {
-                            if (password == user.GetAccount().GetPassword())
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Wrong password");
+                            Console.ReadKey(true);
+                            Console.ResetColor();
+                            retries++;
+                            if (retries == 3)
                             {
-                                Console.WriteLine("Welcome");
-                                isLoggedIn = true;
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Wrong password");
-                                Console.ReadKey(true);
-                                retries++;
-                                if (retries == 3)
-                                {
-                                    user.GetAccount().SetIsBlocked();
-                                    isBlocked = user.GetAccount().GetIsBlocked();
-                                }
+                                user.GetAccount().SetIsBlocked();
+                                isBlocked = user.GetAccount().GetIsBlocked();
                             }
                         }
                     }
                 }
-                else { Console.WriteLine("Wrong card number"); }
-            }while (!isLoggedIn);
+                if (isBlocked && !isLoggedIn)
+                {
+                    Console.WriteLine("Your card is blocked. Please go yo nearest bank to unblock it.");
+                    Console.ReadKey(true);
+                }
+
+                do
+                {
+                    Console.Clear();
+                    Logo();
+
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine($"Hello, {user!.GetName()}");
+                    Console.ResetColor();
+
+                    PrintLoggedInMenu();
+
+                    int choice = GetChoice();
+
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.Clear();
+                            Logo();
+
+                            Console.WriteLine($"Your balance: {user.GetAccount().GetMoneyInAccount()}€");
+                            Console.ReadKey(true);
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Logo();
+
+                            Console.WriteLine("Last 5 Transactions:");
+                            if (user.GetTransactions().Count != 0)
+                            {
+                                int counter = 0;
+                                foreach(Transaction trans in user!.GetTransactions().OrderByDescending(date => date.GetTransactionTime()))
+                                {
+                                    if(counter < 5)
+                                    {
+                                        Console.WriteLine(trans.ToString());
+                                        counter++;
+                                    }
+                                    else { break; }
+                                }
+                            }
+                            else { Console.WriteLine("There is no transaction history."); }
+                            Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Logo();
+
+                            Console.Write("Please type the amount that you want to withdraw: ");
+                            amount = GetChoice();
+                            user.GetAccount().WithdrawMoney(amount);
+
+                            Console.WriteLine($"You have withdrawn {amount}€. Current balance {user.GetAccount().GetMoneyInAccount()}€");
+                            user.SetTransaction(new Transaction(amount, "Withdraw"));
+                            Console.ReadKey(true);
+                            break;
+                        case 4:
+                            Console.Clear();
+                            Logo();
+
+                            Console.Write("Please type the amount that you want to deposit: ");
+                            amount = GetChoice();
+                            user.GetAccount().DepositMoney(amount);
+
+                            Console.WriteLine($"You have deposited {amount}€. Current balance {user.GetAccount().GetMoneyInAccount()}€");
+                            user.SetTransaction(new Transaction(amount, "Deposit"));
+                            Console.ReadKey(true);
+                            break;
+                        case 5:
+                            string path = @"D:\Projektai\Programavimas\CodeAcademy\Lesson42\ATM\DB\Users.txt";
+                            user.WriteToFile(path);
+                            isLoggedIn = false;
+                            break;
+                        default:
+                            Console.WriteLine($"Wrong Choice. {choice}");
+                            break;
+                    }
+                } while (isLoggedIn);
+
+            } while (!isLoggedIn);
         }
 
         private static void Logo()
@@ -130,6 +222,38 @@ namespace ATM
                 throw new UserNotFoundException("There is no user in list. Please Try again.");
 
             return newUser;
+        }
+
+        private static int GetChoice()
+        {
+            if(int.TryParse(Console.ReadLine(), out int choice))
+                return choice;
+            return 0;
+        }
+
+        private static List<User> GetUsers(string pathToFile)
+        {
+            List <User> newListOfUsers = [];
+
+            using StreamReader streamReader = new(pathToFile);
+            List<string> data = [.. streamReader.ReadToEnd().Replace("\r\n", ",").Split(',')];
+            for (int i = 0; i < data.Count; i += 4)
+            {
+                newListOfUsers.Add(new User(data[i], new Account(data[i + 1], Convert.ToDouble(data[i + 2]), data[i + 3])));
+            }
+
+            return newListOfUsers;
+        }
+
+        private static void PrintLoggedInMenu()
+        {
+            Console.WriteLine("""
+                1. Show available money
+                2. Show 5 last transactions
+                3. Withdraw money
+                4. Deposit money
+                5. Log out
+                """);
         }
     }
 }

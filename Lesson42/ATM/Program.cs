@@ -1,7 +1,5 @@
 ﻿using ATM.Class;
 using ATM.Exceptions;
-using System.Threading.Channels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ATM
 {
@@ -11,11 +9,9 @@ namespace ATM
         {
             bool isLoggedIn = false;
 
-            /*List<User> users = [
-                    new("Povilas", new Account("1234", 100, "123456789")),
-                    new("Petras", new Account("4321", 1000, "987654321"))
-                ];*/
             string pathToUsers = @"D:\Projektai\Programavimas\CodeAcademy\Lesson42\ATM\DB\Users.txt";
+            string pathToTransaction = @"D:\Projektai\Programavimas\CodeAcademy\Lesson42\ATM\DB\Transactions\";
+
             List<User> users = GetUsers(pathToUsers);
 
             User? user = null;
@@ -51,7 +47,7 @@ namespace ATM
                     continue;
                 }
 
-                bool isBlocked = user!.GetAccount().GetIsBlocked();
+                bool isBlocked = user!.GetAccount()!.GetIsBlocked();
                 int retries = 0;
 
                 while (!isBlocked)
@@ -61,14 +57,14 @@ namespace ATM
                     Console.Write("Please enter a Password: ");
                     string password = GetPassword();
 
-                    if (user.GetAccount().GetIsBlocked())
+                    if (user!.GetAccount()!.GetIsBlocked())
                     {
-                        isBlocked = user.GetAccount().GetIsBlocked();
+                        isBlocked = user!.GetAccount()!.GetIsBlocked();
                         continue;
                     }
                     else
                     {
-                        if (password == user.GetAccount().GetPassword())
+                        if (password == user!.GetAccount()!.GetPassword())
                         {
                             isLoggedIn = true;
                             break;
@@ -82,8 +78,8 @@ namespace ATM
                             retries++;
                             if (retries == 3)
                             {
-                                user.GetAccount().SetIsBlocked();
-                                isBlocked = user.GetAccount().GetIsBlocked();
+                                user!.GetAccount()!.SetIsBlocked();
+                                isBlocked = user!.GetAccount()!.GetIsBlocked();
                             }
                         }
                     }
@@ -113,20 +109,22 @@ namespace ATM
                             Console.Clear();
                             Logo();
 
-                            Console.WriteLine($"Your balance: {user.GetAccount().GetMoneyInAccount()}€");
+                            Console.WriteLine($"Your balance: {user!.GetAccount()!.GetMoneyInAccount()}€");
                             Console.ReadKey(true);
                             break;
                         case 2:
                             Console.Clear();
                             Logo();
 
+                            user.ReadFromFile(pathToTransaction);
+
                             Console.WriteLine("Last 5 Transactions:");
                             if (user.GetTransactions().Count != 0)
                             {
                                 int counter = 0;
-                                foreach(Transaction trans in user!.GetTransactions().OrderByDescending(date => date.GetTransactionTime()))
+                                foreach (Transaction trans in user!.GetTransactions().OrderByDescending(date => date.GetTransactionTime()))
                                 {
-                                    if(counter < 5)
+                                    if (counter < 5)
                                     {
                                         Console.WriteLine(trans.ToString());
                                         counter++;
@@ -143,11 +141,12 @@ namespace ATM
 
                             Console.Write("Please type the amount that you want to withdraw: ");
                             amount = GetChoice();
-                            user.GetAccount().WithdrawMoney(amount);
-
-                            Console.WriteLine($"You have withdrawn {amount}€. Current balance {user.GetAccount().GetMoneyInAccount()}€");
-                            user.SetTransaction(new Transaction(amount, "Withdraw"));
-                            Console.ReadKey(true);
+                            if (user!.GetAccount()!.WithdrawMoney(amount))
+                            {
+                                Console.WriteLine($"You have withdrawn {amount}€. Current balance {user!.GetAccount()!.GetMoneyInAccount()}€");
+                                Console.ReadKey(true);
+                            }
+                            else { Console.WriteLine("Transaction failed..."); }
                             break;
                         case 4:
                             Console.Clear();
@@ -155,15 +154,15 @@ namespace ATM
 
                             Console.Write("Please type the amount that you want to deposit: ");
                             amount = GetChoice();
-                            user.GetAccount().DepositMoney(amount);
-
-                            Console.WriteLine($"You have deposited {amount}€. Current balance {user.GetAccount().GetMoneyInAccount()}€");
-                            user.SetTransaction(new Transaction(amount, "Deposit"));
-                            Console.ReadKey(true);
+                            if(user!.GetAccount()!.DepositMoney(amount))
+                            {
+                                Console.WriteLine($"You have deposited {amount}€. Current balance {user!.GetAccount()!.GetMoneyInAccount()}€");
+                                Console.ReadKey(true);
+                            }
+                            else { Console.WriteLine("Deposit failed..."); }
                             break;
                         case 5:
-                            string path = @"D:\Projektai\Programavimas\CodeAcademy\Lesson42\ATM\DB\Users.txt";
-                            user.WriteToFile(path);
+                            WriteUserDataToFile(pathToUsers, users);
                             isLoggedIn = false;
                             break;
                         default:
@@ -212,13 +211,10 @@ namespace ATM
         private static User? GetUser(List<User> users, string cardNum)
         {
             User? newUser = null;
-            foreach (User user in users)
-            {
-                if (cardNum == user.GetAccount().GetCardNumber())
-                    newUser = user;
-            }
 
-            if(newUser == null)
+            newUser = users.FirstOrDefault(usr => usr!.GetAccount()!.GetCardNumber() == cardNum);
+
+            if (newUser == null)
                 throw new UserNotFoundException("There is no user in list. Please Try again.");
 
             return newUser;
@@ -226,20 +222,25 @@ namespace ATM
 
         private static int GetChoice()
         {
-            if(int.TryParse(Console.ReadLine(), out int choice))
+            if (int.TryParse(Console.ReadLine(), out int choice))
                 return choice;
             return 0;
         }
 
         private static List<User> GetUsers(string pathToFile)
         {
-            List <User> newListOfUsers = [];
+            List<User> newListOfUsers = [];
 
             using StreamReader streamReader = new(pathToFile);
             List<string> data = [.. streamReader.ReadToEnd().Replace("\r\n", ",").Split(',')];
+
             for (int i = 0; i < data.Count; i += 4)
             {
-                newListOfUsers.Add(new User(data[i], new Account(data[i + 1], Convert.ToDouble(data[i + 2]), data[i + 3])));
+                User usr = new(data[i]);
+                Account acc = new(data[i + 1], Convert.ToDouble(data[i + 2]), data[i + 3]);
+                usr.SetAccount(acc);
+
+                newListOfUsers.Add(usr);
             }
 
             return newListOfUsers;
@@ -254,6 +255,22 @@ namespace ATM
                 4. Deposit money
                 5. Log out
                 """);
+        }
+
+        public static void WriteUserDataToFile(string path, List<User> users)
+        {
+            List<User> workableUserList = [.. users.OrderBy(usr => usr.GetName())];
+            using (StreamWriter streamWriter = new(path))
+            {
+                for (int i = 0; i < workableUserList.Count; i++)
+                {
+                    if (i + 1 == workableUserList.Count)
+                        streamWriter.Write(workableUserList[i].ToStringToFile());
+                    else { streamWriter.WriteLine(workableUserList[i].ToStringToFile()); }
+                }
+            }
+            Console.WriteLine("Data has been written.");
+            Console.ReadKey(true);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ATM.Interface
+﻿using ATM.Class;
+
+namespace ATM.Interface
 {
     internal interface IWritable
     {

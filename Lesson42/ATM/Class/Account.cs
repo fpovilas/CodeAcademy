@@ -23,12 +23,17 @@
         {
             if (amount > 1000)
             { 
-                Console.WriteLine("Maximum Withdrawal amount is 1000€");
+                Console.WriteLine("Maximum Withdrawal amount is 1000€.");
                 return false;
             }
             else if (MoneyInAccount < 0 || MoneyInAccount < amount)
             {
-                Console.WriteLine($"Can't withdraw {amount} you have only {MoneyInAccount}");
+                Console.WriteLine($"Can't withdraw {amount}€. You have only {MoneyInAccount}€.");
+                return false;
+            }
+            else if (amount < 0)
+            {
+                Console.WriteLine("You cannot withdraw negative amount.");
                 return false;
             }
             else
@@ -44,7 +49,12 @@
         {
             if (amount > 1000)
             {
-                Console.WriteLine("Maximum Deposit amount is 1000€");
+                Console.WriteLine("Maximum Deposit amount is 1000€.");
+                return false;
+            }
+            else if (amount < 0)
+            {
+                Console.WriteLine("You cannot deposit negative amount.");
                 return false;
             }
             else

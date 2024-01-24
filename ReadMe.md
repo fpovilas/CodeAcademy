@@ -231,8 +231,15 @@
 
 - Continuing Project - ***ATM***
 
-#### [Lesson 45 (2024-01-22)](/Lesson42/)
+#### [Lesson 45 (2024-01-23)](/Lesson42/)
 
 - Continuing Project - ***ATM***
+
+#### [Lesson 46 (2024-01-24)](/Lesson42/)
+
+- Continuing Project - ***ATM***
+- Presnetation
+- Bug fixes
+    - Need to make advanced stuff
 
 </details>

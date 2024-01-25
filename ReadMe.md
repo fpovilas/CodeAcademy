@@ -242,4 +242,8 @@
 - Bug fixes
     - Need to make advanced stuff
 
+#### [Lesson 47 (2024-01-25)](/Lesson42/)
+
+- Project - ***ATM*** Presnetations
+
 </details>

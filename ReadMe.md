@@ -246,4 +246,10 @@
 
 - Project - ***ATM*** Presnetations
 
+#### [Lesson 48 (2024-01-29)](/Lesson48/)
+
+- Async programming
+    - Threads
+    - await
+
 </details>

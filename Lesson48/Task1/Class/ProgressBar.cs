@@ -9,15 +9,19 @@
             for (int i = 0; i <= 100; i++)
             {
                 Progress = i;
-                await Task.Delay(100);
+                await Task.Delay(1000);
             }
             return new ProgressBar();
         }
 
         public async Task GetProgressInfo()
         {
-            await Task.Delay(300);
-            Console.Clear();
+            while(Progress < 100)
+            { 
+                Console.WriteLine(Progress);
+                await Task.Delay(3000);
+                Console.Clear();
+            }
             Console.WriteLine(Progress);
         }
 

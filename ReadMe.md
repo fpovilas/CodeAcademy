@@ -252,4 +252,12 @@
     - Threads
     - await
 
+#### [Lesson 49 (2024-01-30)](/Lesson49/)
+
+- Async programming
+    - Threads
+    - await
+- Software Architecture
+    - Theory only
+
 </details>

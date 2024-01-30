@@ -4,7 +4,7 @@ namespace Task1
 {
     internal class Program
     {
-        static void Main()
+        static async Task Main()
         {
             ProgressBar progressBar = new();
             List<Task> tasks = [
@@ -12,14 +12,7 @@ namespace Task1
                 progressBar.GetProgressInfo()
                 ];
 
-            while (tasks.Count > 0)
-            {
-                progressBar.GetProgressInfo().Wait();
-                if (tasks[0].IsCompleted)
-                {
-                    break;
-                }
-            }
+            await Task.WhenAll(tasks); // Wait till all async task are done
         }
     }
 }

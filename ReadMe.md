@@ -260,4 +260,8 @@
 - Software Architecture
     - Theory only
 
+#### [Lesson 50 (2024-01-31)](/Lesson50/)
+
+- Advanced C# Exam
+
 </details>

@@ -1,0 +1,4 @@
+Cola;1,59
+Fanta;1,59
+Water;0,6
+Fresh Juice;3

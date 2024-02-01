@@ -1,22 +1,16 @@
-﻿using ExamAdvancedCSharp.Repos;
-using ExamAdvancedCSharp.Service;
+﻿using ExamAdvancedCSharp.Service;
 using ExamAdvancedCSharp.Class;
+using ExamAdvancedCSharp.Service.Interfaces;
 
 namespace ExamAdvancedCSharp
 {
     internal class Program
     {
+        private static readonly IFoodItemService _foodItemService = new FoodItemService();
+
         static void Main()
         {
             bool stopProgram = false;
-            FoodItemService foodItemService = new(new FoodItemRepository());
-            ReadFileService readFileService = new(@"D:\Projektai\Programavimas\CodeAcademy\Lesson50\", "Food.txt");
-            var list = readFileService.ReadFile<FoodItem>();
-
-            foreach(var item in list)
-            {
-                foodItemService.AddFoodItem(item);
-            }
 
             do
             {
@@ -29,22 +23,17 @@ namespace ExamAdvancedCSharp
 
                 switch (choice)
                 {
-                    case 1:
+                    case 1: // Start Order
                         break;
-                    case 2:
+                    case 2: // Display All Tables
                         break;
-                    case 3:
-                        WriteFileService writeFileService = new("D:\\Projektai\\Programavimas\\CodeAcademy\\Lesson50\\", "Food.txt");
-                        string? name = Console.ReadLine();
-                        double price = double.Parse(Console.ReadLine());
-
-                        foodItemService.AddFoodItem(name, price);
-
-                        writeFileService.WriteFile(foodItemService.GetFoodItems());
+                    case 3: // Adding Food
+                        AddFood();
                         break;
-                    case 4:
+                    case 4: // Adding Drinks
+                        AddDrinks();
                         break;
-                    case 5:
+                    case 5: // Stopping program
                         stopProgram = true;
                         break;
                     default:
@@ -103,5 +92,53 @@ namespace ExamAdvancedCSharp
         }
 
         #endregion
+
+        private static void AddFood()
+        {
+            Console.Write("Please write food name: ");
+            string? name = Console.ReadLine();
+            Console.Write($"Please write price of {name}: ");
+            double price = 0;
+            if (name != null)
+            {
+                price = double.Parse(Console.ReadLine()!);
+
+                _foodItemService.AddFoodItem("Food", name, price);
+
+                _foodItemService.WriteFile("Food");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong");
+                Console.ReadKey(true);
+            }
+
+            Console.WriteLine($"{name} -- {price:0.##} has been added");
+            Console.ReadKey(true);
+        }
+
+        private static void AddDrinks()
+        {
+            Console.Write("Please write drink name: ");
+            string? name = Console.ReadLine();
+            Console.Write($"Please write price of {name}: ");
+            double price = 0;
+            if (name != null)
+            {
+                price = double.Parse(Console.ReadLine()!);
+
+                _foodItemService.AddFoodItem("Drinks", name, price);
+
+                _foodItemService.WriteFile("Drinks");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong");
+                Console.ReadKey(true);
+            }
+
+            Console.WriteLine($"{name} -- {price:0.##} has been added");
+            Console.ReadKey(true);
+        }
     }
 }

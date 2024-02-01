@@ -1,4 +1,6 @@
-Cola;1,59
-Fanta;1,59
-Water;0,6
-Fresh Juice;3
+Steak;25,49
+Chicken;8,59
+Pork Steak;9,99
+Salad;7,49
+Brownie;5
+Shishkebab;6,69

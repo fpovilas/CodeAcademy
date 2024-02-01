@@ -263,5 +263,13 @@
 #### [Lesson 50 (2024-01-31)](/Lesson50/)
 
 - Advanced C# Exam
+</details>
+
+<details>
+<summary>2024-02 February</summary>
+
+#### [Lesson 51 (2024-02-01)](/Lesson50/)
+
+- Advanced C# Exam
 
 </details>

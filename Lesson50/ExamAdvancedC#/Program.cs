@@ -1,5 +1,5 @@
-﻿using ExamAdvancedCSharp.Service;
-using ExamAdvancedCSharp.Class;
+﻿using ExamAdvancedCSharp.Class;
+using ExamAdvancedCSharp.Service;
 using ExamAdvancedCSharp.Service.Interfaces;
 
 namespace ExamAdvancedCSharp
@@ -7,6 +7,7 @@ namespace ExamAdvancedCSharp
     internal class Program
     {
         private static readonly IFoodItemService _foodItemService = new FoodItemService();
+        private static readonly ITableService _tableService = new TableService();
 
         static void Main()
         {
@@ -14,18 +15,47 @@ namespace ExamAdvancedCSharp
 
             do
             {
-                Console.Clear();
-                PrintLogo();
+                ClearAndPrintLogo();
                 PrintMenu();
-                PrintAskForChoice();
 
                 int choice = GetChoice();
 
                 switch (choice)
                 {
                     case 1: // Start Order
+                        Console.Write("Please enter your name: ");
+                        string? waiterName = Console.ReadLine();
+                        if (waiterName == string.Empty)
+                        {
+                            Console.WriteLine("Something went wrong.");
+                            Console.ReadKey(true);
+                            continue;
+                        }
+                        else
+                        {
+                            ClearAndPrintLogo();
+                            PrintTables();
+                            int tableChoiceForOrder = GetChoice();
+
+                        }
+                        // Ask for Waitress/Waiter name
+                        // Select table
+                        // Create waiter object
+                        // Make relationship between table and waiter
+                        // Give menu to choose food
+                        // Create food list
+                        // Print sorted completed list
+                        // Ask to confirm that everything okay
+                        // If okay add this order to table
+                        // If not give to choose products again after that go to confirmation
                         break;
-                    case 2: // Display All Tables
+                    case 2: // Display All Tables and do actions with them
+                        ClearAndPrintLogo();
+                        PrintTables();
+
+                        int tableChoice = GetChoice();
+
+                        DoWhileTableAction(tableChoice);
                         break;
                     case 3: // Adding Food
                         AddFood();
@@ -80,12 +110,38 @@ namespace ExamAdvancedCSharp
             Console.Write("Your choice: ");
         }
 
+        private static void PrintMenuForTableAction()
+        {
+            Console.WriteLine("""
+                1. Pay bill
+                2. Reserve table
+                3. Vacate table
+                4. Exit
+                """);
+        }
+
+        private static void ClearAndPrintLogo()
+        {
+            Console.Clear();
+            PrintLogo();
+        }
+
+        private static void PrintTables()
+        {
+            int index = 1;
+            foreach (var table in _tableService.GetTables())
+            {
+                Console.WriteLine($"{index++}. {table}");
+            }
+        }
+
         #endregion
 
         #region Get Function
 
         private static int GetChoice()
         {
+            PrintAskForChoice();
             if (int.TryParse(Console.ReadLine(), out int choice))
                 return choice;
             return 0;
@@ -139,6 +195,45 @@ namespace ExamAdvancedCSharp
 
             Console.WriteLine($"{name} -- {price:0.##} has been added");
             Console.ReadKey(true);
+        }
+
+        private static void DoWhileTableAction(int tableChoice)
+        {
+            bool exit = true;
+            do
+            {
+                Table table = _tableService.GetTables()[tableChoice - 1];
+                string tableName = table.GetTableName();
+                string tableState = $"{(table.GetTableState() ? "Unavailable" : "Available")}";
+                ClearAndPrintLogo();
+                Console.WriteLine($"You chose {tableName} and it is {tableState}");
+                PrintMenuForTableAction();
+                int tableActionChoice = GetChoice();
+                switch (tableActionChoice)
+                {
+                    case 1: // Pay Bill
+                        break;
+                    case 2: // Reserve Table
+                        table.SetTableSate(true);
+                        Console.WriteLine("Table reserved.");
+                        Console.ReadKey(true);
+                        break;
+                    case 3: // Vacate Table (Checking if table bills is paid needed)
+                        table.SetTableSate(false);
+                        Console.WriteLine("Table vacated.");
+                        Console.ReadKey(true);
+                        break;
+                    case 4:
+                        Console.WriteLine("Exiting.");
+                        Console.ReadKey();
+                        exit = false;
+                        break;
+                    default:
+                        Console.WriteLine("Something went wrong.");
+                        Console.ReadKey();
+                        continue;
+                }
+            } while (exit);
         }
     }
 }

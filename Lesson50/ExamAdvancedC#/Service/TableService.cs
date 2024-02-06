@@ -1,12 +1,12 @@
 ﻿using ExamAdvancedCSharp.Service.Interfaces;
-using ExamAdvancedCSharp.Repos;
 using ExamAdvancedCSharp.Class;
+using ExamAdvancedCSharp.Repos.Interfaces;
 
 namespace ExamAdvancedCSharp.Service
 {
-    internal class TableService() : ITableService
+    internal class TableService(ITableRepository tableRepository) : ITableService
     {
-        private static readonly TableRepository _tableRepository = new();
+        private readonly ITableRepository _tableRepository = tableRepository;
 
         public List<Table> GetTables() => _tableRepository.GetTables();
     }

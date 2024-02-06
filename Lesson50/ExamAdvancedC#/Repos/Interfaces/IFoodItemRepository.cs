@@ -4,10 +4,10 @@ namespace ExamAdvancedCSharp.Repos.Interfaces
 {
     internal interface IFoodItemRepository
     {
-        public void AddFoodItem(string key, FoodItem foodItem);
+        public void AddFoodItem(FoodItem foodItem);
 
-        public void WriteFile(string key);
+        public void WriteFile(FoodType key);
 
-        public Dictionary<string, List<FoodItem>> GetFoodItems();
+        public List<FoodItem> GetFoodItems();
     }
 }

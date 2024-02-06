@@ -4,3 +4,4 @@ Pork Steak;9,99
 Salad;7,49
 Brownie;5
 Shishkebab;6,69
+Shvarma;6,99

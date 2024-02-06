@@ -4,12 +4,12 @@ namespace ExamAdvancedCSharp.Service.Interfaces
 {
     internal interface IFoodItemService
     {
-        public void AddFoodItem(string key, string name, double price);
+        public void AddFoodItem(string name, double price, FoodType foodType);
 
-        public void AddFoodItem(string key, FoodItem foodItem);
+        public void AddFoodItem(FoodItem foodItem);
 
-        public void WriteFile(string key);
+        public void WriteFile(FoodType key);
 
-        public Dictionary<string, List<FoodItem>> GetFoodItems();
+        public List<FoodItem> GetFoodItems();
     }
 }

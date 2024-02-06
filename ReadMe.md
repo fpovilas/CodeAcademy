@@ -276,4 +276,8 @@
 
 - Advanced C# Exam
 
+#### [Lesson 53 (2024-02-06)](/Lesson50/)
+
+- Advanced C# Exam
+
 </details>

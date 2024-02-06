@@ -9,7 +9,7 @@ namespace ExamAdvancedCSharp.Repos
 
         private readonly string _pathToDrinks = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\Drinks.txt";
         private readonly string _pathToFood = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\Food.txt";
-        private readonly Dictionary<string, List<FoodItem>> foodItems = [];
+        private readonly List<FoodItem> foodItems = [];
 
         #endregion
 
@@ -18,40 +18,35 @@ namespace ExamAdvancedCSharp.Repos
             List<string> foodList = GetFoodItemList(_pathToFood);
             List<string> drinkList = GetFoodItemList(_pathToDrinks);
 
-            LoadData(foodList, "Food");
-            LoadData(drinkList, "Drinks");
+            LoadData(foodList, FoodType.Food);
+            LoadData(drinkList, FoodType.Drinks);
         }
 
-        public void AddFoodItem(string key, FoodItem foodItem)
-        {
-            if(!foodItems.ContainsKey(key))
-            {
-                foodItems.Add(key, [foodItem]);
-            }
-            else {foodItems[key].Add(foodItem);}
-        }
+        public void AddFoodItem(FoodItem foodItem) => foodItems.Add(foodItem);
 
-        public Dictionary<string, List<FoodItem>> GetFoodItems() => foodItems;
+        public List<FoodItem> GetFoodItems() => foodItems;
 
-        public void WriteFile(string key)
+        public void WriteFile(FoodType key)
         {
             switch(key)
             {
-                case "Drinks":
+                case FoodType.Drinks:
                     {
                         using StreamWriter streamWriter = new(_pathToDrinks);
-                        for (int i = 0; i < foodItems[key].Count; i++)
+                        for (int i = 0; i < foodItems.Count; i++)
                         {
-                            streamWriter.WriteLine(foodItems[key][i]);
+                            if (foodItems[i].GetFoodType() == FoodType.Drinks)
+                                streamWriter.WriteLine(foodItems[i]);
                         }
                     }
                     break;
-                case "Food":
+                case FoodType.Food:
                     {
                         using StreamWriter streamWriter = new(_pathToFood);
-                        for (int i = 0; i < foodItems[key].Count; i++)
+                        for (int i = 0; i < foodItems.Count; i++)
                         {
-                            streamWriter.WriteLine(foodItems[key][i]);
+                            if (foodItems[i].GetFoodType() == FoodType.Food)
+                                streamWriter.WriteLine(foodItems[i]);
                         }
                     }
                     break;
@@ -73,12 +68,12 @@ namespace ExamAdvancedCSharp.Repos
             return foodItemList;
         }
 
-        private void LoadData(List<string> foodItemsList, string key)
+        private void LoadData(List<string> foodItemsList, FoodType foodType)
         {
             for(int i = 0; i < foodItemsList.Count; i += 2)
             {
-                FoodItem foodItem = new(foodItemsList[i], Convert.ToDouble(foodItemsList[i + 1]));
-                AddFoodItem(key, foodItem);
+                FoodItem foodItem = new(foodItemsList[i], Convert.ToDouble(foodItemsList[i + 1]), foodType);
+                AddFoodItem(foodItem);
             }
         }
     }

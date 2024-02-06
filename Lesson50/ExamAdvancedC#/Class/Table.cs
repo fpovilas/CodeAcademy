@@ -12,7 +12,12 @@
         public int GetSeating() => Seating;
         public bool GetTableState() => IsTaken;
 
-        public bool SetTableSate(bool state) => IsTaken = state;
+        public void SetTableSate(bool state) => IsTaken = state;
+        public void SetWaitress(Waitress? waitress)
+        {
+            Waitress = waitress;
+            Waitress?.AddTable(this);
+        }
 
         public override string ToString()
             => $"{Name} has {Seating} seats and are served by" +

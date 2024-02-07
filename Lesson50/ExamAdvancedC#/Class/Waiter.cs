@@ -1,6 +1,6 @@
 ﻿namespace ExamAdvancedCSharp.Class
 {
-    internal class Waitress(string name)
+    internal class Waiter(string name)
     {
         private string Name { get; set; } = name;
         private List<Table> Tables { get; set; } = [];

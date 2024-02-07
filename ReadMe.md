@@ -280,4 +280,8 @@
 
 - Advanced C# Exam
 
+#### [Lesson 54 (2024-02-07)](/Lesson50/)
+
+- Advanced C# Exam
+
 </details>

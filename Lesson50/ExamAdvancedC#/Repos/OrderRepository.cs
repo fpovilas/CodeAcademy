@@ -1,6 +1,5 @@
 ﻿using ExamAdvancedCSharp.Class;
 using ExamAdvancedCSharp.Repos.Interfaces;
-using System.Linq;
 
 namespace ExamAdvancedCSharp.Repos
 {

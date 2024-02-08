@@ -1,4 +1,6 @@
-﻿using ExamAdvancedCSharp.Service.Interfaces;
+﻿using ExamAdvancedCSharp.Service;
+using ExamAdvancedCSharp.Service.Interfaces;
+using System.Text;
 
 namespace ExamAdvancedCSharp.Class
 {
@@ -174,6 +176,31 @@ namespace ExamAdvancedCSharp.Class
             Console.ResetColor();
         }
 
+        private void PrintReceipt(Order order)
+        {
+            Dictionary<string, int> distinctFood = order.GetFoodItems().GroupBy(n => n.GetName())
+                                                                       .ToDictionary(x => x.Key, x => x.Count());
+            Console.WriteLine($"""
+                                ########################################
+                                # ----------------   ----------------- #
+                                # Order ID {order.GetID():000000}  {order.GetOrderTime()} #
+                                """);
+            double total = 0;
+            foreach (KeyValuePair<string, int> foodItem in distinctFood)
+            {
+                double price = _foodItemService.GetFoodItems()
+                                               .FirstOrDefault(x => x.GetName().Equals(foodItem.Key))!
+                                               .GetPrice();
+                Console.WriteLine($"# {foodItem.Key,-16} x {foodItem.Value,-2} ---{"",4}{price * foodItem.Value,6:##0.00}€ #");
+                total += price * foodItem.Value;
+            }
+            Console.WriteLine($"""
+                                # ----------------   ----------------- #
+                                # Total: {total,6:##0.00}€{"",22} #
+                                ########################################
+                                """);
+        }
+
         #endregion
 
         #region Get Function
@@ -299,33 +326,7 @@ namespace ExamAdvancedCSharp.Class
                 {
                     // Pay Bill
                     case 1:
-                        if(orderList.Count == 1 )
-                        {
-                            Order order = orderList[0];
-                            Dictionary<string, int> distinctFood = order.GetFoodItems().GroupBy(n => n.GetName())
-                                                                                       .ToDictionary(x => x.Key, x => x.Count());
-                            Console.WriteLine($"""
-                                ########################################
-                                # ----------------   ----------------- #
-                                # Order ID {order.GetID():000000}  {order.GetOrderTime()} #
-                                """);
-                            double total = 0;
-                            foreach(KeyValuePair<string, int> foodItem in distinctFood)
-                            {
-                                double price = _foodItemService.GetFoodItems()
-                                                               .FirstOrDefault(x => x.GetName().Equals(foodItem.Key))!
-                                                               .GetPrice();
-                                Console.WriteLine($"# {foodItem.Key, -16} x {foodItem.Value, -2} ---{"",4}{price * foodItem.Value, 6:##0.00}€ #");
-                                total += price * foodItem.Value;
-                            }
-                            Console.WriteLine($"""
-                                # ----------------   ----------------- #
-                                # Total: {total, 6:##0.00}€{"", 22} #
-                                ########################################
-                                """);
-                        }
-                        else { PrintTextInRead("Something went wrong"); }
-                        Console.ReadKey(true);
+                        PayBillLogic(orderList);
                         break;
                     // Reserve Table
                     case 2:
@@ -380,25 +381,16 @@ namespace ExamAdvancedCSharp.Class
                 {
                     ClearAndPrintLogo();
                     List<FoodItem> list = [];
+                    List<FoodItem> sortedFoodItemList = [.. _foodItemService.GetFoodItems().OrderByDescending(x => x.GetFoodType())];
                     int index = 1;
-                    foreach (var foodItem in _foodItemService.GetFoodItems())
+                    foreach (var foodItem in sortedFoodItemList)
                     {
-                        if (foodItem.GetFoodType() == FoodType.Food)
-                        {
-                            Console.WriteLine($"{index++,2}. {foodItem.GetName(),-16} --- {foodItem.GetPrice(),6:##0.00}€");
-                            list.Add(foodItem);
-                        }
-                    }
-                    foreach (var foodItem in _foodItemService.GetFoodItems())
-                    {
-                        if (foodItem.GetFoodType() == FoodType.Drinks)
-                        {
-                            Console.WriteLine($"{index++,2}. {foodItem.GetName(),-16} --- {foodItem.GetPrice(),6:##0.00}€");
-                            list.Add(foodItem);
-                        }
+
+                        Console.WriteLine($"{index++,2}. {foodItem.GetName(),-16} --- {foodItem.GetPrice(),6:##0.00}€");
+                        list.Add(foodItem);
                     }
                     chosenFoodItem = GetChoice();
-                    if (chosenFoodItem < list.Count && chosenFoodItem != 0)
+                    if (chosenFoodItem <= list.Count && chosenFoodItem != 0)
                     {
                         newOrder.AddFoodItem(list[chosenFoodItem - 1]);
                         Console.WriteLine($"{list[chosenFoodItem - 1].GetName()} - {list[chosenFoodItem - 1].GetPrice()}€ has been added");
@@ -431,6 +423,57 @@ namespace ExamAdvancedCSharp.Class
                     }
                 }
             } while (!stopOrder);
+        }
+
+        private void PayBillLogic(List<Order> orderList)
+        {
+            if (orderList.Count == 1)
+            {
+                ClearAndPrintLogo();
+                PrintReceipt(orderList[0]);
+                SendReceipt(orderList[0]);
+            }
+            else if (orderList.Count > 1)
+            {
+                int index = 1;
+                foreach (var order in orderList)
+                {
+                    Console.WriteLine($"{index++}. {order.GetID()} - {order.GetOrderTime()}");
+                }
+                int orderToPayChoice = GetChoice();
+                if (orderToPayChoice != 0)
+                {
+                    ClearAndPrintLogo();
+                    PrintReceipt(orderList[orderToPayChoice - 1]);
+                    SendReceipt(orderList[orderToPayChoice - 1]);
+                }
+            }
+            else
+            {
+                PrintTextInRead("Something went wrong");
+            }
+        }
+
+        private static void SendReceipt(Order order)
+        {
+            Console.Write("Do customer needs receipt?(y/n): ");
+            string? customerReceiptChoice = Console.ReadLine();
+            if (!string.IsNullOrEmpty(customerReceiptChoice))
+            {
+                switch (customerReceiptChoice.ToLower())
+                {
+                    case "y":
+                        EmailService emailService = new();
+                        ((IEmailService)emailService).Send(order);
+                        break;
+                    case "n":
+                        break;
+                    default:
+                        PrintTextInRead("Something went wrong");
+                        break;
+                }
+            }
+            Console.ReadKey(true);
         }
     }
 }

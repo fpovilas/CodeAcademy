@@ -4,6 +4,6 @@ namespace ExamAdvancedCSharp.Service.Interfaces
 {
     internal interface IEmailService
     {
-        public void Send(Order order);
+        public bool Send(Order order);
     }
 }

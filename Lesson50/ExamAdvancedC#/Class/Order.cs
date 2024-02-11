@@ -9,7 +9,7 @@
         private Table Table { get; set; } = table;
 
         public int GetID() => ID;
-        public string GetOrderTime() => OrderTime.ToString();
+        public DateTime GetOrderTime() => OrderTime;
         public List<FoodItem> GetFoodItems() => FoodItems;
         public bool GetIsPaid() => IsPaid;
         public Table GetTable() => Table;

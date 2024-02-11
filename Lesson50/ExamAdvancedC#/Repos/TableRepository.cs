@@ -5,7 +5,7 @@ namespace ExamAdvancedCSharp.Repos
 {
     internal class TableRepository : ITableRepository
     {
-        private static readonly string _pathToTables = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\Tables.txt";
+        private static readonly string _pathToTables = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\ExamAdvancedC#\DB\Tables.txt";
         private static readonly List<Table> _tables = [];
 
         public TableRepository()

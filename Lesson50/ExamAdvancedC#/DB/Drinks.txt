@@ -4,3 +4,4 @@ Water;0,6
 Fresh Juice;3
 Soda;0,89
 Sparkling Water;0,99
+Virgin Mojito;6,69

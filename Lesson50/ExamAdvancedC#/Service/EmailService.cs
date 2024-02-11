@@ -10,41 +10,47 @@ namespace ExamAdvancedCSharp.Service
     internal class EmailService : IEmailService
     {
 
-        public void Send(Order order)
+        public bool Send(Order order)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                             .AddUserSecrets<Program>()
                             .AddJsonFile("secrets.json", optional: true, reloadOnChange: true)
                             .Build();
 
-            Console.Write("Please enter recipient e. mail: "); // Remake to Service and Interface
-            string? recipient = Console.ReadLine(); // Separate method for checking and asking
+            RecipientValidatorService recipientValidatorService = new();
+            Console.Write("Please enter recipient e.mail: ");
+            string? recipient = Console.ReadLine();
             if (!string.IsNullOrEmpty(recipient))
             {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress($"Dining RegSys Receipt", configuration["email"]));
-                message.To.Add(new MailboxAddress(recipient, recipient));
-                message.Subject = $"Dining RegSys Order: {order.GetID():000000}";
-                message.Body = new TextPart("html")
+                ((IRecipientValidator)recipientValidatorService).SetRecipientEmail(recipient);
+                if(((IRecipientValidator)recipientValidatorService).CheckEmail())
                 {
-                    Text = CreateReceipt(order)
-                };
+                    var message = new MimeMessage();
+                    message.From.Add(new MailboxAddress($"Dining RegSys Receipt", configuration["email"]));
+                    message.To.Add(new MailboxAddress(recipient, recipient));
+                    message.Subject = $"Dining RegSys Order: {order.GetID():000000}";
+                    message.Body = new TextPart("html")
+                    {
+                        Text = CreateReceipt(order)
+                    };
 
-                using var client = new SmtpClient();
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate(configuration["email"], configuration["password"]);
-                client.Send(message);
-                client.Disconnect(true);
+                    using var client = new SmtpClient();
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate(configuration["email"], configuration["password"]);
+                    client.Send(message);
+                    client.Disconnect(true);
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            PrintTextInGreen("Receipt is sent");
-            Console.ReadKey(true);
-        }
-
-        private static void PrintTextInGreen(string text)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(text);
-            Console.ResetColor();
+            else
+            {
+                return false;
+            }
         }
 
         private static string CreateReceipt(Order order)

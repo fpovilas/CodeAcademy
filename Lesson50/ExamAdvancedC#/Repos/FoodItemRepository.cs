@@ -7,8 +7,8 @@ namespace ExamAdvancedCSharp.Repos
     {
         #region ReadOnly
 
-        private readonly string _pathToDrinks = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\Drinks.txt";
-        private readonly string _pathToFood = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\Food.txt";
+        private readonly string _pathToDrinks = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\ExamAdvancedC#\DB\Drinks.txt";
+        private readonly string _pathToFood = @"D:\Projektai\Programavimas\CodeAcademy\Lesson50\ExamAdvancedC#\DB\Food.txt";
         private readonly List<FoodItem> foodItems = [];
 
         #endregion

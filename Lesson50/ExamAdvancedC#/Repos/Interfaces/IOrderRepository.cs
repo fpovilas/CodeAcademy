@@ -7,5 +7,7 @@ namespace ExamAdvancedCSharp.Repos.Interfaces
         public void AddOrder(Order order);
 
         public List<Order> GetOrders();
+
+        public string SaveReceipt(int orderID);
     }
 }

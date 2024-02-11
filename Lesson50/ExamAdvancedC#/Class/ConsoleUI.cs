@@ -28,9 +28,9 @@ namespace ExamAdvancedCSharp.Class
                     case 1:
                         Console.Write("Please enter your name: ");
                         string? waiterName = Console.ReadLine();
-                        if (waiterName == string.Empty || waiterName == null)
+                        if (string.IsNullOrEmpty(waiterName))
                         {
-                            Console.WriteLine("Something went wrong.");
+                            PrintTextInRed("Something went wrong.");
                             Console.ReadKey(true);
                             continue;
                         }
@@ -38,17 +38,13 @@ namespace ExamAdvancedCSharp.Class
                         {
                             int tableChoiceForNewOrder = GetTable();
 
-                            if (tableChoiceForNewOrder == 0)
+                            // If wrong choice continue loop
+                            if (tableChoiceForNewOrder == -1 || tableChoiceForNewOrder == 0)
                                 continue;
 
                             Waiter waiter = new(waiterName);
                             Table chosenTable = _tableService.GetTables()[tableChoiceForNewOrder - 1];
-
                             chosenTable.SetWaiter(waiter);
-
-                            ClearAndPrintLogo();
-                            Console.WriteLine($"Hello, {waiterName}. Ordering for {chosenTable.GetTableName()}");
-                            chosenTable.SetTableSate(true);
 
                             int newOrderID = GetOrderID();
                             Order newOrder = new(newOrderID, chosenTable);
@@ -61,12 +57,23 @@ namespace ExamAdvancedCSharp.Class
                         break;
                     // Display All Tables and do actions with them
                     case 2:
-                        ClearAndPrintLogo();
-                        PrintTables();
+                        bool stopTableChoosing = false;
+                        do
+                        {
+                            ClearAndPrintLogo();
+                            PrintTables();
 
-                        int tableChoice = GetChoice();
+                            int tableChoice = GetChoice(true);
 
-                        TableAction(tableChoice);
+
+                            if (tableChoice != -1 && tableChoice > 0)
+                            {
+                                if (_tableService.GetTables().Count > tableChoice && tableChoice != 0)
+                                    TableAction(tableChoice);
+                            }
+                            else { stopTableChoosing = true; }
+                        } while (!stopTableChoosing);
+
                         break;
                     // Adding Food
                     case 3:
@@ -81,7 +88,7 @@ namespace ExamAdvancedCSharp.Class
                         stopProgram = true;
                         break;
                     default:
-                        PrintTextInRead($"Wrong choice ({choice})");
+                        PrintTextInRed($"Wrong choice ({choice})");
                         Console.ReadKey(true);
                         break;
                 }
@@ -152,31 +159,24 @@ namespace ExamAdvancedCSharp.Class
             }
         }
 
-        private static void PrintOrder(Order newOrder)
+        private void PrintOrder(Order newOrder)
         {
+            List<FoodItem> orderedFoodItems = [.. newOrder.GetFoodItems().OrderByDescending(x => x.GetFoodType())];
+            Dictionary<string, int> distinctFood = orderedFoodItems.GroupBy(n => n.GetName())
+                                                                   .ToDictionary(x => x.Key, x => x.Count());
+
             ClearAndPrintLogo();
             Console.WriteLine("Your order:");
-            foreach (FoodItem food in newOrder.GetFoodItems())
+            foreach (KeyValuePair<string, int> foodItem in distinctFood)
             {
-                Console.WriteLine($"{food.GetName(),-16} - {food.GetPrice(),6:##0.00}€");
+                double price = _foodItemService.GetFoodItems()
+                                               .FirstOrDefault(x => x.GetName().Equals(foodItem.Key))!
+                                               .GetPrice();
+                Console.WriteLine($"{foodItem.Key,-16} {price,6:##0.00}€ x {foodItem.Value,-2}");
             }
         }
 
-        private static void PrintTextInRead(string text)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(text);
-            Console.ResetColor();
-        }
-
-        private static void PrintTextInGreen(string text)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(text);
-            Console.ResetColor();
-        }
-
-        private void PrintReceipt(Order order)
+        private void PrintReceiptOnScreen(Order order)
         {
             Dictionary<string, int> distinctFood = order.GetFoodItems().GroupBy(n => n.GetName())
                                                                        .ToDictionary(x => x.Key, x => x.Count());
@@ -201,6 +201,27 @@ namespace ExamAdvancedCSharp.Class
                                 """);
         }
 
+        private static void PrintTextInRed(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        private static void PrintTextInGreen(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        private static void PrintTextInYellow(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
         #endregion
 
         #region Get Function
@@ -208,9 +229,18 @@ namespace ExamAdvancedCSharp.Class
         private static int GetChoice(bool withExit = false)
         {
             PrintAskForChoice(withExit);
-            if (int.TryParse(Console.ReadLine(), out int choice))
-                return choice;
-            return 0;
+            string? userInput = Console.ReadLine();
+            if (!string.IsNullOrEmpty(userInput))
+            {
+                if (int.TryParse(userInput, out int choice))
+                    return choice;
+                else if (choice == 0 && userInput.ToLower().Equals("q"))
+                    return 0;
+                else
+                    return -1;
+            }
+            else
+                return -1;
         }
 
         private int GetTable()
@@ -222,11 +252,11 @@ namespace ExamAdvancedCSharp.Class
                 ClearAndPrintLogo();
                 PrintTables();
                 tableChoiceForNewOrder = GetChoice(true);
-                if (_tableService.GetTables().Count >= tableChoiceForNewOrder && tableChoiceForNewOrder != 0)
+                if (_tableService.GetTables().Count >= tableChoiceForNewOrder && (tableChoiceForNewOrder != -1 && tableChoiceForNewOrder > 0))
                 {
                     if (_tableService.GetTables()[tableChoiceForNewOrder - 1].GetTableState())
                     {
-                        PrintTextInRead($"{_tableService.GetTables()[tableChoiceForNewOrder - 1].GetTableName()} is already taken");
+                        PrintTextInRed($"{_tableService.GetTables()[tableChoiceForNewOrder - 1].GetTableName()} is already taken");
                         Console.ReadKey(true);
                         continue;
                     }
@@ -235,7 +265,7 @@ namespace ExamAdvancedCSharp.Class
                         freeTableChosen = true;
                     }
                 }
-                else if (tableChoiceForNewOrder == 0) { break; }
+                else if (tableChoiceForNewOrder == 0) { freeTableChosen = true; }
 
             } while (!freeTableChosen);
 
@@ -332,7 +362,7 @@ namespace ExamAdvancedCSharp.Class
                     case 2:
                         if (table.GetTableState())
                         {
-                            PrintTextInRead("Table already in use.");
+                            PrintTextInRed("Table already in use.");
                             Console.ReadKey(true);
                         }
                         else
@@ -346,7 +376,7 @@ namespace ExamAdvancedCSharp.Class
                     case 3:
                         if (orderList.Count > 0)
                         {
-                            PrintTextInRead($"You cannot vacate {table.GetTableName()} because it has unpaid bills");
+                            PrintTextInRed($"You cannot vacate {table.GetTableName()} because it has unpaid bills");
                             Console.ReadKey(true);
                         }
                         else
@@ -363,7 +393,7 @@ namespace ExamAdvancedCSharp.Class
                         exit = false;
                         break;
                     default:
-                        Console.WriteLine("Something went wrong.");
+                        PrintTextInRed("Something went wrong.");
                         Console.ReadKey();
                         continue;
                 }
@@ -372,6 +402,10 @@ namespace ExamAdvancedCSharp.Class
 
         private void StartOrdering(Order newOrder)
         {
+            Table chosenTable = newOrder.GetTable();
+            Waiter waiter = chosenTable.GetWaiter()!;
+            string waiterName = waiter.GetName();
+            chosenTable.SetTableSate(true);
             bool stopOrder = false;
             do
             {
@@ -379,9 +413,12 @@ namespace ExamAdvancedCSharp.Class
                 bool stopChoosingFoodItem = false;
                 do
                 {
-                    ClearAndPrintLogo();
                     List<FoodItem> list = [];
                     List<FoodItem> sortedFoodItemList = [.. _foodItemService.GetFoodItems().OrderByDescending(x => x.GetFoodType())];
+
+                    ClearAndPrintLogo();
+                    Console.WriteLine($"Hello, {waiterName}. Ordering for {chosenTable.GetTableName()}");
+                    
                     int index = 1;
                     foreach (var foodItem in sortedFoodItemList)
                     {
@@ -393,12 +430,12 @@ namespace ExamAdvancedCSharp.Class
                     if (chosenFoodItem <= list.Count && chosenFoodItem != 0)
                     {
                         newOrder.AddFoodItem(list[chosenFoodItem - 1]);
-                        Console.WriteLine($"{list[chosenFoodItem - 1].GetName()} - {list[chosenFoodItem - 1].GetPrice()}€ has been added");
+                        Console.WriteLine($"{list[chosenFoodItem - 1].GetName()} - {list[chosenFoodItem - 1].GetPrice(),6:##0.00}€ has been added");
                         stopChoosingFoodItem = true;
                     }
                     else
                     {
-                        PrintTextInRead("Something went wrong please try again.");
+                        PrintTextInRed("Something went wrong. Please try again.");
                         Console.ReadKey(true);
                         continue;
                     }
@@ -430,8 +467,15 @@ namespace ExamAdvancedCSharp.Class
             if (orderList.Count == 1)
             {
                 ClearAndPrintLogo();
-                PrintReceipt(orderList[0]);
+                PrintReceiptOnScreen(orderList[0]);
                 SendReceipt(orderList[0]);
+                PrintTextInYellow(_orderService.SaveReceipt(orderList[0].GetID()));
+
+                orderList[0].SetIsPaid(true);
+                orderList[0].GetTable().SetWaiter(null);
+                orderList[0].GetTable().SetTableSate(false);
+
+                Console.ReadKey(true);
             }
             else if (orderList.Count > 1)
             {
@@ -441,16 +485,24 @@ namespace ExamAdvancedCSharp.Class
                     Console.WriteLine($"{index++}. {order.GetID()} - {order.GetOrderTime()}");
                 }
                 int orderToPayChoice = GetChoice();
-                if (orderToPayChoice != 0)
+                if (orderToPayChoice != 0 && orderToPayChoice > 0)
                 {
                     ClearAndPrintLogo();
-                    PrintReceipt(orderList[orderToPayChoice - 1]);
+                    PrintReceiptOnScreen(orderList[orderToPayChoice - 1]);
                     SendReceipt(orderList[orderToPayChoice - 1]);
+                    PrintTextInYellow(_orderService.SaveReceipt(orderList[orderToPayChoice - 1].GetID()));
+
+                    orderList[orderToPayChoice - 1].SetIsPaid(true);
+                    orderList[orderToPayChoice - 1].GetTable().SetWaiter(null);
+                    orderList[orderToPayChoice - 1].GetTable().SetTableSate(false);
+
+                    Console.ReadKey(true);
                 }
             }
             else
             {
-                PrintTextInRead("Something went wrong");
+                PrintTextInRed("There is no bills to pay");
+                Console.ReadKey();
             }
         }
 
@@ -464,16 +516,27 @@ namespace ExamAdvancedCSharp.Class
                 {
                     case "y":
                         EmailService emailService = new();
-                        ((IEmailService)emailService).Send(order);
+                        bool stopAskingForEmail = false;
+                        do
+                        {
+                            if (((IEmailService)emailService).Send(order))
+                            {
+                                PrintTextInGreen($"Receipt {order.GetID():000000} is sent");
+                                stopAskingForEmail = true;
+                            }
+                            else
+                            {
+                                PrintTextInRed("This is not e.mail");
+                            }
+                        } while (!stopAskingForEmail);
                         break;
                     case "n":
                         break;
                     default:
-                        PrintTextInRead("Something went wrong");
+                        PrintTextInRed("Something went wrong");
                         break;
                 }
             }
-            Console.ReadKey(true);
         }
     }
 }

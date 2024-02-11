@@ -6,5 +6,6 @@ namespace ExamAdvancedCSharp.Service.Interfaces
     {
         public void AddOrder(Order order);
         public List<Order> GetOrders();
+        public string SaveReceipt(int orderID);
     }
 }

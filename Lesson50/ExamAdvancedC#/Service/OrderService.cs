@@ -11,5 +11,7 @@ namespace ExamAdvancedCSharp.Service
         public void AddOrder(Order order) => _orderRepository.AddOrder(order);
 
         public List<Order> GetOrders() => _orderRepository.GetOrders();
+
+        public string SaveReceipt(int orderID) => _orderRepository.SaveReceipt(orderID);
     }
 }

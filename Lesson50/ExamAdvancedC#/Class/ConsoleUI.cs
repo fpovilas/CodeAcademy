@@ -1,6 +1,5 @@
 ﻿using ExamAdvancedCSharp.Service;
 using ExamAdvancedCSharp.Service.Interfaces;
-using System.Text;
 
 namespace ExamAdvancedCSharp.Class
 {

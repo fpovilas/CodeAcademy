@@ -1,3 +1,8 @@
+## Lessons by Level
+- Lesson01 - 23 ***Basic C#***
+- Lesson24 - 56 ***Advanced C#***
+- Lesson57 - 00 ***SQL***
+
 ## Lessons sorted by month
 
 <details>
@@ -292,5 +297,15 @@
 
 - Advanced C# Exam
     - ***Presentation***
+
+#### [Lesson 57 (2024-02-13)](/Lesson57/)
+
+- DB
+
+#### [Lesson 58 (2024-02-13)](/Lesson58/)
+
+- DBMS (Database Managament Systems)
+    - Wider use of WHERE statment
+    - GROUP BY
 
 </details>

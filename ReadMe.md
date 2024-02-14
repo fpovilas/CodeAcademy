@@ -308,4 +308,8 @@
     - Wider use of WHERE statment
     - GROUP BY
 
+#### [Lesson 59 (2024-02-14)](/Lesson59/)
+
+- SQL Joins
+
 </details>

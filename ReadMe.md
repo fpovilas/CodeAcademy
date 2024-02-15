@@ -312,4 +312,8 @@
 
 - SQL Joins
 
+#### [Lesson 60 (2024-02-14)](/Lesson59/)
+
+- SQL Joins more advanced
+
 </details>

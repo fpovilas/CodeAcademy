@@ -1,3 +1,6 @@
+----------------------------------------------
+------------------ NewDB DB ------------------
+----------------------------------------------
 -- Task1
 -- 1.Select the names of the staff members together with the name of the project they work on.
 SELECT FirstName, Project.Name

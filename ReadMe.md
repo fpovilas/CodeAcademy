@@ -312,8 +312,12 @@
 
 - SQL Joins
 
-#### [Lesson 60 (2024-02-14)](/Lesson59/)
+#### [Lesson 60 (2024-02-15)](/Lesson60/)
 
 - SQL Joins more advanced
+
+#### [Lesson 61 (2024-02-20)](/Lesson61/)
+
+- Database design
 
 </details>

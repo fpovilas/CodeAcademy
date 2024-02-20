@@ -316,8 +316,12 @@
 
 - SQL Joins more advanced
 
-#### [Lesson 61 (2024-02-20)](/Lesson61/)
+#### [Lesson 61 (2024-02-19)](/Lesson61/)
 
 - Database design
+
+#### [Lesson 62 (2024-02-20)](/Lesson62/)
+
+- Entity Framwork core
 
 </details>

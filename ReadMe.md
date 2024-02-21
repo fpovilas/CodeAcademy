@@ -324,4 +324,11 @@
 
 - Entity Framwork core
 
+#### [Lesson 63 (2024-02-21)](/Lesson62/)
+
+- Continuing DB
+    - CRUD
+        - Need to redo DB relationship
+        - Rewrite Code
+
 </details>

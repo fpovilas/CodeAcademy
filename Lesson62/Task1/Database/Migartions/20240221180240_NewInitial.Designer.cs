@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Task1.Database;
 
 #nullable disable
 
-namespace Task1.Database.Migrations
+namespace Task1.Database.Migartions
 {
     [DbContext(typeof(ATMContext))]
-    partial class ATMContextModelSnapshot : ModelSnapshot
+    [Migration("20240221180240_NewInitial")]
+    partial class NewInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,13 +25,19 @@ namespace Task1.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.HasSequence<int>("AccountsSeq", "dbo")
+                .StartsAt(1000L)
+                .IncrementsBy(5);
+
             modelBuilder.Entity("Task1.Database.Models.Account", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR dbo.AccountsSeq");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("CardNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
@@ -37,7 +46,6 @@ namespace Task1.Database.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserID")
@@ -89,7 +97,6 @@ namespace Task1.Database.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

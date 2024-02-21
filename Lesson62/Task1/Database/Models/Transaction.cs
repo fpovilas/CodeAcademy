@@ -10,7 +10,7 @@
 
     public enum Action
     {
-        Withdraw,
-        Deposit
+        Withdraw = 1,
+        Deposit = 2,
     };
 }

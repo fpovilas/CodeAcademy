@@ -8,9 +8,11 @@ namespace Task1.Database.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        public string Password { get; set; }
-        public double MoneyInAccount { get; set; }
-        public string CardNumber { get; }
+        public string? Password { get; set; }
+        [Column(TypeName = "decimal(5,2)")]
+        //[Precision(5,2)] Same aš upper one
+        public decimal Balance { get; set; }
+        public string? CardNumber { get; set; }
         public bool IsBlocked { get; set; }
         
         [ForeignKey("User")]

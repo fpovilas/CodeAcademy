@@ -1,23 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Task1.Database.Migrations
+namespace Task1.Database.Migartions
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class NewInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "AccountsSeq",
+                schema: "dbo",
+                startValue: 1000L,
+                incrementBy: 5);
+
             migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR dbo.AccountsSeq"),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MoneyInAccount = table.Column<double>(type: "float", nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsBlocked = table.Column<bool>(type: "bit", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -32,7 +42,7 @@ namespace Task1.Database.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -104,6 +114,10 @@ namespace Task1.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropSequence(
+                name: "AccountsSeq",
+                schema: "dbo");
         }
     }
 }

@@ -11,5 +11,18 @@ namespace Task1.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=ATM;Trusted_Connection=True;");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasSequence<int>("AccountsSeq", schema: "dbo")
+                .StartsAt(1000)
+                .IncrementsBy(5);
+
+            modelBuilder.Entity<Account>()
+                .Property(o => o.ID)
+                .HasDefaultValueSql("NEXT VALUE FOR dbo.AccountsSeq");
+        }
+
+
     }
 }

@@ -9,7 +9,7 @@ namespace MongoDB.Repository
         private readonly IMongoCollection<Page> _pages;
         public PageRepository()
         {
-            const string connectionUri = "mongodb+srv://fpovilas:9XTqdAmQfHxmf@mongodb.vpiwb1q.mongodb.net/?retryWrites=true&w=majority&appName=MongoDB";
+            const string connectionUri = "mongodb+srv://username:password@mongodb.vpiwb1q.mongodb.net/?retryWrites=true&w=majority&appName=MongoDB";
 
             var settings = MongoClientSettings.FromConnectionString(connectionUri);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);

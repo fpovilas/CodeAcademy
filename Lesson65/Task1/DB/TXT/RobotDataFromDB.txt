@@ -1,0 +1,61 @@
+Robot Head:
+    Oblong
+Robot Torso:
+    Waist: 55,9 cm
+    Chest: 50,6 cm
+Robot Arms:
+    Material: Titanium,
+    NumberOfJoints: 2,
+    NumberOfFingers: 8
+
+Robot Legs:
+    Material: Metal,
+    NumberOfJoints: 3,
+    SizeOfFoot: 13
+    Material: Metal,
+    NumberOfJoints: 3,
+    SizeOfFoot: 13
+
+------------
+Robot Head:
+    Square
+Robot Torso:
+    Waist: 50 cm
+    Chest: 50 cm
+Robot Arms:
+    Material: Titanium,
+    NumberOfJoints: 1,
+    NumberOfFingers: 5
+    Material: Titanium,
+    NumberOfJoints: 2,
+    NumberOfFingers: 4
+
+Robot Legs:
+    Material: Steel,
+    NumberOfJoints: 3,
+    SizeOfFoot: 5
+    Material: Steel,
+    NumberOfJoints: 2,
+    SizeOfFoot: 9
+
+------------
+Robot Head:
+    Oblong
+Robot Torso:
+    Waist: 55,9 cm
+    Chest: 45,6 cm
+Robot Arms:
+    Material: Titanium,
+    NumberOfJoints: 2,
+    NumberOfFingers: 8
+
+Robot Legs:
+    Material: Metal,
+    NumberOfJoints: 3,
+    SizeOfFoot: 13
+    Material: Wood,
+    NumberOfJoints: 2,
+    SizeOfFoot: 15
+
+------------
+

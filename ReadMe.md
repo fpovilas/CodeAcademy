@@ -334,5 +334,10 @@
 #### [Lesson 64 (2024-02-22)](/Lesson64/)
 
 - NoSql
-- (MongoDB)[https://cloud.mongodb.com]
+- [MongoDB](https://cloud.mongodb.com)
+
+#### [Lesson 65 (2024-02-26)](/Lesson65/)
+
+- [MongoDB](https://cloud.mongodb.com)
+
 </details>

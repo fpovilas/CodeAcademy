@@ -340,4 +340,9 @@
 
 - [MongoDB](https://cloud.mongodb.com)
 
+#### [Lesson 66 (2024-02-27)](/Lesson66/)
+
+- Entity framework
+    - Many to Many relationship
+
 </details>

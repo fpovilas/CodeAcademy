@@ -4,6 +4,7 @@ using ManyToMany.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManyToMany.DB.Migrations
 {
     [DbContext(typeof(FileContext))]
-    partial class FileContextModelSnapshot : ModelSnapshot
+    [Migration("20240228171552_AddedTags")]
+    partial class AddedTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace ManyToMany.DB.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("FileDBTag", (string)null);
+                    b.ToTable("FileDBTag");
                 });
 
             modelBuilder.Entity("ManyToMany.Model.FileDB", b =>
@@ -61,7 +64,7 @@ namespace ManyToMany.DB.Migrations
 
                     b.HasIndex("FolderDBID");
 
-                    b.ToTable("FilesDB", (string)null);
+                    b.ToTable("FilesDB");
                 });
 
             modelBuilder.Entity("ManyToMany.Model.FolderDB", b =>
@@ -77,7 +80,7 @@ namespace ManyToMany.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FoldersDB", (string)null);
+                    b.ToTable("FoldersDB");
                 });
 
             modelBuilder.Entity("ManyToMany.Model.Tag", b =>
@@ -93,7 +96,7 @@ namespace ManyToMany.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("FileDBTag", b =>

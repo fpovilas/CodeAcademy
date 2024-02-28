@@ -6,7 +6,8 @@ namespace ManyToMany
     {
         static void Main()
         {
-            ConsoleUI.Run();
+            ConsoleUI consoleUI = new();
+            consoleUI.Run();
         }
     }
 }

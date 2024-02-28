@@ -7,6 +7,7 @@ namespace ManyToMany.DB
     {
         public DbSet<FileDB> FilesDB { get; set; }
         public DbSet<FolderDB> FoldersDB { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=FilesDB;Trusted_Connection=True;");

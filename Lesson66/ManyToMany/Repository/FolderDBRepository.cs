@@ -4,13 +4,13 @@ using ManyToMany.Repository.Interface;
 
 namespace ManyToMany.Repository
 {
-    internal class FileDBRepository(FileContext context) : IFileDBRepository
+    internal class FolderDBRepository(FileContext context) : IFolderDBRepository
     {
         private readonly FileContext _context = context;
 
-        public void SaveListOfFiles(List<FileDB> listOfFiles)
+        public void SaveFolder(FolderDB folder)
         {
-            _context.FilesDB.AddRange(listOfFiles);
+            _context.FoldersDB.Add(folder);
             _context.SaveChanges();
         }
     }

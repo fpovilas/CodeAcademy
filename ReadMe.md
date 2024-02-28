@@ -345,4 +345,9 @@
 - Entity framework
     - Many to Many relationship
 
+#### [Lesson 67 (2024-02-28)](/Lesson66/)
+
+- Entity framework (***Continuing***)
+    - Many to Many relationship
+
 </details>

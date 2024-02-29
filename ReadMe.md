@@ -350,4 +350,14 @@
 - Entity framework (***Continuing***)
     - Many to Many relationship
 
+#### [Lesson 68 (2024-02-29)](/Lesson68/)
+
+- Entity framework
+    - Lazy and Eager Loading
+- Micro-ORM vs ORM (***O***bject***R***elation***M***apping)
+    - Entity Framework Core is ORM
+    - Dapper is Micro-ORM
+
+
+
 </details>

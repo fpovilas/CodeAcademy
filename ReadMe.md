@@ -363,8 +363,12 @@
 <details>
 <summary>2024-03 March</summary>
 
-#### [Lesson 68 (2024-03-04)](/Lesson69/)
+#### [Lesson 69 (2024-03-04)](/Lesson69/)
 
 - Dapper (Mico-ORM)
+
+#### [Lesson 70 (2024-03-04)](/Lesson69/)
+
+- Repetition of DBs
 
 </details>

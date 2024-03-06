@@ -367,8 +367,12 @@
 
 - Dapper (Mico-ORM)
 
-#### [Lesson 70 (2024-03-04)](/Lesson69/)
+#### [Lesson 70 (2024-03-05)](/Lesson69/)
 
 - Repetition of DBs
+
+#### [Lesson 71 (2024-03-06)](/Lesson71/)
+
+- DB exams
 
 </details>

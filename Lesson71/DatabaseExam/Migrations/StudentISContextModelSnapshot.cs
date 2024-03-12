@@ -41,7 +41,7 @@ namespace DatabaseExam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("DatabaseExam.Database.Models.Lecture", b =>
@@ -57,7 +57,7 @@ namespace DatabaseExam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lectures");
+                    b.ToTable("Lectures", (string)null);
                 });
 
             modelBuilder.Entity("DatabaseExam.Database.Models.Student", b =>
@@ -80,7 +80,7 @@ namespace DatabaseExam.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("DepartmentLecture", b =>
@@ -95,7 +95,7 @@ namespace DatabaseExam.Migrations
 
                     b.HasIndex("LecturesId");
 
-                    b.ToTable("DepartmentLecture");
+                    b.ToTable("DepartmentLecture", (string)null);
                 });
 
             modelBuilder.Entity("LectureStudent", b =>
@@ -110,7 +110,7 @@ namespace DatabaseExam.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("LectureStudent");
+                    b.ToTable("LectureStudent", (string)null);
                 });
 
             modelBuilder.Entity("DatabaseExam.Database.Models.Student", b =>

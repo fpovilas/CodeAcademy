@@ -2,7 +2,7 @@
 
 namespace DatabaseExam.Database.Models
 {
-    internal class Lecture
+    public class Lecture
     {
         public int Id { get; set; }
 

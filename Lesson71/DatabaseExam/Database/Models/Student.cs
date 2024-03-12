@@ -2,7 +2,7 @@
 
 namespace DatabaseExam.Database.Models
 {
-    internal class Student
+    public class Student
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace DatabaseExam.Database.Models
 
         [ForeignKey(nameof(Department))]
         public int? DepartmentId { get; set; }
-        public Department? Department { get; set; }
+        public virtual Department? Department { get; set; }
 
         public virtual List<Lecture>? Lectures { get; set; }
 

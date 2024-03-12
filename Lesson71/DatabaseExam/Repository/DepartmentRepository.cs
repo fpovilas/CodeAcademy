@@ -19,6 +19,12 @@ namespace DatabaseExam.Repository
         public Department GetDepartmentByID(int departmentId)
             => studentISContext.Departments.FirstOrDefault(dID => dID.Id == departmentId) ?? new();
 
+        public Department GetDepartmentByName(string name)
+            => studentISContext.Departments.FirstOrDefault(dName => dName.Name == name) ?? new();
+
+        public List<Department> GetAllDepartments()
+            => studentISContext.Departments.ToList() ?? [];
+
         public void UpdateDepartment(Department departmentIn)
         {
             studentISContext.Departments.Update(departmentIn);

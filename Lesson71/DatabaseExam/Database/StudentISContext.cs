@@ -10,7 +10,9 @@ namespace DatabaseExam.Database
         public DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=StudentIS;Trusted_Connection=True;");
+            => optionsBuilder
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=StudentIS;Trusted_Connection=True;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

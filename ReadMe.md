@@ -375,4 +375,12 @@
 
 - DB exams
 
+#### [Lesson 72 (2024-03-07)](/Lesson71/)
+
+- DB exams ***Continuation***
+
+#### [Lesson 73 (2024-03-12)](/Lesson71/)
+
+- DB exams ***Continuation***
+
 </details>

@@ -383,4 +383,8 @@
 
 - DB exams ***Continuation***
 
+#### [Lesson 73 (2024-03-13)](/Lesson71/)
+
+- DB exams ***Presentation***
+
 </details>

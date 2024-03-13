@@ -13,7 +13,7 @@ namespace DatabaseExam.Repository
             studentISContext.Departments.Add(department);
             studentISContext.SaveChanges();
 
-            return studentISContext.Departments.FirstOrDefault(dID => dID.Id == department.Id)!.Id;
+            return department.Id;
         }
 
         public Department GetDepartmentByID(int departmentId)

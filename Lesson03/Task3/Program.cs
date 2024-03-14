@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.Write("Choose Task 3.1 by entering 1.\nChooce Task 3.2 by entering 2.\nYour choice: ");
+            Console.Write("Choose Task 3.1 by entering 1.\nChoose Task 3.2 by entering 2.\nYour choice: ");
             int choice = Convert.ToInt16(Console.ReadLine());
             if (choice == 1)
             {

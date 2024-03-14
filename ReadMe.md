@@ -1,7 +1,8 @@
 ## Lessons by Level
 - Lesson01 - 23 ***Basic C#***
 - Lesson24 - 56 ***Advanced C#***
-- Lesson57 - 00 ***SQL***
+- Lesson57 - 74 ***SQL***
+- Lesson75 - 00 ***Software Testing***
 
 ## Lessons sorted by month
 
@@ -383,8 +384,13 @@
 
 - DB exams ***Continuation***
 
-#### [Lesson 73 (2024-03-13)](/Lesson71/)
+#### [Lesson 74 (2024-03-13)](/Lesson71/)
 
 - DB exams ***Presentation***
+
+#### [Lesson 75 (2024-03-14)](/Lesson75/)
+
+- Software Testing
+    - Unit Testing
 
 </details>

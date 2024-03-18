@@ -4,7 +4,7 @@ using DatabaseExam.Repository.Interface;
 
 namespace DatabaseExam.Repository
 {
-    internal class DepartmentRepository(StudentISContext context) : IDepartmentRepository
+    public class DepartmentRepository(StudentISContext context) : IDepartmentRepository
     {
         private readonly StudentISContext studentISContext = context;
 

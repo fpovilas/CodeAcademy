@@ -2,7 +2,7 @@
 
 namespace DatabaseExam.Repository.Interface
 {
-    internal interface ILectureRepository
+    public interface ILectureRepository
     {
         public int AddLecture(Lecture lecture);
         public Lecture GetLectureByID(int lectureId);

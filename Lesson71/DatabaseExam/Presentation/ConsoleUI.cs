@@ -22,9 +22,9 @@ namespace DatabaseExam.Presentation
 
         public void Run()
         {
-            // PopulateDepartments();
-            // PopulateLectures();
-            // PopulateStudents();
+            PopulateDepartments();
+            PopulateLectures();
+            PopulateStudents();
 
             //CreateDepartmentWithStudentsAndLectures();
             //AddStudentsToDepartment();
@@ -231,7 +231,7 @@ namespace DatabaseExam.Presentation
             do
             {
                 depName = Getter.GetString("Write department name: ");
-                if(CheckDepartmentForm(depName))
+                if (CheckDepartmentForm(depName))
                 {
                     department.Name = depName;
                     stopLoop = true;
@@ -283,7 +283,7 @@ namespace DatabaseExam.Presentation
                 Console.WriteLine("Students:");
                 foreach (Student student in students)
                 {
-                    if (!department.Students.Contains(student) && student.Department is null)
+                    if (!department.Students.Contains(student) && student.Department is null)
                         Console.WriteLine($"\t- ({student.Id}) {student}");
                 }
                 int studID = Getter.GetInt("Enter lecture ID: ");
@@ -342,7 +342,7 @@ namespace DatabaseExam.Presentation
 
             List<Department> departments = departmentRepository.GetAllDepartments();
             bool addDepartmentsToLecture = Getter.GetBoolValue("Do you want to assign lecture to departments? (y/n) ");
-            while(addDepartmentsToLecture)
+            while (addDepartmentsToLecture)
             {
                 Console.Clear();
                 Console.WriteLine("Departments: ");
@@ -383,7 +383,7 @@ namespace DatabaseExam.Presentation
                     Console.WriteLine($"\t- ({student.Id}) {student}");
                 }
                 int studentID = Getter.GetInt("Enter student ID: ");
-                if(students.Exists(s => s.Id == studentID))
+                if (students.Exists(s => s.Id == studentID))
                     lecture.Students.Add(studentRepository.GetStudentByID(studentID));
                 else
                 {
@@ -428,7 +428,7 @@ namespace DatabaseExam.Presentation
             if (assignLectures)
             {
                 Console.WriteLine("Lectures that you inherited from department:");
-                foreach(Lecture lecture in student.Lectures!)
+                foreach (Lecture lecture in student.Lectures!)
                 {
                     Console.WriteLine($"\t- ({lecture.Id}) {lecture}");
                 }
@@ -436,7 +436,7 @@ namespace DatabaseExam.Presentation
                 Console.WriteLine("Possible lectures to choose: ");
                 foreach (Lecture lecture in lectureRepository.GetAllLectures())
                 {
-                    if(!student.Lectures.Contains(lecture))
+                    if (!student.Lectures.Contains(lecture))
                         Console.WriteLine($"\t- ({lecture.Id}) {lecture}");
                 }
             }
@@ -544,7 +544,7 @@ namespace DatabaseExam.Presentation
             };
 
             Department department = departmentRepository.GetDepartmentByID(10002);
-            if(department.Students is not null)
+            if (department.Students is not null)
                 department.Students!.Add(studentGediminas);
             else { department.Students = [studentGediminas]; }
             departmentRepository.UpdateDepartment(department);
@@ -558,16 +558,16 @@ namespace DatabaseExam.Presentation
 
             foreach (Lecture l in lectures)
             {
-                if(l.Students is null)
+                if (l.Students is null)
                     l.Students = [studentGediminas];
                 else
                 {
-                    if(!l.Students.Contains(studentGediminas))
+                    if (!l.Students.Contains(studentGediminas))
                         l.Students.Add(studentGediminas);
                 }
                 lectureRepository.UpdateLecture(l);
             }
-            
+
         }
 
         private void TransferStudentToOtherDepartment()
@@ -624,7 +624,7 @@ namespace DatabaseExam.Presentation
         private void DisplayAllLectureByStudent()
         {
             Console.WriteLine("All lectures that Students have:");
-            foreach(Student student in studentRepository.GetAllStudents())
+            foreach (Student student in studentRepository.GetAllStudents())
             {
                 int index = 0;
                 Console.WriteLine($"\t- ({student.Id}) {student}:");

@@ -391,6 +391,11 @@
 #### [Lesson 75 (2024-03-14)](/Lesson75/)
 
 - Software Testing
-    - Unit Testing
+    - Unit Testing ***(Need to be completed)***
+
+#### [Lesson 76 (2024-03-18)](/Lesson76/)
+
+- Software Testing
+    - Integration Testing
 
 </details>

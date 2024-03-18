@@ -2,7 +2,7 @@
 
 namespace DatabaseExam.Repository.Interface
 {
-    internal interface IStudentRepository
+    public interface IStudentRepository
     {
         public int AddStudent(Student student);
         public Student GetStudentByID(int studentId);

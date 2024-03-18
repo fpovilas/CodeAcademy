@@ -3,16 +3,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseExam.Database
 {
-    internal class StudentISContext : DbContext
+    public class StudentISContext : DbContext
     {
+        public StudentISContext() { }
+        public StudentISContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Department> Departments { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        {
+            if(!optionsBuilder.IsConfigured)
+                optionsBuilder
                     .UseLazyLoadingProxies()
                     .UseSqlServer(@"Server=(localDB)\MSSQLLocalDB;Database=StudentIS;Trusted_Connection=True;");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

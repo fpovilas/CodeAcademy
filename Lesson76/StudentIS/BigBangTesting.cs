@@ -70,6 +70,166 @@ namespace StudentISTest
             Assert.IsTrue(department.Lectures.Count > 0);
         }
 
+        [TestMethod]
+        public void DepartmentCreation_CreateDepartmentWithStudentsAndLectures_CreatedDepartmentWithStudentsAndLectures()
+        {
+            Department department = new()
+            {
+                Name = "Department of Math",
+                Lectures =
+                [
+                    new Lecture()
+                    {
+                        Name = "Math"
+                    },
+                    new Lecture()
+                    {
+                        Name = "Physics"
+                    }
+                ],
+                Students =
+                [
+                    new Student()
+                    { 
+                        FirstName = "Tester",
+                        LastName = "Test",
+                    }
+                ]
+            };
+
+            departmentRepository.AddDepartment(department);
+
+            var addedDepartment = departmentRepository.GetDepartmentByName(department.Name);
+
+            Assert.IsNotNull(addedDepartment);
+            Assert.IsTrue(addedDepartment.Lectures.Count > 0);
+            Assert.IsTrue(addedDepartment.Students.Count > 0);
+        }
+
+        [TestMethod]
+        public void StudentTransfer_TransferStudentToOtherDepartment_StudentTransferredToOtherDepartment()
+        {
+            Student student = new()
+            {
+                Id = 420,
+                FirstName = "Ieva",
+                LastName = "Test",
+                DepartmentId = 10000,
+                Lectures =
+                [
+                    new Lecture
+                    {
+                        Id = 1,
+                        Name = "Art",
+                        Departments = [],
+                        Students = []
+                    }
+                ]
+            };
+
+            // Old Department
+            Department departmentOfArt = new()
+            {
+                Id = 10000,
+                Name = "Department of Art",
+                Lectures = student.Lectures,
+                Students = [student]
+            };
+
+            // New Department
+            Department departmentOfPhilosophy = new()
+            {
+                Id = 10002,
+                Name = "Department of Philosophy",
+                Lectures =
+                [
+                    new Lecture
+                    {
+                        Id = 2,
+                        Name = "Philosophy"
+                    }
+                ],
+                Students = []
+            };
+
+            departmentRepository.AddDepartment(departmentOfArt);
+            departmentRepository.AddDepartment(departmentOfPhilosophy);
+
+            student.DepartmentId = departmentOfPhilosophy.Id;
+
+            studentRepository.UpdateStudent(student);
+
+            Assert.IsTrue(studentRepository.GetStudentByID(student.Id).DepartmentId == departmentOfPhilosophy.Id);
+        }
+
+        [TestMethod]
+        public void StudentDepartment_CreateStudentAndAddToExistingDepartmentAndLectures_StudentAddedToDepartmentAndLectures()
+        {
+            Student studentGediminas = new()
+            {
+                Id = 500,
+                FirstName = "Gediminas",
+                LastName = "Gediminaitis"
+            };
+
+            studentRepository.AddStudent(studentGediminas);
+
+            Department departmentOfPhilosophy = new()
+            {
+                Id = 10002,
+                Name = "Department of Philosophy",
+                Lectures =
+                [
+                    new Lecture
+                    {
+                        Id = 2,
+                        Name = "Philosophy"
+                    }
+                ],
+                Students = []
+            };
+
+            departmentOfPhilosophy.Students.Add(studentGediminas);
+
+            departmentRepository.AddDepartment(departmentOfPhilosophy);
+
+            // Check if student has Department
+            Assert.IsTrue(studentRepository.GetStudentByID(500).DepartmentId == 10002);
+
+            List<Lecture> lectures =
+                [
+                    new Lecture
+                    {
+                        Id = 4,
+                        Name = "Rhetoric",
+                    },
+                    new Lecture
+                    {
+                        Id = 5,
+                        Name = "Psychology"
+                    }
+                ];
+
+            foreach (Lecture l in lectures)
+            {
+                if(!lectureRepository.GetAllLectures().Contains(l))
+                    lectureRepository.AddLecture(l);
+
+                if (l.Students is null)
+                    l.Students = [studentGediminas];
+                else
+                {
+                    if (!l.Students.Contains(studentGediminas))
+                        l.Students.Add(studentGediminas);
+                }
+                lectureRepository.UpdateLecture(l);
+            }
+
+            Assert.IsTrue(studentRepository.GetStudentByID(500).Lectures.Count() > 0);
+            Assert.AreNotEqual(studentRepository.GetStudentByID(500).Lectures, departmentRepository.GetDepartmentByID(10002).Lectures);
+
+        }
+
         [TestCleanup]
         public void CleanUp()
         {

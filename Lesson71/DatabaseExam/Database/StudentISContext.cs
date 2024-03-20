@@ -10,9 +10,9 @@ namespace DatabaseExam.Database
         {
         }
 
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Lecture> Lectures { get; set; }
-        public DbSet<Student> Students { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Lecture> Lectures { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

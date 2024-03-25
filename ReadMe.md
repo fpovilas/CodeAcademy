@@ -2,7 +2,8 @@
 - Lesson01 - 23 ***Basic C#***
 - Lesson24 - 56 ***Advanced C#***
 - Lesson57 - 74 ***SQL***
-- Lesson75 - 00 ***Software Testing***
+- Lesson75 - 79 ***Software Testing***
+- Lesson80 - 00 ***API***
 
 ## Lessons sorted by month
 
@@ -403,8 +404,16 @@
 - Software Testing
     - Integration Testing
 
-#### [Lesson 78 (2024-03-19)](/Lesson78/)
+#### [Lesson 78 (2024-03-20)](/Lesson78/)
 
 - Software Testing
     - Mocking
+
+#### [Lesson 79 (2024-03-21)](/Lesson78/)
+
+- Software Testing
+
+#### [Lesson 80 (2024-03-25)](/Lesson80/)
+
+- .NET API
 </details>

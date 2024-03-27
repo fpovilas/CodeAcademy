@@ -1,0 +1,20 @@
+@Task1_HostAddress = https://localhost:7118
+
+GET {{Task1_HostAddress}}/Product/
+Accept: application/json
+
+###
+
+POST {{Task1_HostAddress}}/AddProduct/
+Accept: */*
+Content-Type: application/json
+
+{
+    "id": 4,
+    "name": "Onion",
+    "price": 0.99
+}
+
+###
+
+DELETE {{Task1_HostAddress}}/RemoveByID/4

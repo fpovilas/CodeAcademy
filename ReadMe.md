@@ -418,10 +418,16 @@
 - .NET API
     - REST API
 
-#### [Lesson 81 (2024-03-26)](/Lesson80/)
+#### [Lesson 81 (2024-03-26)](/Lesson81/)
 
 - .NET API
     - Lesson 80 Revision
+    - ***Mini API***
+    - ***Dependecy injection***
+
+#### [Lesson 82 (2024-03-27)](/Lesson81/)
+
+- .NET API
     - ***Mini API***
     - ***Dependecy injection***
 </details>

@@ -1,34 +1,33 @@
-﻿using Lesson81.Model;
-using Lesson81.Service.Interface;
+﻿using Task1.Model;
+using Task1.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lesson81.Controllers
+namespace Task1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class ProductController(ILogger<ProductController> logger, IProductService productService) : ControllerBase
     {
-        private readonly IProductService productService = productService;
+        // You can not define this Field if you using PRIMARY Constructor
+        // private readonly IProductService productService = productService;
 
         private readonly ILogger<ProductController> logger = logger;
 
         [HttpGet(Name = "GetProducts")]
         public IEnumerable<Product> Get() => productService.Get();
 
+        [HttpGet("/GetProductByName/{productName}")]
+        public Result<Product> GetProductByName(string productName) => productService.GetProductByName(productName);
+
+        [HttpGet("GetProductsByPrice/{priceMin}-{priceMax}")]
+        public ResultList<Product> GetByPriceRange(decimal priceMin, decimal priceMax) => productService.GetByPriceRange(priceMin, priceMax);
+
         [HttpPost]
         [Route("/AddProduct")]
-        public Result<Product> Add(Product product)
-        {
-            Result<Product> result = productService.Add(product);
-            return result;
-        }
+        public Result<Product> Add(Product product) => productService.Add(product);
 
         [HttpDelete]
         [Route("/RemoveByID/{id}")]
-        public Result<Product> Delete(int id)
-        {
-            Result<Product> productToRemove = productService.RemoveByID(id);
-            return productToRemove;
-        }
+        public Result<Product> Delete(int id) => productService.RemoveByID(id);
     }
 }

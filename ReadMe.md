@@ -430,4 +430,13 @@
 - .NET API
     - ***Mini API***
     - ***Dependecy injection***
+    - ***Continuation***
+
+#### [Lesson 83 (2024-03-28)](/Lesson81/)
+
+- .NET API
+    - ***Mini API***
+    - ***Dependecy injection***
+    - ***Continuation***
+    - ***Additional Tasks***
 </details>

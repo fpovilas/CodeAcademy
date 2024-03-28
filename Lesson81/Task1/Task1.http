@@ -18,3 +18,17 @@ Content-Type: application/json
 ###
 
 DELETE {{Task1_HostAddress}}/RemoveByID/4
+
+###
+
+GET {{Task1_HostAddress}}/GetProductByName/Onion
+
+###
+
+GET {{Task1_HostAddress}}/product/GetProductsByPrice/4-6
+
+###
+
+GET {{Task1_HostAddress}}/product/GetProductsByPrice/0.6-0.4
+
+###

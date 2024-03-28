@@ -1,6 +1,9 @@
-
-using Lesson81.Service;
-using Lesson81.Service.Interface;
+using Task1.Data;
+using Task1.Data.Interface;
+using Task1.Repository;
+using Task1.Repository.Interface;
+using Task1.Service;
+using Task1.Service.Interface;
 
 namespace Lesson81
 {
@@ -19,6 +22,8 @@ namespace Lesson81
 
             // Register Dependency Injection
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddSingleton<IProductData, ProductData>();
 
             var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿namespace Lesson81.Model
+﻿namespace Task1.Model
 {
     public class Product
     {

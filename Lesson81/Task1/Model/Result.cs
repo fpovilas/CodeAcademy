@@ -1,4 +1,4 @@
-﻿namespace Lesson81.Model
+﻿namespace Task1.Model
 {
     public class Result
     {
@@ -17,5 +17,14 @@
         public static Result<T> Success(string msg = "", T? t = default) => new() { IsSuccess = true, Message = msg, Value = t };
 
         public static new Result<T> Failure(string msg = "") => new() { IsSuccess = false, Message = msg };
+    }
+
+    public class ResultList<T> : Result
+    {
+        public IEnumerable<T>? ListValue { get; set; }
+
+        public static ResultList<T> Success(string msg = "", IEnumerable<T>? t = default) => new() { IsSuccess = true, Message = msg, ListValue = t };
+
+        public static new ResultList<T> Failure(string msg = "") => new() { IsSuccess = false, Message = msg };
     }
 }

@@ -439,4 +439,17 @@
     - ***Dependecy injection***
     - ***Continuation***
     - ***Additional Tasks***
+
+</details>
+<details>
+<summary>2024-04 April</summary>
+
+#### [Lesson 84 (2024-04-02)](/Lesson81/)
+
+- .NET API
+    - ***Dependecy injection***
+    - ***Recap***
+    - ***Transient***
+    - ***Data transmission***
+
 </details>

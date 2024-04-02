@@ -8,7 +8,7 @@ namespace Task1.Controllers
     [Route("[controller]")]
     public class ProductController(ILogger<ProductController> logger, IProductService productService) : ControllerBase
     {
-        // You can not define this Field if you using PRIMARY Constructor
+        // You do not define this Field if you using PRIMARY Constructor
         // private readonly IProductService productService = productService;
 
         private readonly ILogger<ProductController> logger = logger;

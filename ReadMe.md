@@ -459,7 +459,7 @@
     - ***Using DB with API***
 
 > [!TIP]
-> - Helpfull [link](https://medium.com/swlh/creating-a-multi-project-net-core-database-solution-a69decdf8d7e) how project was set up
+> - Helpfull [link](https://medium.com/swlh/creating-a-multi-project-net-core-database-solution-a69decdf8d7e) how project was set up with Rokas help
 > - Check ***Lesson84 Push*** to see ***Original Lesson84*** project
 
 </details>

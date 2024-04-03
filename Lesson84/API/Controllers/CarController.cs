@@ -1,19 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Task1.Model;
-using Task1.Service.Interface;
+using API.Model;
+using API.Service.Interface;
+using DatabaseLayer.Database.Model;
+using Microsoft.IdentityModel.Tokens;
 
-namespace Task1.Controllers
+namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class CarController(ILogger<CarController> logger, ICarService carService) : ControllerBase
     {
-        private readonly ILogger<CarController> logger = logger;
-
-
         [HttpGet]
         [Route("/GetAllCars")]
-        public IEnumerable<Car> GetAllCars() => carService.GetAllCars();
+        public IEnumerable<Car> GetAllCars()
+        {
+            var cars = carService.GetAllCars();
+            if(cars.IsNullOrEmpty())
+            {
+                logger.LogError("No Cars in Database");
+                return cars;
+            }
+            else
+            {
+                logger.LogInformation("Successfully returned Cars");
+                return cars;
+            }
+        }
 
         [HttpGet]
         [Route("/GetCarsByColor")]
@@ -23,10 +35,10 @@ namespace Task1.Controllers
         [Route("/AddNewCar")]
         public ActionResult AddNewCar(CarDTO car)
         {
-            int newId = (GetAllCars().OrderBy(x => x.Id).LastOrDefault()?.Id ?? 0) + 1;
-            Car newCar = new Car()
+            //int newId = (GetAllCars().OrderBy(x => x.Id).LastOrDefault()?.Id ?? 0) + 1;
+            Car newCar = new()
             {
-                Id = newId,
+                //Id = newId,
                 Manufacturer = car.Manufacturer,
                 Color = car.Color,
             };
@@ -40,7 +52,7 @@ namespace Task1.Controllers
         [Route("/UpdateCar")]
         public ActionResult UpdateCar(int id, [FromBody] CarDTO car)
         {
-            Car newCar = new Car()
+            Car newCar = new()
             {
                 Id = id,
                 Manufacturer = car.Manufacturer,

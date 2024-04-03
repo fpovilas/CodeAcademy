@@ -1,8 +1,7 @@
-﻿namespace Task1.Model
+﻿namespace API.Model
 {
-    public class Car
+    public class CarDTO
     {
-        public int Id { get; set; }
         public string? Manufacturer { get; set; }
         public string? Color { get; set; }
     }

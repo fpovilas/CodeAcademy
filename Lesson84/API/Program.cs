@@ -1,10 +1,8 @@
-
-using Task1.Data;
-using Task1.Data.Interface;
-using Task1.Repository;
-using Task1.Repository.Interface;
-using Task1.Service;
-using Task1.Service.Interface;
+using API.Repository;
+using API.Repository.Interface;
+using API.Service;
+using API.Service.Interface;
+using DatabaseLayer.Extensions;
 
 namespace Task1
 {
@@ -22,9 +20,10 @@ namespace Task1
             builder.Services.AddSwaggerGen();
 
             // Inject Dependencies
-            builder.Services.AddSingleton<ICarData, CarData>();
-            builder.Services.AddTransient<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<ICarRepository, CarRepository>();
             builder.Services.AddScoped<ICarService, CarService>();
+            // Injecting DatabaseContext
+            builder.Services.RegisterDataService(builder.Configuration);
 
             var app = builder.Build();
 

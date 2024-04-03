@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Task1.Model;
-using Task1.Repository.Interface;
-using Task1.Service.Interface;
+﻿using API.Repository.Interface;
+using API.Service.Interface;
+using DatabaseLayer.Database.Model;
 
-namespace Task1.Service
+namespace API.Service
 {
     public class CarService(ICarRepository carRepository) : ICarService
     {

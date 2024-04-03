@@ -444,12 +444,22 @@
 <details>
 <summary>2024-04 April</summary>
 
-#### [Lesson 84 (2024-04-02)](/Lesson81/)
+#### [Lesson 84 (2024-04-02)](/Lesson84/)
 
 - .NET API
     - ***Dependecy injection***
     - ***Recap***
     - ***Transient***
     - ***Data transmission***
+
+#### [Lesson 85 (2024-04-03)](/Lesson84/)
+
+- .NET API
+    - ***Dependecy injection***
+    - ***Using DB with API***
+
+> [!info]
+> - Helpfull [link](https://medium.com/swlh/creating-a-multi-project-net-core-database-solution-a69decdf8d7e) how project was set up
+> - Check ***Lesson84 Push*** to see ***Original Lesson84*** project
 
 </details>

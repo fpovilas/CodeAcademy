@@ -1,7 +1,8 @@
-﻿namespace Task1.Model
+﻿namespace DatabaseLayer.Database.Model
 {
-    public class CarDTO
+    public class Car
     {
+        public int Id { get; set; }
         public string? Manufacturer { get; set; }
         public string? Color { get; set; }
     }

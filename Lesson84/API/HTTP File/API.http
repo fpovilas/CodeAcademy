@@ -1,0 +1,51 @@
+@API_HostAddress = https://localhost:7126
+
+GET {{API_HostAddress}}/GetAllCars
+
+###
+
+GET {{API_HostAddress}}/GetCarsByColor?color=Green
+
+###
+
+GET {{API_HostAddress}}/GetCarsByColor?color=Black
+
+###
+
+POST {{API_HostAddress}}/AddNewCar
+Content-Type: application/json
+
+{
+  "Manufacturer" : "Subaru",
+  "Color" : "Blue"
+}
+
+###
+
+POST {{API_HostAddress}}/AddNewCar
+Content-Type: application/json
+
+{
+  "Manufacturer" : "Hyundai",
+  "Color" : "Green"
+}
+
+###
+
+POST {{API_HostAddress}}/UpdateCar?id=1
+Content-Type: application/json
+
+{
+  "Manufacturer" : "Subaru",
+  "Color" : "Yellow"
+}
+
+###
+
+DELETE {{API_HostAddress}}/DeleteCar/1
+
+###
+
+DELETE {{API_HostAddress}}/DeleteCar/2
+
+###

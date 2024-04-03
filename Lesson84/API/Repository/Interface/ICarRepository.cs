@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Task1.Model;
+﻿using DatabaseLayer.Database.Model;
 
-namespace Task1.Service.Interface
+namespace API.Repository.Interface
 {
-    public interface ICarService
+    public interface ICarRepository
     {
         public IEnumerable<Car> GetAllCars();
         public IEnumerable<Car> GetCarsByColor(string color);

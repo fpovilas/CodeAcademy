@@ -49,3 +49,7 @@ DELETE {{API_HostAddress}}/DeleteCar/1
 DELETE {{API_HostAddress}}/DeleteCar/2
 
 ###
+
+DELETE {{API_HostAddress}}/DeleteCar/3
+
+###

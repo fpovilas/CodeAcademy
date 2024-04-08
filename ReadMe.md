@@ -462,4 +462,14 @@
 > - Helpfull [link](https://medium.com/swlh/creating-a-multi-project-net-core-database-solution-a69decdf8d7e) how project was set up with Rokas help
 > - Check ***Lesson84 Push*** to see ***Original Lesson84*** project
 
+#### [Lesson 86 (2024-04-04)](/Lesson86/)
+
+- .NET API
+    - ***Getting data from external API***
+
+#### [Lesson 87 (2024-04-08)](/Lesson86/)
+
+- .NET API
+    - Getting data from external API ***Cotinuation***
+
 </details>

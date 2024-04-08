@@ -35,10 +35,8 @@ namespace API.Controllers
         [Route("/AddNewCar")]
         public ActionResult AddNewCar(CarDTO car)
         {
-            //int newId = (GetAllCars().OrderBy(x => x.Id).LastOrDefault()?.Id ?? 0) + 1;
             Car newCar = new()
             {
-                //Id = newId,
                 Manufacturer = car.Manufacturer,
                 Color = car.Color,
             };
@@ -68,8 +66,7 @@ namespace API.Controllers
         [Route("/DeleteCar/{id}")]
         public ActionResult DeleteCar([FromRoute] int id)
         {
-            Car deletedCar = GetAllCars().Where(c => c.Id == id).FirstOrDefault()!;
-            carService.DeleteCar(id);
+            Car deletedCar = carService.DeleteCar(id);
 
             return Ok(deletedCar);
         }

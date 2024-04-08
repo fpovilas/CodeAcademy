@@ -22,11 +22,13 @@ namespace API.Repository
             context.SaveChanges();
         }
 
-        public void DeleteCar(int id)
+        public Car DeleteCar(int id)
         {
             Car carToRemove = context.Cars.FirstOrDefault(c => c.Id == id)!;
             context.Cars.Remove(carToRemove);
             context.SaveChanges();
+
+            return carToRemove;
         }
     }
 }

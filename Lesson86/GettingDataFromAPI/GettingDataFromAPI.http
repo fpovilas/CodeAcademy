@@ -1,0 +1,16 @@
+@GettingDataFromAPI_HostAddress = http://localhost:5157
+
+GET {{GettingDataFromAPI_HostAddress}}/weatherforecast?cityName=Šiauliai
+Accept: application/json
+
+###
+
+GET {{GettingDataFromAPI_HostAddress}}/weatherforecast?cityName=Vilnius
+Accept: application/json
+
+###
+
+GET {{GettingDataFromAPI_HostAddress}}/weatherforecast?cityName=Kaunas
+Accept: application/json
+
+###

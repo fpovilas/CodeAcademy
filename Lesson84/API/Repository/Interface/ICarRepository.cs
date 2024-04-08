@@ -8,6 +8,6 @@ namespace API.Repository.Interface
         public IEnumerable<Car> GetCarsByColor(string color);
         public void AddNewCar(Car car);
         public void UpdateCar(Car car);
-        public void DeleteCar(int id);
+        public Car DeleteCar(int id);
     }
 }

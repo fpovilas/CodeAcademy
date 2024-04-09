@@ -14,3 +14,7 @@ GET {{GettingDataFromAPI_HostAddress}}/weatherforecast?cityName=Kaunas
 Accept: application/json
 
 ###
+GET {{GettingDataFromAPI_HostAddress}}/weatherforecast?cityName=Klaipėda
+Accept: application/json
+
+###

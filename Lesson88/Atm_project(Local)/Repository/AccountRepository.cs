@@ -58,7 +58,6 @@ namespace Atm.Repository
                 Date = DateTime.Now
             };
             _transactionService.CreateTransaction(transaction);
-            _context.Transactions.Add(transaction);
             _context.SaveChanges();
             return account;
         }
@@ -79,7 +78,6 @@ namespace Atm.Repository
                 Date = DateTime.Now
             };
             _transactionService.CreateTransaction(transaction);
-            _context.Transactions.Add(transaction);
             _context.SaveChanges();
             return account;
         }

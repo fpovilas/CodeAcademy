@@ -1,0 +1,11 @@
+@Atm_HostAddress = https://localhost:7189
+
+
+POST {{Atm_HostAddress}}/api/customer/CreateCustomer
+Content-Type: application/json
+
+{
+  //CustomerDto
+}
+
+###

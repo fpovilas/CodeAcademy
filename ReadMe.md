@@ -472,10 +472,25 @@
 - .NET API
     - Getting data from external API ***Cotinuation***
 
-#### [Lesson 88 (2024-04-09)](/Lesson86/)
+#### [Lesson 88 (2024-04-09)](/Lesson88/)
 
 - .NET API
     - ActionResult<T>
     - Wroking in team
      - [Naming convention for GIT](https://medium.com/@abhay.pixolo/naming-conventions-for-git-branches-a-cheatsheet-8549feca2534)
+
+#### [Lesson 89 (2024-04-10)](/Lesson88/)
+
+- .NET API
+    - ActionResult<T>
+    - Wroking in team ***Continuation***
+
+#### [Lesson 90 (2024-04-11)](/Lesson88/)
+
+- .NET API
+    - ActionResult<T>
+    - Wroking in team. Continuation
+    - ***Project presentation***
+    - Added Local folder where I can work localy
+    
 </details>

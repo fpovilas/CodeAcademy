@@ -9,5 +9,6 @@ namespace API.Repository.Interface
         public void AddNewCar(Car car);
         public void UpdateCar(Car car);
         public Car DeleteCar(int id);
+        public Car GetCarByID(int id);
     }
 }

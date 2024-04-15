@@ -17,5 +17,7 @@ namespace API.Service
         public void UpdateCar(Car car) => carRepository.UpdateCar(car);
 
         public Car DeleteCar(int id) => carRepository.DeleteCar(id);
+
+        public Car GetCarByID(int id) => carRepository.GetCarByID(id);
     }
 }

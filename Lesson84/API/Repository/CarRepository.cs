@@ -10,6 +10,8 @@ namespace API.Repository
 
         public IEnumerable<Car> GetCarsByColor(string color) => context.Cars.Where(c => c.Color == color);
 
+        public Car GetCarByID(int id) => context.Cars.FirstOrDefault(c => c.Id == id) ?? new();
+
         public void AddNewCar(Car car)
         {
             context.Cars.Add(car);

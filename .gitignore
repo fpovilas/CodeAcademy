@@ -1,6 +1,8 @@
 # Ignore Videos
-[Ll]esson*.zip
+[Vv]ideo/[Ll]esson*.zip
+
 # Ignore vscode
 .vscode/
+
 # Ignore template
 template.gitignore

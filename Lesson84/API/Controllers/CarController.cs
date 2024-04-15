@@ -31,6 +31,10 @@ namespace API.Controllers
         [Route("/GetCarsByColor")]
         public IEnumerable<Car> GetCarsByColor([FromQuery] string color) => carService.GetCarsByColor(color);
 
+        [HttpGet]
+        [Route("/GetCarByID/{id}")]
+        public Car GetCarByID([FromRoute] int id) => carService.GetCarByID(id);
+
         [HttpPost]
         [Route("/AddNewCar")]
         public ActionResult AddNewCar(CarDTO car)

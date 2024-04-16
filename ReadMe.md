@@ -497,5 +497,11 @@
 
 - .NET API
     - xUnit Tests
+
+#### [Lesson 92 (2024-04-16)](/Lesson92/)
+
+- .NET API
+    - xUnit Tests
+    - Endpoint is given by lecturer
     
 </details>

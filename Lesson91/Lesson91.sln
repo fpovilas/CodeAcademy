@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitAPITest", "xUnitAPITest\xUnitAPITest.csproj", "{2DC99218-8939-4838-BDAA-653C4CE2ACCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitAPITest", "xUnitAPITest\xUnitAPITest.csproj", "{2DC99218-8939-4838-BDAA-653C4CE2ACCB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "..\Lesson84\API\API.csproj", "{20BD8126-C495-4255-8207-E3ABDB374E58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseLayer", "..\Lesson84\DatabaseLayer\DatabaseLayer.csproj", "{6847888F-50E9-47B5-9423-F700BA4DB006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{20BD8126-C495-4255-8207-E3ABDB374E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20BD8126-C495-4255-8207-E3ABDB374E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20BD8126-C495-4255-8207-E3ABDB374E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6847888F-50E9-47B5-9423-F700BA4DB006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6847888F-50E9-47B5-9423-F700BA4DB006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6847888F-50E9-47B5-9423-F700BA4DB006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6847888F-50E9-47B5-9423-F700BA4DB006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,8 +13,8 @@ namespace xUnitAPITest.SpecimenBuilder
             if(request is Type type && type.IsEquivalentTo(typeof(Car)))
             {
                 return new Car { Id = rand.Next(0, int.MaxValue),
-                                Color = ((Colors)(rand.Next(0, 40) / 5)).GetDisplayName(),
-                                Manufacturer = ((Manufacturer)(rand.Next(0, 60) / 10)).GetDisplayName() };
+                                Color = ((Colors)(rand.Next(0, 41) / 10)).GetDisplayName(),
+                                Manufacturer = ((Manufacturer)(rand.Next(0, 51) / 10)).GetDisplayName() };
             }
             return new NoSpecimen();
         }

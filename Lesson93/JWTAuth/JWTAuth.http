@@ -1,0 +1,14 @@
+@JWTAuth_HostAddress = https://localhost:7218
+
+POST {{JWTAuth_HostAddress}}/api/user/SignUp?username=povfri&password=123456
+
+###
+
+GET {{JWTAuth_HostAddress}}/api/user/LogIn?username=povfri&password=123456
+
+###
+
+GET {{JWTAuth_HostAddress}}/api/user/GetUser?username=povfri
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicG92ZnJpIiwiZXhwIjoxNzEzMzgxNTYxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjUyLyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcyNTIvIn0.UoIWV3CSzWigKQ5uHEPPoh6rDLasnRzh135vO0LQSzu_X86llI9j-sKOEswf4fcc9REXcnM7IpKO54GSe3q3pA
+
+###

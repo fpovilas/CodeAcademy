@@ -503,5 +503,10 @@
 - .NET API
     - xUnit Tests
     - Endpoint is given by lecturer
+
+#### [Lesson 93 (2024-04-17)](/Lesson93/)
+
+- .NET API
+    - JWT Token (JSON Web Token)
     
 </details>

@@ -16,7 +16,7 @@ namespace JWTAuth.Service
                 new Claim(ClaimTypes.Name, user)
             ];
             var secretToken = _configuration.GetSection("Jwt:Key").Value;
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretToken));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretToken!));
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
@@ -24,7 +24,7 @@ namespace JWTAuth.Service
                 issuer: _configuration.GetSection("Jwt:Issuer").Value,
                 audience: _configuration.GetSection("Jwt:Audience").Value,
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(30),
+                expires: DateTime.Now.AddSeconds(600),
                 signingCredentials: cred);
 
 

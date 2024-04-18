@@ -3,6 +3,7 @@ using JWTAuth.DB;
 using JWTAuth.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
+using JWTAuth.Models;
 
 namespace JWTAuth.Controllers
 {
@@ -27,7 +28,7 @@ namespace JWTAuth.Controllers
         public ActionResult LogIn(string username, string password)
         {
             var user = _userContext.Users.FirstOrDefault(x => x.Username == username);
-            if (VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
+            if (VerifyPassword(password, user!.PasswordHash, user.PasswordSalt))
             {
                 return Ok(_jwtService.GetJWT(username));
             }

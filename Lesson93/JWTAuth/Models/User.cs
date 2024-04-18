@@ -1,4 +1,4 @@
-﻿namespace JWTAuth
+﻿namespace JWTAuth.Models
 {
     public class User
     {

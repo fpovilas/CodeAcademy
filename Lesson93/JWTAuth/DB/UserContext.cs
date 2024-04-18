@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JWTAuth.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace JWTAuth.DB
 {

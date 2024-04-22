@@ -9,12 +9,14 @@ namespace JWTAuth.Service
     {
         private readonly IConfiguration _configuration = configuration;
 
-        public string GetJWT(string user)
+        public string GetJWT(string user, string role)
         {
             List<Claim> claims =
             [
-                new Claim(ClaimTypes.Name, user)
+                new Claim(ClaimTypes.Name, user),
+                new Claim(ClaimTypes.Role, role)
             ];
+
             var secretToken = _configuration.GetSection("Jwt:Key").Value;
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretToken!));
 

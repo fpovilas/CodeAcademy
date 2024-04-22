@@ -1,23 +1,56 @@
 @JWTAuth_HostAddress = https://localhost:7218
+@bearerToken = ***
+@adminBearerToken = ***
 
-POST {{JWTAuth_HostAddress}}/api/user/SignUp?username=povfri&password=123456
+POST {{JWTAuth_HostAddress}}/api/user/SignUp?username=ievsln&password=123456
 
 ###
 
-GET {{JWTAuth_HostAddress}}/api/user/LogIn?username=povfri&password=123456
+POST {{JWTAuth_HostAddress}}/api/user/LogIn?username=povfri&password=123456
+
+###
+
+POST {{JWTAuth_HostAddress}}/api/user/LogIn?username=povfriADM&password=123456
+
+###
+
+GET {{JWTAuth_HostAddress}}/api/user/GetUser?username=povfriADM
+Authorization: Bearer {{bearerToken}}
 
 ###
 
 GET {{JWTAuth_HostAddress}}/api/user/GetUser?username=povfri
-Authorization: Bearer ***
+Authorization: Bearer {{bearerToken}}
 
 ###
 
-GET {{JWTAuth_HostAddress}}/GetCarID/1
-Authorization: Bearer ***
+GET {{JWTAuth_HostAddress}}/api/user/GetUser?username=ievsln
+Authorization: Bearer {{bearerToken}}
+
+###
+
+POST {{JWTAuth_HostAddress}}/api/user/ChangeRole?username=ievsln&newRole=User
+Authorization: Bearer {{bearerToken}}
+
+###
+
+GET {{JWTAuth_HostAddress}}/GetCarID/4
+Authorization: Bearer {{bearerToken}}
+
 ###
 
 GET {{JWTAuth_HostAddress}}/GetCars
-Authorization: Bearer ***
+Authorization: Bearer {{bearerToken}}
+
+###
+
+PUT {{JWTAuth_HostAddress}}/AddCar
+Authorization: Bearer {{adminBearerToken}}
+Content-Type: application/json
+
+{
+  "Manufacturer" : "Hyundai",
+  "Color" : "Green"
+}
 
 ###

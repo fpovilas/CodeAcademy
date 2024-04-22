@@ -515,6 +515,12 @@
 - .NET API
     - JWT Token (JSON Web Token)
         - Authentication (Continuation)
+
+#### [Lesson 95 (2024-04-22)](/Lesson93/)
+
+- .NET API
+    - JWT Token (JSON Web Token)
+        - Authentication (Continuation)
         - Authorization
     
 </details>

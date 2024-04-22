@@ -9,9 +9,9 @@ namespace JWTAuth.Service
     {
         public ActionResult<Car> GetCarByID(int id)
         {
-            var newCar = (from car in carContext.Cars
+            Car newCar = (from car in carContext.Cars
                          where car.Id == id
-                         select car).FirstOrDefault();
+                         select car).FirstOrDefault()!;
 
             return newCar;
         }
@@ -22,6 +22,39 @@ namespace JWTAuth.Service
                        select car;
 
             return cars.ToList();
+        }
+
+        public bool Add(CarDto car)
+        {
+            if (car is null) return false;
+
+            Car newCar = new();
+            newCar.ConvertFromDto(car);
+
+            carContext.Cars.Add(newCar);
+            carContext.SaveChanges();
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            Car car = carContext.Cars.FirstOrDefault(x => x.Id == id) ?? new();
+            if(car is null) return false;
+
+            carContext.Cars.Remove(car);
+            carContext.SaveChanges();
+            return true;
+        }
+
+        public bool Update(CarDto car, int carToUpdateId)
+        {
+            Car carToUpdate = carContext.Cars.FirstOrDefault(c => c.Id == carToUpdateId) ?? new();
+            if(carToUpdate is null) return false;
+
+            carToUpdate.ConvertFromDto(car);
+            carContext.Update(carToUpdate);
+            carContext.SaveChanges();
+            return true;
         }
     }
 }

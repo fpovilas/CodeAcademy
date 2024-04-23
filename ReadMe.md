@@ -523,4 +523,9 @@
         - Authentication (Continuation)
         - Authorization
     
+#### [Lesson 96 (2024-04-23)](/Lesson96/)
+
+- .NET API
+    - API key authorization
+    
 </details>

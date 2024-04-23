@@ -1,12 +1,14 @@
 @JWTAuth_HostAddress = https://localhost:7218
 @bearerToken = ***
 @adminBearerToken = ***
+@apiKey = ***
 
 POST {{JWTAuth_HostAddress}}/api/user/SignUp?username=ievsln&password=123456
 
 ###
 
 POST {{JWTAuth_HostAddress}}/api/user/LogIn?username=povfri&password=123456
+ApiKey: {{apiKey}}
 
 ###
 

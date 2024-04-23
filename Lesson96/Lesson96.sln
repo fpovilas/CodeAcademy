@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallsWithAPIKey", "CallsWithAPIKey\CallsWithAPIKey.csproj", "{CA82006B-0646-49ED-9853-F42ABD6B5F32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWTAuth", "..\Lesson93\JWTAuth\JWTAuth.csproj", "{DCFEFF0F-8BE1-48FA-A599-17E28B684B62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA82006B-0646-49ED-9853-F42ABD6B5F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA82006B-0646-49ED-9853-F42ABD6B5F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA82006B-0646-49ED-9853-F42ABD6B5F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA82006B-0646-49ED-9853-F42ABD6B5F32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFEFF0F-8BE1-48FA-A599-17E28B684B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFEFF0F-8BE1-48FA-A599-17E28B684B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFEFF0F-8BE1-48FA-A599-17E28B684B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFEFF0F-8BE1-48FA-A599-17E28B684B62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FBD1F58-C7D5-459D-BC1F-B5A993F2BE02}
+	EndGlobalSection
+EndGlobal

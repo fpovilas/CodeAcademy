@@ -4,6 +4,7 @@ using JWTAuth.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using JWTAuth.Models;
+using JWTAuth.Attributes;
 
 namespace JWTAuth.Controllers
 {
@@ -11,8 +12,6 @@ namespace JWTAuth.Controllers
     [ApiController]
     public class UserController(UserContext userContext, IJWTService jwtService) : Controller
     {
-
-        [AllowAnonymous]
         [HttpPost("SignUp")]
         public User SignUp(string username, string password)
         {
@@ -22,7 +21,7 @@ namespace JWTAuth.Controllers
             return user;
         }
 
-        [AllowAnonymous]
+        [ApiKeyAuth]
         [HttpPost("LogIn")]
         public ActionResult LogIn(string username, string password)
         {

@@ -18,36 +18,77 @@ namespace JWTAuth
 
             // Add services to the container.
 
-            //For Swagger
-            builder.Services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "WebAPI",
-                    Description = "Product WebAPI"
-                });
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header,
-                    Name = "Authorization",
-                    Description = "Bearer Authentication with JWT Token",
-                    Type = SecuritySchemeType.Http
-                });
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    {
-                    new OpenApiSecurityScheme {
-                        Reference = new OpenApiReference {
-                            Id = "Bearer",
-                            Type = ReferenceType.SecurityScheme
-                        }
-                    },
-                    new List <string> ()
-                    }
-                });
-            });
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+
+            #region JWT Token for Swagger
+
+            //For Swagger to get Auth for JWT Token
+            //builder.Services.AddSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Version = "v1",
+            //        Title = "WebAPI",
+            //        Description = "Product WebAPI"
+            //    });
+            //    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            //    {
+            //        Scheme = "Bearer",
+            //        BearerFormat = "JWT",
+            //        In = ParameterLocation.Header,
+            //        Name = "Authorization",
+            //        Description = "Bearer Authentication with JWT Token",
+            //        Type = SecuritySchemeType.Http
+            //    });
+            //    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+            //        {
+            //        new OpenApiSecurityScheme {
+            //            Reference = new OpenApiReference {
+            //                Id = "Bearer",
+            //                Type = ReferenceType.SecurityScheme
+            //            }
+            //        },
+            //        new List <string> ()
+            //        }
+            //    });
+            //});
+
+            #endregion
+
+            #region API Key for Swagger
+
+            //For Swagger to get Auth for Api KEY
+            //builder.Services.AddSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Version = "v1",
+            //        Title = "WebAPI",
+            //        Description = "Product WebAPI"
+            //    });
+            //    options.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+            //    {
+            //        In = ParameterLocation.Header,
+            //        Name = "ApiKey",
+            //        Description = "Input Api Key",
+            //        Type = SecuritySchemeType.ApiKey
+            //    });
+            //    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+            //        {
+            //        new OpenApiSecurityScheme {
+            //            Reference = new OpenApiReference {
+            //                Id = "ApiKey",
+            //                Type = ReferenceType.SecurityScheme
+            //            }
+            //        },
+            //        new List <string> ()
+            //        }
+            //    });
+            //});
+
+            #endregion
 
             //For Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

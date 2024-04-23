@@ -1,0 +1,11 @@
+@CallsWithAPIKey_HostAddress = https://localhost:7111
+@JWTToken = ***
+@Secret = ***
+
+
+GET {{CallsWithAPIKey_HostAddress}}/callother/ExternalCall?user=povfri&pass=123456&apiKey={{Secret}}
+
+###
+
+GET {{CallsWithAPIKey_HostAddress}}/callother/ExternalGetCarsCall?jwtToken={{JWTToken}}
+###

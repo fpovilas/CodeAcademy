@@ -1,5 +1,4 @@
-﻿using JWTAuth.DB;
-using JWTAuth.Models;
+﻿using JWTAuth.Models;
 using JWTAuth.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,16 @@
 @Book_Management_API_HostAddress = https://localhost:7004
-@Book_Management_API_HostAddress2 = https://localhost:7004
+@Book_Management_API_HostAddress2 = https://localhost:5125
 @JWTtoken = ***
+
+###
+
+POST {{Book_Management_API_HostAddress}}/api/user/SignUp
+Content-Type: application/json
+
+{
+  "username": "povfri",
+  "password": "123456"
+}
 
 ###
 

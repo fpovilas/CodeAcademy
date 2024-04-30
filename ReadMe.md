@@ -538,7 +538,12 @@
 - .NET API
     - Team Work
 
-#### [Lesson 99 (2024-04-26)](/Lesson97/)
+#### [Lesson 99 (2024-04-29)](/Lesson97/)
+
+- .NET API
+    - Team Work
+
+#### [Lesson 100 (2024-04-30)](/Lesson97/)
 
 - .NET API
     - Team Work

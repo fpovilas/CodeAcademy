@@ -4,7 +4,7 @@ using Book_Management_API.Interfaces.Services;
 using Book_Management_API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace Book_Management_API.Controllers
 {
@@ -14,10 +14,12 @@ namespace Book_Management_API.Controllers
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly IRecommendationService _recommendationService;
 
-        public BookController(IBookService bookService)
+        public BookController(IBookService bookService, IRecommendationService recommendationService)
         {
             _bookService = bookService;
+            _recommendationService = recommendationService;
         }
 
         [HttpPost]
@@ -106,11 +108,15 @@ namespace Book_Management_API.Controllers
         [HttpGet("filterBooks")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Book>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public IActionResult FilterBooks([FromQuery][Required] string title, [FromQuery] int rating = 0, [FromQuery] int publishYear = 0, [FromQuery] int limit = 0)
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        public IActionResult FilterBooks([FromQuery] string title = "", [FromQuery] int rating = 0, [FromQuery] int fromPublishYear = 0, [FromQuery] int toPublishYear = 0, [FromQuery] string genre = "", [FromQuery] int limit = 0)
         {
             try
             {
-                var books = _bookService.FilterBooks(title, rating, publishYear, limit);
+                if (fromPublishYear > toPublishYear)
+                    return BadRequest("fromPublishYear should be less than toPublishYear");
+
+                var books = _bookService.FilterBooks(title, rating, fromPublishYear, toPublishYear, genre, limit);
                 return Ok(books);
             }
             catch (NotFoundErrorException Ex)
@@ -130,6 +136,22 @@ namespace Book_Management_API.Controllers
             try
             {
                 var books = _bookService.SortBooksByNumberOfReviews();
+                return Ok(books);
+            }
+            catch (Exception Ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, Ex.Message);
+            }
+        }
+
+        [HttpGet("GetRecommendedBooks")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Book>))]
+        public IActionResult GetRecommendedBooks()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+            try
+            {
+                var books = _recommendationService.GetRecommendation(userIdClaim.Value);
                 return Ok(books);
             }
             catch (Exception Ex)

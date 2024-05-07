@@ -1,0 +1,14 @@
+@FileUploadDownloadAPI_HostAddress = https://localhost:7237
+
+POST {{FileUploadDownloadAPI_HostAddress}}/api/images
+Form: Image=D:\Users\Povka\Pictures\3109716.jpg;type=image/jpeg
+
+###
+
+GET {{FileUploadDownloadAPI_HostAddress}}/api/images/Get
+
+###
+
+GET {{FileUploadDownloadAPI_HostAddress}}/api/images/Download?guid=096f562c-79c0-4312-450a-08dc6ec646c3
+
+###

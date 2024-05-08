@@ -5,6 +5,7 @@ namespace FileUploadDownloadAPI.Database
 {
     public class ImageDbContext(DbContextOptions<ImageDbContext> options) : DbContext(options)
     {
-        public DbSet<Image> Images { get; set; }
+        public DbSet<CustomImage> Images { get; set; }
+        public DbSet<CustomImageThumbnail> ImageThumbnails { get; set; }
     }
 }

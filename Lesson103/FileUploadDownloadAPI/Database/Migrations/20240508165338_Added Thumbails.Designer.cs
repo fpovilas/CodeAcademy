@@ -4,6 +4,7 @@ using FileUploadDownloadAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileUploadDownloadAPI.Database.Migrations
 {
     [DbContext(typeof(ImageDbContext))]
-    partial class ImageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240508165338_Added Thumbails")]
+    partial class AddedThumbails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +58,6 @@ namespace FileUploadDownloadAPI.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CutomsImageID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<byte[]>("ImageData")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -68,20 +68,7 @@ namespace FileUploadDownloadAPI.Database.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CutomsImageID");
-
                     b.ToTable("ImageThumbnails");
-                });
-
-            modelBuilder.Entity("FileUploadDownloadAPI.Model.CustomImageThumbnail", b =>
-                {
-                    b.HasOne("FileUploadDownloadAPI.Model.CustomImage", "CustomImage")
-                        .WithMany()
-                        .HasForeignKey("CutomsImageID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CustomImage");
                 });
 #pragma warning restore 612, 618
         }

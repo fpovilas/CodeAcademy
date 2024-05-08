@@ -15,6 +15,18 @@ namespace FileUploadDownloadAPI.Attributes
                 }
             }
 
+            if (value is List<IFormFile> files)
+            {
+                foreach(var item in files)
+                {
+                    var extension = Path.GetExtension(item.FileName);
+                    if (!extensions.Contains(extension.ToLower()))
+                    {
+                        return new ValidationResult(GetErrorMessage() + $" {item.FileName}");
+                    }
+                }
+            }
+
             return ValidationResult.Success;
         }
 

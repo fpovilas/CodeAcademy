@@ -4,6 +4,7 @@ using FileUploadDownloadAPI.Database;
 using FileUploadDownloadAPI.Model;
 using FileUploadDownloadAPI.Model.Dto;
 using FileUploadDownloadAPI.Service.Interface;
+using System.IO.Compression;
 
 namespace FileUploadDownloadAPI.Controllers
 {
@@ -13,21 +14,14 @@ namespace FileUploadDownloadAPI.Controllers
     {
         // POST: api/Images/Upload
         [HttpPost("Upload")]
-        public ActionResult UploadImage([FromForm] ImageUploadRequest request)
+        public ActionResult UploadImage([FromForm] ImageUploadRequest request) =>
+            imageService.UploadImageAndThumbnail(request.Image) ? Ok() : StatusCode(StatusCodes.Status418ImATeapot);
+
+        // POST: api/Images/UploadBulk
+        [HttpPost("UploadBulk")]
+        public ActionResult UploadImageBulk([FromForm] BulkImageUploadRequest requests)
         {
-            using var memoryStream = new MemoryStream();
-            request.Image.CopyTo(memoryStream);
-            var imageBytes = memoryStream.ToArray();
-            Image image = new()
-            {
-                Name = request.Image.Name,
-                ContentType = request.Image.ContentType,
-                ImageData = imageBytes,
-                PictureUrl = request.Image.FileName
-            };
-            context.Images.Add(image);
-            context.SaveChanges();
-            return Ok();
+            return imageService.UploadBulkImageAndThmubnails(requests) ? Ok() : StatusCode(StatusCodes.Status418ImATeapot);
         }
 
         // GET: api/Images/Download
@@ -35,12 +29,21 @@ namespace FileUploadDownloadAPI.Controllers
         public ActionResult DownloadImage([FromQuery] Guid guid)
         {
             var image = imageService.GetImage(guid);
-            return File(image.ImageData, $"image/{image.ContentType}");
+            return File(image.ImageData, $"{image.ContentType}");
+        }
+
+        // GET: api/Images/DownloadThumbnail
+        [HttpGet("DownloadThumbnail")]
+        public ActionResult DownloadImageThumbnail([FromQuery] Guid guid)
+        {
+            var thumbnail = imageService.GetImageThumbnail(guid);
+
+            return File(thumbnail.ImageData, $"{thumbnail.ContentType}");
         }
 
         // GET: api/Images/Get
         [HttpGet("Get")]
-        public async Task<ActionResult<IEnumerable<Image>>> GetImages()
+        public async Task<ActionResult<IEnumerable<CustomImage>>> GetImages()
         {
             return await context.Images.ToListAsync();
         }

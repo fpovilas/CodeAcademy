@@ -562,7 +562,12 @@
 - .NET API
     - Deploy to Azure
 
-#### [Lesson 103 (2024-05-06)](/Lesson103/)
+#### [Lesson 103 (2024-05-07)](/Lesson103/)
+
+- .NET API
+    - Files
+
+#### [Lesson 104 (2024-05-08)](/Lesson103/)
 
 - .NET API
     - Files

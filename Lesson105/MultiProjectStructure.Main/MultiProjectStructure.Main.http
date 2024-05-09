@@ -1,0 +1,6 @@
+@MultiProjectStructure.Main_HostAddress = http://localhost:5132
+
+GET {{MultiProjectStructure.Main_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

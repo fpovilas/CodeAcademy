@@ -578,5 +578,10 @@
 - .NET API
     - Multi-Project structure
      - Need to added Unit Tests
+
+#### [Lesson 106 (2024-05-13)](/Lesson106/)
+
+- .NET API
+    - Repetition before exam
     
 </details>

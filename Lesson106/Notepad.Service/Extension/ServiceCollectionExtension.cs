@@ -9,6 +9,7 @@ namespace Notepad.Service.Extension
         public static IServiceCollection AddNotepadService(this IServiceCollection services)
         {
             services.AddScoped<INoteService, NoteService>();
+            services.AddTransient<IJWTService, JWTService>();
             return services;
         }
     }

@@ -1,6 +1,14 @@
-@Notepad.Main_HostAddress = http://localhost:5119
+@Notepad.Main_HostAddress = https://localhost:7123
+@jwt = ***
+@username = ***
+@password = ***
+@regUsername = ***
+@regPassword = ***
 
-GET {{Notepad.Main_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{Notepad.Main_HostAddress}}/api/user/LogIn?username={{username}}&password={{password}}
+
+###
+
+POST {{Notepad.Main_HostAddress}}/api/user/Register?username={{regUsername}}&password={{regPassword}}
 
 ###

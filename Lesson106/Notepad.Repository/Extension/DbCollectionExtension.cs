@@ -10,9 +10,10 @@ namespace Notepad.Repository.Extension
     {
         public static IServiceCollection AddNotepadDbService(this IServiceCollection services, string connString)
         {
-            services.AddScoped<INoteRepository, NoteRepository>();
             services.AddDbContext<NotepadDbContext>
                 (options => options.UseSqlServer(connString));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<INoteRepository, NoteRepository>();
             return services;
         }
     }

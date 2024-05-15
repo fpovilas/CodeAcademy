@@ -582,12 +582,18 @@
 #### [Lesson 106 (2024-05-13)](/Lesson106/)
 
 - .NET API
-    - Repetition before exam
+    - Repetition before exam #1
 
 #### [Lesson 107 (2024-05-14)](/Lesson106/)
 
 - .NET API
-    - Repetition before exam
+    - Repetition before exam #2
     - Frontend Basics (In Video)
+
+#### [Lesson 108 (2024-05-15)](/Lesson106/)
+
+- .NET API
+    - Repetition before exam #3
+    - More Frontend Basics (In Video)
     
 </details>

@@ -3,11 +3,13 @@ using Notepad.Repository.Model;
 
 namespace Notepad.Repository.Database
 {
-    public class NotepadDbContext(DbContextOptions options) : DbContext (options)
+    public class NotepadDbContext(DbContextOptions options) : DbContext(options)
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<NoteImage> NoteImages { get; set; }
+        public DbSet<NoteImageThumbnail> NoteImageThumbnails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,10 +5,30 @@
 @regUsername = ***
 @regPassword = ***
 
-POST {{Notepad.Main_HostAddress}}/api/user/LogIn?username={{username}}&password={{password}}
+POST {{Notepad.Main_HostAddress}}/user/LogIn?username={{username}}&password={{password}}
 
 ###
 
-POST {{Notepad.Main_HostAddress}}/api/user/Register?username={{regUsername}}&password={{regPassword}}
+POST {{Notepad.Main_HostAddress}}/user/Register?username={{regUsername}}&password={{regPassword}}
+
+###
+
+POST {{Notepad.Main_HostAddress}}/tag/Create?tagName=String
+Authorization: Bearer {{jwt}}
+
+###
+
+POST {{Notepad.Main_HostAddress}}/tag/Edit?tagID=3&newTagName=Testas
+Authorization: Bearer {{jwt}}
+
+###
+
+POST {{Notepad.Main_HostAddress}}/tag/Delete?tagID=6
+Authorization: Bearer {{jwt}}
+
+###
+
+POST {{Notepad.Main_HostAddress}}/tag/Get?tagID=3
+Authorization: Bearer {{jwt}}
 
 ###

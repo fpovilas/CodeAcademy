@@ -12,6 +12,7 @@ namespace Notepad.Service.Extension
         {
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITagService, TagService>();
             services.AddTransient<IJWTService, JWTService>();
             return services;
         }

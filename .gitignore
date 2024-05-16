@@ -1,8 +1,11 @@
 # Ignore Videos
-[Vv]ideo/[Ll]esson*.zip
+[Vv]ideo/*.zip
 
 # Ignore vscode
 .vscode/
 
 # Ignore template
 template.gitignore
+
+# Ignore Rokas (Lecturer) Git projects
+[Rr]okas[Ee]xamples/*.zip

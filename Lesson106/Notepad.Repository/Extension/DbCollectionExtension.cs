@@ -14,6 +14,7 @@ namespace Notepad.Repository.Extension
                 (options => options.UseSqlServer(connString));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
             return services;
         }
     }

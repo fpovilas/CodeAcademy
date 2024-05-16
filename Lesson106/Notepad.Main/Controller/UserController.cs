@@ -4,13 +4,13 @@ using Notepad.Shared.Dto;
 
 namespace Notepad.Main.Controller
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class UserController(IUserService userService) : ControllerBase
     {
         [HttpPost("Register")]
         [ProducesResponseType(200)] // OK
-        [ProducesResponseType(400)] // Bad Requist
+        [ProducesResponseType(400)] // Bad Request
         public ActionResult<UserDto> Register(string username, string password)
         {
             if (!userService.Register(username, password, out UserDto userDto))
@@ -21,7 +21,7 @@ namespace Notepad.Main.Controller
 
         [HttpPost("LogIn")]
         [ProducesResponseType(200)] // OK
-        [ProducesResponseType(400)] // Bad Requist
+        [ProducesResponseType(400)] // Bad Request
         public ActionResult<string> LogIn(string username, string password)
         {
             if (!userService.LogIn(username, password, out string jwt))

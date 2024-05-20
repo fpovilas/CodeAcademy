@@ -2,14 +2,9 @@
 
 namespace Notepad.Repository.Model
 {
-    public class NoteImage
+    public class NoteImage : ImageBase
     {
-        public int Id { get; set; }
-        public required string Name { get; set; }
-        public required string ContentType { get; set; }
-        public required string PictureUrl { get; set; }
-
-        // One-to-One relationship with NoteImage entity (NoteImageThumbnail can have one NoteImage)
+        // One-to-One relationship with Note entity (NoteImage can have one Note)
         [ForeignKey(nameof(Note))]
         public int NoteId { get; set; }
         public virtual Note? Note { get; set; }

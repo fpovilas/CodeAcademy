@@ -15,6 +15,7 @@ namespace Notepad.Repository.Extension
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<INoteImageRepository, NoteImageRepository>();
             return services;
         }
     }

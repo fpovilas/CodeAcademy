@@ -15,5 +15,8 @@ namespace Notepad.Repository.Model
         [ForeignKey(nameof(User))]
         public int? UserId { get; set; }
         public virtual User? User { get; set; }
+
+        // One-to-one relationship with NoteImage entity (Note can have one NoteImage)
+        public NoteImage? NoteImage { get; set; }
     }
 }

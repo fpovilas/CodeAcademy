@@ -18,9 +18,20 @@ namespace Notepad.Repository.Repository
             context.SaveChanges();
         }
 
-        public NoteImage? GetImage(int id)
+        public T? GetImage<T>(int id) where T : class
         {
-            return context.NoteImages.FirstOrDefault(x => x.Id == id);
+            if (typeof(T) == typeof(NoteImage))
+            {
+                return context.NoteImages.FirstOrDefault(context => context.Id == id) as T;
+            }
+            else if (typeof(T) == typeof(NoteImageThumbnail))
+            {
+                return context.NoteImageThumbnails.FirstOrDefault(context => context.Id == id) as T;
+            }
+            else
+            {
+                throw new InvalidOperationException("Unsupported type.");
+            }
         }
     }
 }

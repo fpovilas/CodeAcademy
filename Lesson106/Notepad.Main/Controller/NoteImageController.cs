@@ -18,7 +18,10 @@ namespace Notepad.Main.Controller
         [HttpGet("Download")]
         public ActionResult DownloadImage([FromQuery] int id)
         {
-            if (!noteImageService.GetImage(id, out string msg, out NoteImage noteImage))
+            if (!noteImageService.GetImage(id, out string msg, out NoteImage? noteImage))
+            { return BadRequest(msg); }
+
+            if (noteImage is null)
             { return BadRequest(msg); }
 
             FileStream fileStream = new(noteImage.PictureUrl, FileMode.Open, FileAccess.Read);

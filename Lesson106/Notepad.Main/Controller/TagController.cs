@@ -47,7 +47,7 @@ namespace Notepad.Main.Controller
         }
 
         [Authorize]
-        [HttpPost("Get")]
+        [HttpGet("Get")]
         [ProducesResponseType(200)] // OK
         [ProducesResponseType(400)] // Bad Request
         public ActionResult<Tag> Get(int tagID)

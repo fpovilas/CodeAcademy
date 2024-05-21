@@ -60,9 +60,9 @@ namespace Notepad.Service.Service
             catch { return false; }
         }
 
-        public bool GetImage(int id, out string msg, out NoteImage noteImage)
+        public bool GetImage(int id, out string msg, out NoteImage? noteImage)
         {
-            noteImage = noteImageRepository.GetImage(id)!;
+            noteImage = noteImageRepository.GetImage<NoteImage>(id);
             msg = string.Empty;
 
             if (noteImage is null)
@@ -80,19 +80,21 @@ namespace Notepad.Service.Service
             return true;
         }
 
-        public bool Get<T>(int id, out string msg, out T image) where T : ImageBase
+        public bool GetImageThumbnail(int id, out string msg, out NoteImageThumbnail noteImageThumbnail)
         {
+            noteImageThumbnail = noteImageRepository.GetImage<NoteImageThumbnail>(id)!;
             msg = string.Empty;
-            image = default!;
 
-            if (typeof(T) is NoteImageThumbnail)
+            if (noteImageThumbnail is null)
             {
-                image = noteImageRepository.GetImage(id) as T;
+                msg = "Image not found.";
+                return false;
             }
 
-            if (typeof(T) == typeof(NoteImage))
+            if (!File.Exists(noteImageThumbnail.PictureUrl))
             {
-                image = noteImageRepository.GetImage(id) as T;
+                msg = "File does not exist on disk.";
+                return false;
             }
 
             return true;

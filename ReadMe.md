@@ -607,5 +607,12 @@
 - .NET API
     - Repetition before exam #5
     - More Frontend Basics (In Video) #4
+
+#### [Lesson 111 (2024-05-21)](/Lesson106/)
+
+- .NET API
+    - Repetition before exam #6
+    - Serilog
+    - AutoMapper
     
 </details>

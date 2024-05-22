@@ -612,7 +612,12 @@
 
 - .NET API
     - Repetition before exam #6
-    - Serilog
-    - AutoMapper
+    - Serilog #1 (Video)
+
+#### [Lesson 112 (2024-05-22)](/Lesson106/)
+
+- .NET API
+    - Repetition before exam #7
+    - AutoMapper (Video)
     
 </details>

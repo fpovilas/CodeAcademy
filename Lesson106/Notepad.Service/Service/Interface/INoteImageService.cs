@@ -7,6 +7,6 @@ namespace Notepad.Service.Service.Interface
     {
         public bool GetImage(int id, out string msg, out NoteImage? noteImage);
         public bool GetImageThumbnail(int id, out string msg, out NoteImageThumbnail noteImageThumbnail);
-        public bool UploadImageAndThumbnail(IFormFile request);
+        public bool UploadImageAndThumbnail(IFormFile request, Note note, out int noteImageId);
     }
 }

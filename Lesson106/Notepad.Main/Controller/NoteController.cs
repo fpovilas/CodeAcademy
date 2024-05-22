@@ -11,12 +11,12 @@ namespace Notepad.Main.Controller
         [HttpPost("Create")]
         [ProducesResponseType(200)] // OK
         [ProducesResponseType(400)] // Bad Request
-        public ActionResult<NoteDto> Create([FromBody] NoteDto? note)
+        public ActionResult<NoteDto> Create([FromForm] NoteDto? note, [FromForm] ImageUploadRequest request)
         {
             if (note is null)
             { return BadRequest("Bad Request"); }
 
-            if (!noteService.Create(note))
+            if (!noteService.Create(note, request.Image))
             { return BadRequest("Bad Request"); }
 
             return Ok(note);

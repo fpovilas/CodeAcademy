@@ -1,6 +1,6 @@
 ﻿namespace Notepad.Shared.Dto
 {
-    public record TagDto
+    public class TagDto
     {
         public string? TagName { get; set; }
     }

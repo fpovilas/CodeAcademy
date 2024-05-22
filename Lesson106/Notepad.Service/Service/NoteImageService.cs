@@ -11,8 +11,9 @@ namespace Notepad.Service.Service
         private readonly string noteImagePath = @"./NoteImages";
         private readonly string noteImageThumbnailPath = @"./NoteImages/Thumbnails";
 
-        public bool UploadImageAndThumbnail(IFormFile request)
+        public bool UploadImageAndThumbnail(IFormFile request, Note note, out int noteImageId)
         {
+            noteImageId = 0;
             try
             {
                 using var memoryStream = new MemoryStream();
@@ -32,24 +33,26 @@ namespace Notepad.Service.Service
                 if (!Directory.Exists(noteImageThumbnailPath))
                 { Directory.CreateDirectory(noteImageThumbnailPath); }
 
-                // Create image
-                NoteImage image = new()
-                {
-                    Name = request.FileName,
-                    ContentType = request.ContentType,
-                    PictureUrl = noteImageFilePath
-                };
-
                 // Create image thumbnail
                 NoteImageThumbnail thumbnail = new()
                 {
                     Name = request.FileName,
                     ContentType = request.ContentType,
-                    PictureUrl = noteImageThumbnailFilePath
+                    PictureUrl = noteImageThumbnailFilePath,
+                };
+
+                // Create image
+                NoteImage image = new()
+                {
+                    Name = request.FileName,
+                    ContentType = request.ContentType,
+                    PictureUrl = noteImageFilePath,
+                    Note = note,
+                    NoteImageThumbnail = thumbnail
                 };
 
                 noteImageRepository.UploadImage(image);
-                noteImageRepository.UploadThumbnail(thumbnail);
+                //noteImageRepository.UploadThumbnail(thumbnail);
 
                 var imgData = ImageHelper.Resize(imageBytes, 120, 120);
                 ImageHelper.SaveNoteImageThumbnail(noteImageThumbnailFilePath, imgData);

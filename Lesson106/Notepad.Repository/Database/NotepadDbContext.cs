@@ -36,6 +36,18 @@ namespace Notepad.Repository.Database
             modelBuilder.Entity<Tag>()
                 .Property(tID => tID.Id)
                 .HasDefaultValueSql("NEXT VALUE FOR dbo.TagIndex");
+
+            modelBuilder.Entity<NoteImage>()
+                .HasOne(ni => ni.NoteImageThumbnail)
+                .WithOne(nit => nit.NoteImage)
+                .HasForeignKey<NoteImageThumbnail>(nit => nit.NoteImageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Note>()
+                .HasOne(n => n.NoteImage)
+                .WithOne(ni => ni.Note)
+                .HasForeignKey<NoteImage>(ni => ni.NoteId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

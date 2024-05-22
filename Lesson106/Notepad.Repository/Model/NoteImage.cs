@@ -8,5 +8,10 @@ namespace Notepad.Repository.Model
         [ForeignKey(nameof(Note))]
         public int NoteId { get; set; }
         public virtual Note? Note { get; set; }
+
+        // One-to-One relationship with NoteImageThumbnail entity (NoteImage can have one NoteImageThumbnail)
+        //[ForeignKey(nameof(NoteImageThumbnail))]
+        //public int NoteImageThumbnailId { get; set; }
+        public virtual NoteImageThumbnail? NoteImageThumbnail { get; set; }
     }
 }

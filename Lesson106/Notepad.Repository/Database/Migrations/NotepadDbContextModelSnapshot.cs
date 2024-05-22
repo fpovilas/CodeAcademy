@@ -128,7 +128,8 @@ namespace Notepad.Repository.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NoteImageId");
+                    b.HasIndex("NoteImageId")
+                        .IsUnique();
 
                     b.ToTable("NoteImageThumbnails");
                 });
@@ -211,8 +212,8 @@ namespace Notepad.Repository.Database.Migrations
             modelBuilder.Entity("Notepad.Repository.Model.NoteImageThumbnail", b =>
                 {
                     b.HasOne("Notepad.Repository.Model.NoteImage", "NoteImage")
-                        .WithMany()
-                        .HasForeignKey("NoteImageId")
+                        .WithOne("NoteImageThumbnail")
+                        .HasForeignKey("Notepad.Repository.Model.NoteImageThumbnail", "NoteImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -222,6 +223,11 @@ namespace Notepad.Repository.Database.Migrations
             modelBuilder.Entity("Notepad.Repository.Model.Note", b =>
                 {
                     b.Navigation("NoteImage");
+                });
+
+            modelBuilder.Entity("Notepad.Repository.Model.NoteImage", b =>
+                {
+                    b.Navigation("NoteImageThumbnail");
                 });
 
             modelBuilder.Entity("Notepad.Repository.Model.User", b =>

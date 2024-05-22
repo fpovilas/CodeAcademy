@@ -12,8 +12,8 @@ using Notepad.Repository.Database;
 namespace Notepad.Repository.Database.Migrations
 {
     [DbContext(typeof(NotepadDbContext))]
-    [Migration("20240516183955_AddedNoteImagesAndItThumbnail")]
-    partial class AddedNoteImagesAndItThumbnail
+    [Migration("20240522160716_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,9 @@ namespace Notepad.Repository.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("NoteImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -94,13 +97,17 @@ namespace Notepad.Repository.Database.Migrations
                     b.Property<int>("NoteId")
                         .HasColumnType("int");
 
+                    b.Property<int>("NoteImageThumbnailId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PictureUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NoteId");
+                    b.HasIndex("NoteId")
+                        .IsUnique();
 
                     b.ToTable("NoteImages");
                 });
@@ -117,10 +124,6 @@ namespace Notepad.Repository.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -134,7 +137,8 @@ namespace Notepad.Repository.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NoteImageId");
+                    b.HasIndex("NoteImageId")
+                        .IsUnique();
 
                     b.ToTable("NoteImageThumbnails");
                 });
@@ -206,8 +210,8 @@ namespace Notepad.Repository.Database.Migrations
             modelBuilder.Entity("Notepad.Repository.Model.NoteImage", b =>
                 {
                     b.HasOne("Notepad.Repository.Model.Note", "Note")
-                        .WithMany()
-                        .HasForeignKey("NoteId")
+                        .WithOne("NoteImage")
+                        .HasForeignKey("Notepad.Repository.Model.NoteImage", "NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -217,12 +221,22 @@ namespace Notepad.Repository.Database.Migrations
             modelBuilder.Entity("Notepad.Repository.Model.NoteImageThumbnail", b =>
                 {
                     b.HasOne("Notepad.Repository.Model.NoteImage", "NoteImage")
-                        .WithMany()
-                        .HasForeignKey("NoteImageId")
+                        .WithOne("NoteImageThumbnail")
+                        .HasForeignKey("Notepad.Repository.Model.NoteImageThumbnail", "NoteImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("NoteImage");
+                });
+
+            modelBuilder.Entity("Notepad.Repository.Model.Note", b =>
+                {
+                    b.Navigation("NoteImage");
+                });
+
+            modelBuilder.Entity("Notepad.Repository.Model.NoteImage", b =>
+                {
+                    b.Navigation("NoteImageThumbnail");
                 });
 
             modelBuilder.Entity("Notepad.Repository.Model.User", b =>

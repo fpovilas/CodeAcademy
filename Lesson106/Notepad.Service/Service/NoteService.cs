@@ -1,13 +1,14 @@
-﻿using Notepad.Repository.Model;
+﻿using Microsoft.AspNetCore.Http;
+using Notepad.Repository.Model;
 using Notepad.Repository.Repository.Interface;
 using Notepad.Service.Service.Interface;
 using Notepad.Shared.Dto;
 
 namespace Notepad.Service.Service
 {
-    public class NoteService(INoteRepository noteRepository) : INoteService
+    public class NoteService(INoteRepository noteRepository, INoteImageService noteImageService) : INoteService
     {
-        public bool Create(NoteDto note)
+        public bool Create(NoteDto note, IFormFile? image)
         {
             try
             {
@@ -22,7 +23,13 @@ namespace Notepad.Service.Service
                     UserId = note.UserId
                 };
 
-                noteRepository.Create(newNote);
+                if (image is not null)
+                {
+                    if (!noteImageService.UploadImageAndThumbnail(image, newNote, out int noteImageId))
+                    { return false; }
+                }
+                else
+                { noteRepository.Create(newNote); }
             }
             catch
             {
@@ -32,14 +39,14 @@ namespace Notepad.Service.Service
             return true;
         }
 
-        public ICollection<Tag> ConvertToTag(ICollection<TagDto> tagDtos)
+        public ICollection<Tag> ConvertToTag(ICollection<string> tagDtos)
         {
             ICollection<Tag> tags = [];
-            foreach (TagDto tagDto in tagDtos)
+            foreach (string tagDto in tagDtos)
             {
                 Tag tag = new()
                 {
-                    Name = tagDto.TagName!
+                    Name = tagDto
                 };
 
                 tags.Add(tag);

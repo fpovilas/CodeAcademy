@@ -7,6 +7,6 @@ namespace Notepad.Shared.Dto
     {
         [MaxFileSize(5 * 1024 * 1024)]
         [AllowedExtensions([".png", ".gif", ".jpeg", ".jpg"])]
-        public required IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

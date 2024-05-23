@@ -1,6 +1,6 @@
 @Notepad.Main_HostAddress = https://localhost:7123
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicG92ZnJpIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTcxNjM5NTAxMSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTExOS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTE5LyJ9.AEKY5K7XXciwE9iNUHKKfuE3H84sP4oLbwknh3QSqE2W60zFCi5CM39NA0df8AdLrXX3DWbNL7RAtaYTgwFasA
-@username = povfri
+@jwt = ***
+@username = ***
 @password = ***
 @regUsername = ***
 @regPassword = ***

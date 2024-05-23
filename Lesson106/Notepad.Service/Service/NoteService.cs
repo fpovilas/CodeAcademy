@@ -6,9 +6,9 @@ using Notepad.Shared.Dto;
 
 namespace Notepad.Service.Service
 {
-    public class NoteService(INoteRepository noteRepository, INoteImageService noteImageService) : INoteService
+    public class NoteService(INoteRepository noteRepository, INoteImageService noteImageService, IUserService userService) : INoteService
     {
-        public bool Create(NoteDto note, IFormFile? image)
+        public bool Create(NoteDto note, IFormFile? image, string username)
         {
             try
             {
@@ -17,10 +17,10 @@ namespace Notepad.Service.Service
 
                 Note newNote = new()
                 {
-                    Description = note.Description,
+                    Description = note.Description!,
                     Tags = ConvertToTag(note.Tags ?? []),
-                    Title = note.Title,
-                    UserId = note.UserId
+                    Title = note.Title!,
+                    UserId = userService.GetIdByUsername(username)
                 };
 
                 if (image is not null)
@@ -39,6 +39,42 @@ namespace Notepad.Service.Service
             return true;
         }
 
+        public List<GetNoteDto> GetAll(string username)
+        {
+            var user = userService.GetByUsername(username) ?? throw new Exception("User is null");
+            var notes = noteRepository.GetAll(user.Id);
+            List<GetNoteDto> noteDtos = [];
+
+            foreach (var note in notes)
+            {
+                noteDtos.Add(Convert(note));
+            }
+
+            return noteDtos;
+        }
+
+        public bool DeleteByID(int id, string username, out GetNoteDto note)
+        {
+            note = new();
+
+            var user = userService.GetByUsername(username);
+
+            if (user is null)
+            { return false; }
+
+            if (user.Notes?.Count == 0)
+            { return false; }
+
+            var realNote = user.Notes?.FirstOrDefault(n => n.User!.Equals(user));
+
+            if (realNote is null)
+            { return false; }
+
+            note = Convert(realNote);
+            noteRepository.Remove(realNote);
+            return true;
+        }
+
         public ICollection<Tag> ConvertToTag(ICollection<string> tagDtos)
         {
             ICollection<Tag> tags = [];
@@ -53,6 +89,41 @@ namespace Notepad.Service.Service
             }
 
             return tags;
+        }
+
+        public static GetNoteDto Convert(Note note)
+        {
+            GetNoteDto noteDto = new();
+
+            if (note.NoteImage is not null)
+            {
+                var imageBase = new ImageBaseDto()
+                {
+                    ContentType = note.NoteImage!.ContentType,
+                    Name = note.NoteImage.Name,
+                    PictureUrl = note.NoteImage.PictureUrl
+                };
+
+                noteDto = new()
+                {
+                    Title = note.Title,
+                    Description = note.Description,
+                    Tags = note.Tags?.Select(t => t.Name).ToList(),
+                    ImageBase = imageBase
+                };
+            }
+            else
+            {
+                noteDto = new()
+                {
+                    Title = note.Title,
+                    Description = note.Description,
+                    Tags = note.Tags?.Select(t => t.Name).ToList()
+                };
+
+            }
+
+            return noteDto;
         }
     }
 }

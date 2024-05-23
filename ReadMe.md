@@ -619,5 +619,11 @@
 - .NET API
     - Repetition before exam #7
     - AutoMapper (Video)
+
+#### [Lesson 113 (2024-05-23)](/Lesson106/)
+
+- .NET API
+    - Repetition before exam #8
+    - Presentation
     
 </details>

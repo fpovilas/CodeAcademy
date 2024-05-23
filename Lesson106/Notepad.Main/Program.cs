@@ -1,7 +1,8 @@
-using Notepad.Service.Extension;
-using Notepad.Repository.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Notepad.Repository.Extension;
+using Notepad.Service.Extension;
 using System.Text;
 
 namespace Notepad.Main
@@ -19,7 +20,37 @@ namespace Notepad.Main
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Adding Authorization
+            //For Swagger to get Auth for JWT Token
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "NotepadAPI",
+                    Description = "Product WebAPI"
+                });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Description = "Bearer Authentication with JWT Token",
+                    Type = SecuritySchemeType.Http
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                    new OpenApiSecurityScheme {
+                        Reference = new OpenApiReference {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    },
+                    new List <string> ()
+                    }
+                });
+            });
+
             //For Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

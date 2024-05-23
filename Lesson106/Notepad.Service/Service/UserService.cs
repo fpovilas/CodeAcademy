@@ -34,11 +34,17 @@ namespace Notepad.Service.Service
             { return false; }
 
             var user = userRepository.FindByUsername(username);
-            if(!UserCreation.VerifyPassword(password, user.PasswordHash ?? new byte[1], user.PasswordSalt ?? new byte[1]))
+            if (!UserCreation.VerifyPassword(password, user.PasswordHash ?? new byte[1], user.PasswordSalt ?? new byte[1]))
             { return false; }
 
             jwt = jwtService.GetJWT(username, user.Role ?? "User");
             return true;
         }
+
+        public int GetIdByUsername(string username)
+            => userRepository.FindByUsername(username).Id;
+
+        public User GetByUsername(string username)
+            => userRepository.FindByUsername(username);
     }
 }

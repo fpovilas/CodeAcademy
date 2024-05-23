@@ -4,6 +4,6 @@
     {
         public required string Username { get; set; }
         public required string Role { get; set; }
-        public required List<NoteDto> Notes { get; set; }
+        public required List<GetNoteDto> Notes { get; set; }
     }
 }

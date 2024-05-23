@@ -52,7 +52,6 @@ namespace Notepad.Service.Service
                 };
 
                 noteImageRepository.UploadImage(image);
-                //noteImageRepository.UploadThumbnail(thumbnail);
 
                 var imgData = ImageHelper.Resize(imageBytes, 120, 120);
                 ImageHelper.SaveNoteImageThumbnail(noteImageThumbnailFilePath, imgData);

@@ -6,7 +6,7 @@ using Notepad.Shared.Dto;
 
 namespace Notepad.Service.Service
 {
-    public class NoteService(INoteRepository noteRepository, INoteImageService noteImageService, IUserService userService) : INoteService
+    public class NoteService(INoteRepository noteRepository, INoteImageService noteImageService, IUserService userService, ITagRepository tagRepository) : INoteService
     {
         public bool Create(NoteDto note, IFormFile? image, string username)
         {
@@ -65,7 +65,7 @@ namespace Notepad.Service.Service
             if (user.Notes?.Count == 0)
             { return false; }
 
-            var realNote = user.Notes?.FirstOrDefault(n => n.User!.Equals(user));
+            var realNote = user.Notes?.FirstOrDefault(n => n.Id == id && n.User!.Username!.Equals(username));
 
             if (realNote is null)
             { return false; }
@@ -75,15 +75,44 @@ namespace Notepad.Service.Service
             return true;
         }
 
-        public ICollection<Tag> ConvertToTag(ICollection<string> tagDtos)
+        public bool Update(int noteID, NoteDto note, IFormFile? image, string username)
+        {
+            if (note is null)
+            { return false; }
+
+            User user = userService.GetByUsername(username);
+            Note? trueNote = noteRepository.GetAll(user.Id).FirstOrDefault(n => n.Id == noteID);
+
+            if (trueNote is null)
+            { return false; }
+
+            if (!string.IsNullOrEmpty(note.Description))
+            {
+                trueNote.Description = note.Description!;
+            }
+            if (!string.IsNullOrEmpty(note.Title))
+            {
+                trueNote.Title = note.Title!;
+            }
+            if (note.Tags?.Count > 0)
+            {
+                trueNote.Tags = ConvertToTag(note.Tags);
+            }
+
+            noteRepository.Update(trueNote);
+            return true;
+        }
+
+        private ICollection<Tag> ConvertToTag(ICollection<string> tagDtos)
         {
             ICollection<Tag> tags = [];
             foreach (string tagDto in tagDtos)
             {
-                Tag tag = new()
-                {
-                    Name = tagDto
-                };
+                Tag tag = new() { Name = string.Empty };
+                var existingTag = tagRepository.GetByName(tagDto);
+
+                if (existingTag is null) { tag.Name = tagDto; }
+                else { tag = existingTag; }
 
                 tags.Add(tag);
             }

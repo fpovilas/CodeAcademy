@@ -68,7 +68,7 @@ namespace Notepad.Main
                 };
             });
 
-            // Adding DependecyInjectionsė
+            // Adding DependecyInjections
             builder.Services.AddNotepadService();
             builder.Services.AddNotepadDbService(builder.Configuration.GetConnectionString("Database")!);
 

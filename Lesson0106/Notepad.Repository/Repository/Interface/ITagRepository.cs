@@ -8,5 +8,6 @@ namespace Notepad.Repository.Repository.Interface
         public void Delete(int id);
         public bool Edit(int id, string newTagName);
         public Tag? Get(int id);
+        public Tag? GetByName(string tagName);
     }
 }

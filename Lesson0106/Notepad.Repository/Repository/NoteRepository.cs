@@ -18,11 +18,18 @@ namespace Notepad.Repository.Repository
             .Include(n => n.User)
             .Include(n => n.NoteImage)
             .ThenInclude(n => n!.NoteImageThumbnail)
+            .Where(n => n.UserId == id)
             .ToList();
 
         public void Remove(Note note)
         {
             context.Remove(note);
+            context.SaveChanges();
+        }
+
+        public void Update(Note note)
+        {
+            context.Notes.Update(note);
             context.SaveChanges();
         }
     }

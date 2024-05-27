@@ -8,5 +8,6 @@ namespace Notepad.Service.Service.Interface
         public bool Create(NoteDto note, IFormFile? image, string username);
         public List<GetNoteDto> GetAll(string username);
         public bool DeleteByID(int id, string username, out GetNoteDto note);
+        public bool Update(int noteID, NoteDto note, IFormFile? image, string username);
     }
 }

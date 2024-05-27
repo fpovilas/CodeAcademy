@@ -7,5 +7,6 @@ namespace Notepad.Repository.Repository.Interface
         public void Create(Note note);
         public List<Note> GetAll(int id);
         public void Remove(Note note);
+        public void Update(Note note);
     }
 }

@@ -45,5 +45,8 @@ namespace Notepad.Repository.Repository
 
         public Tag? Get(int id)
             => context.Tags.FirstOrDefault(t => t.Id.Equals(id));
+
+        public Tag? GetByName(string tagName)
+            => context.Tags.FirstOrDefault(t => t.Name.Equals(tagName));
     }
 }

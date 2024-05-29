@@ -1,4 +1,4 @@
-﻿using FinalProject.Database.Models;
+﻿using FinalProject.Database.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Database.Database

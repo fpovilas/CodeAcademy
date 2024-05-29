@@ -1,4 +1,6 @@
-﻿using FinalProject.Database.Models;
+﻿using FinalProject.Database.Entity;
+using FinalProject.Shared.DTOs;
+using FinalProject.Shared.Enums;
 using System.Security.Cryptography;
 
 namespace FinalProject.Business.Helper
@@ -12,15 +14,15 @@ namespace FinalProject.Business.Helper
             return computedHash.SequenceEqual(passwordHash);
         }
 
-        public static User Create(string username, string password)
+        public static User Create(SignUpUserDTO userDTO)
         {
-            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(userDTO.Password, out byte[] passwordHash, out byte[] passwordSalt);
             User user = new()
             {
-                Username = username,
+                Username = userDTO.Username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Role = "User",
+                Role = Roles.User.ToString(),
                 PersonalInformations = []
             };
             return user;

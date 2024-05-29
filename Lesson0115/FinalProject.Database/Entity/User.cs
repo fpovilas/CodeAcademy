@@ -1,4 +1,4 @@
-﻿namespace FinalProject.Database.Models
+﻿namespace FinalProject.Database.Entity
 {
     public class User
     {

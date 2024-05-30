@@ -7,6 +7,6 @@ namespace FinalProject.Shared.DTOs
     {
         [MaxFileSize(5 * 1024 * 1024)]
         [AllowedExtensions([".png", ".gif", ".jpeg", ".jpg"])]
-        public IFormFile? Image { get; set; }
+        public required IFormFile Image { get; set; }
     }
 }

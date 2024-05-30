@@ -27,12 +27,6 @@ namespace FinalProject.Database.Database.Migrations
                 incrementBy: 7);
 
             migrationBuilder.CreateSequence<int>(
-                name: "PPIndex",
-                schema: "dbo",
-                startValue: 2L,
-                incrementBy: 4);
-
-            migrationBuilder.CreateSequence<int>(
                 name: "UserIndex",
                 schema: "dbo");
 
@@ -40,7 +34,7 @@ namespace FinalProject.Database.Database.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR dbo.PPIndex"),
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR dbo.UserIndex"),
                     Username = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
@@ -63,6 +57,7 @@ namespace FinalProject.Database.Database.Migrations
                     PersonalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -80,8 +75,7 @@ namespace FinalProject.Database.Database.Migrations
                 name: "PlaceOfResidences",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR dbo.PORIndex"),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HouseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -99,28 +93,6 @@ namespace FinalProject.Database.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProfilePhotos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonalInformationId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProfilePhotos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProfilePhotos_PersonalInformations_PersonalInformationId",
-                        column: x => x.PersonalInformationId,
-                        principalTable: "PersonalInformations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_PersonalInformations_UserId",
                 table: "PersonalInformations",
@@ -132,13 +104,6 @@ namespace FinalProject.Database.Database.Migrations
                 column: "PersonalInformationId",
                 unique: true,
                 filter: "[PersonalInformationId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProfilePhotos_PersonalInformationId",
-                table: "ProfilePhotos",
-                column: "PersonalInformationId",
-                unique: true,
-                filter: "[PersonalInformationId] IS NOT NULL");
         }
 
         /// <inheritdoc />
@@ -146,9 +111,6 @@ namespace FinalProject.Database.Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "PlaceOfResidences");
-
-            migrationBuilder.DropTable(
-                name: "ProfilePhotos");
 
             migrationBuilder.DropTable(
                 name: "PersonalInformations");
@@ -162,10 +124,6 @@ namespace FinalProject.Database.Database.Migrations
 
             migrationBuilder.DropSequence(
                 name: "PORIndex",
-                schema: "dbo");
-
-            migrationBuilder.DropSequence(
-                name: "PPIndex",
                 schema: "dbo");
 
             migrationBuilder.DropSequence(

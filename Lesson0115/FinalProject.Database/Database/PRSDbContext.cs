@@ -8,7 +8,6 @@ namespace FinalProject.Database.Database
         public DbSet<User> Users { get; set; }
         public DbSet<PersonalInformation> PersonalInformations { get; set; }
         public DbSet<PlaceOfResidence> PlaceOfResidences { get; set; }
-        public DbSet<ProfilePhoto> ProfilePhotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,10 +24,6 @@ namespace FinalProject.Database.Database
                 .StartsAt(7)
                 .IncrementsBy(7);
 
-            modelBuilder.HasSequence<int>("PPIndex", schema: "dbo")
-                .StartsAt(2)
-                .IncrementsBy(4);
-
             // Assigning incrementation schemes
             modelBuilder.Entity<User>()
                 .Property(uID => uID.Id)
@@ -38,13 +33,10 @@ namespace FinalProject.Database.Database
                 .Property(piID => piID.Id)
                 .HasDefaultValueSql("NEXT VALUE FOR dbo.PIIndex");
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<PlaceOfResidence>()
                 .Property(porID => porID.Id)
                 .HasDefaultValueSql("NEXT VALUE FOR dbo.PORIndex");
 
-            modelBuilder.Entity<User>()
-                .Property(ppID => ppID.Id)
-                .HasDefaultValueSql("NEXT VALUE FOR dbo.PPIndex");
 
             // Assigning entity property lengths
             modelBuilder.Entity<User>()
@@ -64,12 +56,6 @@ namespace FinalProject.Database.Database
                 .HasMany(u => u.PersonalInformations)
                 .WithOne(pi => pi.User)
                 .HasForeignKey(pi => pi.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<PersonalInformation>()
-                .HasOne(pi => pi.ProfilePhoto)
-                .WithOne(pp => pp.PersonalInformation)
-                .HasForeignKey<ProfilePhoto>(pp => pp.PersonalInformationId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PersonalInformation>()

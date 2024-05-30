@@ -1,9 +1,9 @@
 ﻿using FinalProject.Business.Service.Interface;
 using FinalProject.Database.Database;
 using FinalProject.Database.Entity;
+using FinalProject.Shared.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace FinalProject.Main.Controllers
@@ -18,11 +18,22 @@ namespace FinalProject.Main.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<PersonalInformation>>> GetPersonalInformations()
+        public ActionResult<IEnumerable<PersonalInformation>> GetPersonalInformations()
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-            return await context.PersonalInformations.ToListAsync();
+            try
+            {
+                if (string.IsNullOrEmpty(username))
+                {
+                    return BadRequest("Please log in.");
+                }
+                return Ok(personalInfoService.GetAll(username));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"{ex.Message}");
+            }
         }
 
         // GET: api/PersonalInformations/5
@@ -42,38 +53,28 @@ namespace FinalProject.Main.Controllers
             return personalInformation;
         }
 
-        // PUT: api/PersonalInformations/5
-        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        // PUT: api/PersonalInformations/AddPersonalInformation
+        [HttpPut("AddPersonalInformation")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> PutPersonalInformation(int id, PersonalInformation personalInformation)
+        public IActionResult PutPersonalInformation([FromForm] PersonalInformationDTO personalInformation, [FromForm] ImageUploadRequest request)
         {
-            if (id != personalInformation.Id)
-            {
-                return BadRequest();
-            }
-
-            context.Entry(personalInformation).State = EntityState.Modified;
+            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
             try
             {
-                await context.SaveChangesAsync();
+                if (personalInformation is not null && request is not null)
+                {
+                    personalInfoService.Put(personalInformation, request.Image, username);
+                    return Ok(new { personalInformation });
+                }
+                return BadRequest("Not all fields are filled");
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!PersonalInformationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest($"{ex.Message}");
             }
-
-            return NoContent();
         }
 
         // POST: api/PersonalInformations
@@ -107,11 +108,6 @@ namespace FinalProject.Main.Controllers
             await context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool PersonalInformationExists(int id)
-        {
-            return context.PersonalInformations.Any(e => e.Id == id);
         }
     }
 }

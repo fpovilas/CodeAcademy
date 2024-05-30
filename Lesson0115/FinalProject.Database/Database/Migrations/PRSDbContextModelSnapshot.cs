@@ -30,13 +30,9 @@ namespace FinalProject.Database.Database.Migrations
                 .StartsAt(7L)
                 .IncrementsBy(7);
 
-            modelBuilder.HasSequence<int>("PPIndex", "dbo")
-                .StartsAt(2L)
-                .IncrementsBy(4);
-
             modelBuilder.HasSequence<int>("UserIndex", "dbo");
 
-            modelBuilder.Entity("FinalProject.Database.Models.PersonalInformation", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.PersonalInformation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,6 +62,9 @@ namespace FinalProject.Database.Database.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicturePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -76,13 +75,12 @@ namespace FinalProject.Database.Database.Migrations
                     b.ToTable("PersonalInformations");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.PlaceOfResidence", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.PlaceOfResidence", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR dbo.PORIndex");
 
                     b.Property<string>("ApartmentNumber")
                         .HasColumnType("nvarchar(max)");
@@ -108,44 +106,12 @@ namespace FinalProject.Database.Database.Migrations
                     b.ToTable("PlaceOfResidences");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.ProfilePhoto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PersonalInformationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PicturePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonalInformationId")
-                        .IsUnique()
-                        .HasFilter("[PersonalInformationId] IS NOT NULL");
-
-                    b.ToTable("ProfilePhotos");
-                });
-
-            modelBuilder.Entity("FinalProject.Database.Models.User", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR dbo.PPIndex");
+                        .HasDefaultValueSql("NEXT VALUE FOR dbo.UserIndex");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
@@ -165,9 +131,9 @@ namespace FinalProject.Database.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.PersonalInformation", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.PersonalInformation", b =>
                 {
-                    b.HasOne("FinalProject.Database.Models.User", "User")
+                    b.HasOne("FinalProject.Database.Entity.User", "User")
                         .WithMany("PersonalInformations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -176,34 +142,22 @@ namespace FinalProject.Database.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.PlaceOfResidence", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.PlaceOfResidence", b =>
                 {
-                    b.HasOne("FinalProject.Database.Models.PersonalInformation", "PersonalInformation")
+                    b.HasOne("FinalProject.Database.Entity.PersonalInformation", "PersonalInformation")
                         .WithOne("PlaceOfResidence")
-                        .HasForeignKey("FinalProject.Database.Models.PlaceOfResidence", "PersonalInformationId")
+                        .HasForeignKey("FinalProject.Database.Entity.PlaceOfResidence", "PersonalInformationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("PersonalInformation");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.ProfilePhoto", b =>
-                {
-                    b.HasOne("FinalProject.Database.Models.PersonalInformation", "PersonalInformation")
-                        .WithOne("ProfilePhoto")
-                        .HasForeignKey("FinalProject.Database.Models.ProfilePhoto", "PersonalInformationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("PersonalInformation");
-                });
-
-            modelBuilder.Entity("FinalProject.Database.Models.PersonalInformation", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.PersonalInformation", b =>
                 {
                     b.Navigation("PlaceOfResidence");
-
-                    b.Navigation("ProfilePhoto");
                 });
 
-            modelBuilder.Entity("FinalProject.Database.Models.User", b =>
+            modelBuilder.Entity("FinalProject.Database.Entity.User", b =>
                 {
                     b.Navigation("PersonalInformations");
                 });

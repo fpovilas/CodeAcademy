@@ -1,4 +1,5 @@
 ﻿using FinalProject.Database.Database;
+using FinalProject.Database.Entity.AutoMapping;
 using FinalProject.Database.Repository;
 using FinalProject.Database.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,9 @@ namespace FinalProject.Database.Extension
         {
             services.AddDbContext<PRSDbContext>
                 (options => options.UseSqlServer(connString));
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonalInfoRepository, PersonalInfoRepository>();
             return services;
         }
     }

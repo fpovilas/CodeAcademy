@@ -1,6 +1,7 @@
 ﻿using FinalProject.Database.Database;
 using FinalProject.Database.Entity;
 using FinalProject.Database.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Database.Repository
 {
@@ -13,6 +14,8 @@ namespace FinalProject.Database.Repository
         }
 
         public User? FindByUsername(string username)
-            => context.Users.FirstOrDefault(u => u.Username!.Equals(username));
+            => context.Users
+            .Include(u => u.PersonalInformations)
+            .FirstOrDefault(u => u.Username!.Equals(username));
     }
 }

@@ -3,10 +3,12 @@ using System.Text.RegularExpressions;
 
 namespace FinalProject.Shared.DTOs
 {
-    public partial class SignUpUserDTO
+    public class SignUpUserDTO
     {
         public required string Username { get; set; }
         public required string Password { get; set; }
+
+        public readonly string passValidationRegex = @"^(?=.*[A-Z].*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d.*\d)(?=.*[\W_].*[\W_]).{12,}$";
 
         public bool CheckUsername()
         {
@@ -28,13 +30,6 @@ namespace FinalProject.Shared.DTOs
         }
 
         private bool CheckPasswordRequirements()
-        {
-            var IsValid = PassValidationRegex();
-
-            return IsValid.IsMatch(Password);
-        }
-
-        [GeneratedRegex(@"^(?=.*[A-Z].*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d.*\d)(?=.*[\W_].*[\W_]).{12,}$")]
-        private static partial Regex PassValidationRegex();
+            => Regex.IsMatch(Password, passValidationRegex);
     }
 }

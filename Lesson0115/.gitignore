@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Project-specific
+FinalProject.Main/ProfilePictures/*
+
 # User-specific files
 *.rsuser
 *.suo

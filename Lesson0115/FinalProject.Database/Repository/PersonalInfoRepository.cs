@@ -3,6 +3,7 @@ using FinalProject.Database.Database;
 using FinalProject.Database.Entity;
 using FinalProject.Database.Repository.Interface;
 using FinalProject.Shared.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Database.Repository
 {
@@ -11,6 +12,7 @@ namespace FinalProject.Database.Repository
         public IEnumerable<PersonalInformationDTO> GetAll(string username)
         {
             var allPIR = context.PersonalInformations
+                .Include(pi => pi.PlaceOfResidence)
                 .Where(pir => pir.User!.Username!.Equals(username)).ToList();
 
             var dtoPIR = mapper.Map<List<PersonalInformationDTO>>(allPIR);
@@ -21,6 +23,12 @@ namespace FinalProject.Database.Repository
         public void Put(PersonalInformation personalInfo)
         {
             context.PersonalInformations.Add(personalInfo);
+            context.SaveChanges();
+        }
+
+        public void Delete(PersonalInformation personalInfo)
+        {
+            context.Remove(personalInfo);
             context.SaveChanges();
         }
     }

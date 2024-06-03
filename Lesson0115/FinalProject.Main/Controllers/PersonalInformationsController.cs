@@ -1,5 +1,4 @@
 ﻿using FinalProject.Business.Service.Interface;
-using FinalProject.Database.Database;
 using FinalProject.Database.Entity;
 using FinalProject.Shared.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +10,7 @@ namespace FinalProject.Main.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonalInformationsController(PRSDbContext context, IPersonalInfoService personalInfoService) : ControllerBase
+    public class PersonalInformationsController(IPersonalInfoService personalInfoService) : ControllerBase
     {
         // GET: api/PersonalInformations/All
         [HttpGet("All")]
@@ -36,22 +35,24 @@ namespace FinalProject.Main.Controllers
             }
         }
 
-        // GET: api/PersonalInformations/5
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<PersonalInformation>> GetPersonalInformation(int id)
-        {
-            var personalInformation = await context.PersonalInformations.FindAsync(id);
+        #region
+        //// GET: api/PersonalInformations/5
+        //[HttpGet("{id}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //public async Task<ActionResult<PersonalInformation>> GetPersonalInformation(int id)
+        //{
+        //    var personalInformation = await context.PersonalInformations.FindAsync(id);
 
-            if (personalInformation == null)
-            {
-                return NotFound();
-            }
+        //    if (personalInformation == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return personalInformation;
-        }
+        //    return personalInformation;
+        //}
+        #endregion
 
         // PUT: api/PersonalInformations/AddPersonalInformation
         [HttpPut("AddPersonalInformation")]
@@ -77,37 +78,42 @@ namespace FinalProject.Main.Controllers
             }
         }
 
-        // POST: api/PersonalInformations
-        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        #region
+        //// POST: api/PersonalInformations
+        //// To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //public async Task<ActionResult<PersonalInformation>> PostPersonalInformation(PersonalInformation personalInformation)
+        //{
+        //    context.PersonalInformations.Add(personalInformation);
+        //    await context.SaveChangesAsync();
+
+        //    return CreatedAtAction("GetPersonalInformation", new { id = personalInformation.Id }, personalInformation);
+        //}
+
+        #endregion
+
+        // DELETE: api/PersonalInformations/Delete
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<PersonalInformation>> PostPersonalInformation(PersonalInformation personalInformation)
+        public IActionResult DeletePersonalInformation(int id)
         {
-            context.PersonalInformations.Add(personalInformation);
-            await context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPersonalInformation", new { id = personalInformation.Id }, personalInformation);
-        }
-
-        // DELETE: api/PersonalInformations/5
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> DeletePersonalInformation(int id)
-        {
-            var personalInformation = await context.PersonalInformations.FindAsync(id);
-            if (personalInformation == null)
+            var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            try
             {
-                return NotFound();
+                if (!string.IsNullOrEmpty(username))
+                { personalInfoService.Delete(id, username); }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
-            context.PersonalInformations.Remove(personalInformation);
-            await context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok("Successfully deleted");
         }
     }
 }

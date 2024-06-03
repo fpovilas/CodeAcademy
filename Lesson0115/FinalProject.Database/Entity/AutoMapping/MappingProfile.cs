@@ -7,7 +7,10 @@ namespace FinalProject.Database.Entity.AutoMapping
     {
         public MappingProfile()
         {
-            CreateMap<PersonalInformation, PersonalInformationDTO>().ReverseMap();
+            CreateMap<PersonalInformation, PersonalInformationDTO>()
+                .ForMember(dst => dst.PlaceOfResidence, opt => opt.MapFrom(src => src.PlaceOfResidence))
+                .ReverseMap();
+
             CreateMap<PlaceOfResidence, PlaceOfResidenceDTO>().ReverseMap();
         }
     }

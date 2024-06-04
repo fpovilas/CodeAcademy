@@ -12,13 +12,21 @@ namespace FinalProject.Business.Service
     {
         private readonly string imagePath = @"./ProfilePictures";
 
-        public IEnumerable<PersonalInformationDTO> GetAll(string username)
+        public IEnumerable<PersonalInformationWithIdDTO> GetAll(string username)
         {
             var allPIR = personalInfoRepository.GetAll(username);
             if (allPIR is null || !allPIR.Any())
             { throw new Exception($"The user {username} has no personal information stored"); }
 
             return allPIR;
+        }
+
+        public PersonalInformationWithIdDTO Get(int id, string username)
+        {
+            var personalInfo = personalInfoRepository.Get(id, username);
+            if (personalInfo is null)
+            { throw new Exception("Data does not exist."); }
+            else { return personalInfo!; }
         }
 
         public void Put(PersonalInformationDTO personalInformationDTO, IFormFile file, string? username)
@@ -76,6 +84,26 @@ namespace FinalProject.Business.Service
             }
 
             if (!isDeleted) { personalInfoRepository.Delete(infoToDelete); }
+        }
+
+        public bool GetProfilePicture(int idPI, string username, out string msg, out string profilePicturePath)
+        {
+            profilePicturePath = personalInfoRepository.GetProfilePicture(idPI, username);
+            msg = string.Empty;
+
+            if (profilePicturePath is null)
+            {
+                msg = "Image not found.";
+                return false;
+            }
+
+            if (!File.Exists(profilePicturePath))
+            {
+                msg = "File does not exist on disk.";
+                return false;
+            }
+
+            return true;
         }
     }
 }

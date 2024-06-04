@@ -25,7 +25,7 @@ namespace FinalProject.Business.Service
                 issuer: configuration.GetSection("Jwt:Issuer").Value,
                 audience: configuration.GetSection("Jwt:Audience").Value,
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(600),
+                expires: DateTime.Now.AddSeconds(4 * 60 * 60),
                 signingCredentials: cred);
 
 

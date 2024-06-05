@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace FinalProject.Main.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonalInformationsController(IPersonalInfoService personalInfoService) : ControllerBase
@@ -35,7 +35,7 @@ namespace FinalProject.Main.Controllers
         }
 
         // GET: api/PersonalInformations/5
-        [HttpGet("GetById/{id}")]
+        [HttpGet("GetById/{idPI}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -79,12 +79,11 @@ namespace FinalProject.Main.Controllers
         }
 
         // POST: api/PersonalInformations
-        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("UpdatePersonalInformation")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<PersonalInformationUpdateDTO> UpdatePersonalInformation([FromForm] PersonalInformationUpdateDTO personalInformation, int idPI)
+        public ActionResult<PersonalInformationUpdateDTO> UpdatePersonalInformation([FromForm] PersonalInformationUpdateDTO personalInformation, [FromForm] ImageUpdateUploadRequest request, int idPI)
         {
             try
             {
@@ -93,7 +92,7 @@ namespace FinalProject.Main.Controllers
                 if (string.IsNullOrEmpty(username))
                 { return BadRequest("Please log in."); }
 
-                //personalInfoService.Update(personalInformation, idPI, username);
+                personalInfoService.Update(personalInformation, request.Image!, idPI, username);
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
 
@@ -101,7 +100,7 @@ namespace FinalProject.Main.Controllers
         }
 
         // DELETE: api/PersonalInformations/Delete
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("Delete/{idPI}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

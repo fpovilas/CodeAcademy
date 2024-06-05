@@ -19,6 +19,12 @@ namespace FinalProject.Database.Entity.AutoMapping
                 .ForMember(dst => dst.PlaceOfResidence, opt => opt.MapFrom(src => src.PlaceOfResidence))
                 .ReverseMap();
 
+            CreateMap<User, UserAdminDTO>()
+                .ForMember(dst => dst.PersonalInformations, opt => opt.MapFrom(src => src.PersonalInformations))
+                .ReverseMap();
+
+            CreateMap<PersonalInformation, PersonalInformationAdminDTO>().ReverseMap();
+
             CreateMap<PlaceOfResidence, PlaceOfResidenceDTO>().ReverseMap();
             CreateMap<PlaceOfResidence, PlaceOfResidenceWithIdDTO>().ReverseMap();
             CreateMap<PlaceOfResidence, PlaceOfResidenceUpdateDTO>().ReverseMap();

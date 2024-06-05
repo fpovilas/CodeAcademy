@@ -18,23 +18,28 @@ namespace FinalProject.Shared.DTOs
         {
             // City, Street, HouseNumber, ApartmentNumber
             bool isCity, isStreet, isHouseNum, isApartmentNum;
-            if (City is not null)
-            { isCity = LithuanianCities.City.Contains(City); }
-            else { isCity = true; }
 
-            if (Street is not null)
-            { isStreet = Regex.IsMatch(Street, streetCheckRegex); }
-            else { isStreet = true; }
+            isCity = ValidateCity();
 
-            if (HouseNumber is not null)
-            { isHouseNum = Regex.IsMatch(HouseNumber, houseNumRegex); }
-            else { isHouseNum = true; }
+            isStreet = ValidateStreet();
 
-            if (ApartmentNumber is not null)
-            { isApartmentNum = Regex.IsMatch(ApartmentNumber, apartmentNumRegex); }
-            else { isApartmentNum = true; }
+            isHouseNum = ValidateHouseNumber();
+
+            isApartmentNum = ValidateApartmentNumber();
 
             return isCity && isStreet && isHouseNum && isApartmentNum;
         }
+
+        public bool ValidateCity()
+            => LithuanianCities.City.Contains(City!);
+
+        public bool ValidateStreet()
+            => Regex.IsMatch(Street!, streetCheckRegex);
+
+        public bool ValidateHouseNumber()
+            => Regex.IsMatch(HouseNumber!, houseNumRegex);
+
+        public bool ValidateApartmentNumber()
+            => Regex.IsMatch(ApartmentNumber!, apartmentNumRegex);
     }
 }

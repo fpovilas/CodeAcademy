@@ -10,5 +10,6 @@ namespace FinalProject.Business.Service.Interface
         IEnumerable<PersonalInformationWithIdDTO> GetAll(string username);
         bool GetProfilePicture(int idPI, string username, out string msg, out string profilePicturePath);
         void Put(PersonalInformationDTO personalInformationDTO, IFormFile file, string? username);
+        PersonalInformationUpdateDTO Update(PersonalInformationUpdateDTO personalInformation, IFormFile file, int idPI, string username);
     }
 }

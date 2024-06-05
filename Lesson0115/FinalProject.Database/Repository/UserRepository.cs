@@ -17,5 +17,11 @@ namespace FinalProject.Database.Repository
             => context.Users
             .Include(u => u.PersonalInformations)
             .FirstOrDefault(u => u.Username!.Equals(username));
+
+        public User? FindById(int id)
+            => context.Users
+                .Include(u => u.PersonalInformations)
+                !.ThenInclude(pi => pi.PlaceOfResidence)
+                .FirstOrDefault(u => u.Id == id)!;
     }
 }

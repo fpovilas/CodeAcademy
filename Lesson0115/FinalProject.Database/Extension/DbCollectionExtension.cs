@@ -16,6 +16,7 @@ namespace FinalProject.Database.Extension
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPersonalInfoRepository, PersonalInfoRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
             return services;
         }
     }

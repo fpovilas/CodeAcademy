@@ -1,41 +1,41 @@
-﻿using AutoMapper;
-using FinalProject.Database.Database;
+﻿using FinalProject.Database.Database;
 using FinalProject.Database.Entity;
 using FinalProject.Database.Repository.Interface;
-using FinalProject.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Database.Repository
 {
-    public class PersonalInfoRepository(PRSDbContext context, IMapper mapper) : IPersonalInfoRepository
+    public class PersonalInfoRepository(PRSDbContext context) : IPersonalInfoRepository
     {
-        public IEnumerable<PersonalInformationWithIdDTO> GetAll(string username)
+        public IEnumerable<PersonalInformation> GetAll(string username)
         {
             var allPI = context.PersonalInformations
                 .Include(pi => pi.PlaceOfResidence)
                 .Include(pi => pi.User)
-                .Where(pi => pi.User!.Username!.Equals(username)).ToList();
+                .Where(pi => pi.User!.Username!.Equals(username)).ToList() ?? throw new Exception("Data does not exist.");
 
-            var dtoPI = mapper.Map<List<PersonalInformationWithIdDTO>>(allPI);
-
-            return dtoPI;
+            return allPI;
         }
 
-        public PersonalInformationWithIdDTO Get(int id, string username)
+        public PersonalInformation Get(int id, string username)
         {
             var pI = context.PersonalInformations
                 .Include(pi => pi.PlaceOfResidence)
                 .Include(pi => pi.User)
-                .FirstOrDefault(pi => pi.User!.Username!.Equals(username) && pi.Id == id);
+                .FirstOrDefault(pi => pi.User!.Username!.Equals(username) && pi.Id == id) ?? throw new Exception("Data does not exist.");
 
-            var dtoPI = mapper.Map<PersonalInformationWithIdDTO>(pI);
-
-            return dtoPI;
+            return pI;
         }
 
         public void Put(PersonalInformation personalInfo)
         {
             context.PersonalInformations.Add(personalInfo);
+            context.SaveChanges();
+        }
+
+        public void Update(PersonalInformation personalInformation)
+        {
+            context.PersonalInformations.Update(personalInformation);
             context.SaveChanges();
         }
 

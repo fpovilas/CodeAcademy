@@ -28,7 +28,7 @@ namespace FinalProject.Shared.DTOs
             if (LastName is not null) { isLastName = ValidateLastName(); }
             else { isLastName = true; }
 
-            if (Birthday is not null) { isBirthday = Birthday < DateOnly.FromDateTime(DateTime.Now); }
+            if (Birthday is not null) { isBirthday = ValidateBirthday(); }
             else { isBirthday = true; }
 
             if (PersonalCode is not null) { isPersonalCode = ValidatePersonalCode(); }
@@ -43,21 +43,24 @@ namespace FinalProject.Shared.DTOs
             return isName && isLastName && isBirthday && isPersonalCode && isPhoneNumber && isEmailAddress;
         }
 
-        private bool ValidateFirstName()
+        public bool ValidateFirstName()
         {
             var isName = Regex.IsMatch(Name!, nameAndLastNameCheck);
 
             return isName;
         }
 
-        private bool ValidateLastName()
+        public bool ValidateLastName()
         {
             var isLastName = Regex.IsMatch(LastName!, nameAndLastNameCheck);
 
             return isLastName;
         }
 
-        private bool ValidatePersonalCode()
+        public bool ValidateBirthday()
+            => Birthday < DateOnly.FromDateTime(DateTime.Now);
+
+        public bool ValidatePersonalCode()
         {
             List<int> firstRound = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
             List<int> secondRound = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
@@ -111,6 +114,12 @@ namespace FinalProject.Shared.DTOs
             return validPersonalCode;
         }
 
+        public bool ValidatePhoneNumber()
+            => Regex.IsMatch(PhoneNumber!, phoneNumberCheck);
+
+        public bool ValidateEmailAddress()
+            => Regex.IsMatch(EmailAddress!, emailCheck);
+
         private List<int> ToIntList(string personalCode)
         {
             List<int> list = [];
@@ -122,11 +131,5 @@ namespace FinalProject.Shared.DTOs
 
             return list;
         }
-
-        private bool ValidatePhoneNumber()
-            => Regex.IsMatch(PhoneNumber!, phoneNumberCheck);
-
-        private bool ValidateEmailAddress()
-            => Regex.IsMatch(EmailAddress!, emailCheck);
     }
 }

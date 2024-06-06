@@ -4,6 +4,7 @@ namespace FinalProject.Database.Repository.Interface
 {
     public interface IPersonalInfoRepository
     {
+        PersonalInformation AdminGet(int id);
         void Delete(PersonalInformation personalInfo);
         PersonalInformation Get(int id, string username);
         IEnumerable<PersonalInformation> GetAll(string username);

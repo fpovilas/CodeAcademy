@@ -55,7 +55,7 @@ namespace FinalProject.Main.Controllers
         }
 
         // PUT: api/PersonalInformations/AddPersonalInformation
-        [HttpPut("AddPersonalInformation")]
+        [HttpPost("AddPersonalInformation")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -79,7 +79,7 @@ namespace FinalProject.Main.Controllers
         }
 
         // POST: api/PersonalInformations
-        [HttpPost("UpdatePersonalInformation")]
+        [HttpPatch("UpdatePersonalInformation")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -104,7 +104,7 @@ namespace FinalProject.Main.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult DeletePersonalInformation(int idPI)
+        public IActionResult Delete(int idPI)
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
             try
@@ -118,6 +118,33 @@ namespace FinalProject.Main.Controllers
             }
 
             return Ok("Successfully deleted");
+        }
+
+        // DELETE: api/PersonalInformations/AdminDelete
+        [HttpDelete("AdminDelete/{idPI}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult AdminDelete(int idPI)
+        {
+            var userClaim = User.Claims;
+            string user;
+            PersonalInformationAdminDTO? deletedUserPi;
+
+            try
+            {
+                user = personalInfoService.AdminDelete(idPI, userClaim, out deletedUserPi);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(new
+            {
+                Message = $"Successfully deleted users {user} personal info",
+                DeletedPersonalInfo = deletedUserPi
+            });
         }
 
         // GET: api/PersonalInformations/DownloadProfilePicture

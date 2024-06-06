@@ -23,5 +23,25 @@ namespace FinalProject.Database.Repository
                 .Include(u => u.PersonalInformations)
                 !.ThenInclude(pi => pi.PlaceOfResidence)
                 .FirstOrDefault(u => u.Id == id)!;
+
+        public IEnumerable<User> GetAll()
+            => context!.Users!.Include(u => u.PersonalInformations)!.ThenInclude(pi => pi.PlaceOfResidence) ?? throw new Exception("User does not exist.");
+
+        public User Get(int idU)
+            => context!.Users
+                            !.Include(u => u.PersonalInformations)
+                            !.ThenInclude(pi => pi.PlaceOfResidence)
+                            !.FirstOrDefault(u => u.Id == idU) ?? throw new Exception("User does not exist.");
+
+        public bool Delete(User user)
+        {
+            try
+            {
+                context.Users.Remove(user);
+                context.SaveChanges();
+                return true;
+            }
+            catch { return false; }
+        }
     }
 }

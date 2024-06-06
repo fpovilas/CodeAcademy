@@ -11,7 +11,6 @@ namespace FinalProject.Business.Extension
             services.AddTransient<IJWTService, JWTService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPersonalInfoService, PersonalInfoService>();
-            services.AddScoped<IAdminService, AdminService>();
             return services;
         }
     }

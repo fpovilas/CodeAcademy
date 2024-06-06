@@ -27,6 +27,16 @@ namespace FinalProject.Database.Repository
             return pI;
         }
 
+        public PersonalInformation AdminGet(int id)
+        {
+            var pI = context.PersonalInformations
+                .Include(pi => pi.PlaceOfResidence)
+                .Include(pi => pi.User)
+                .FirstOrDefault(pi => pi.Id == id) ?? throw new Exception("Data does not exist.");
+
+            return pI;
+        }
+
         public void Put(PersonalInformation personalInfo)
         {
             context.PersonalInformations.Add(personalInfo);

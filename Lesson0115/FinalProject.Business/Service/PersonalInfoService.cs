@@ -5,7 +5,9 @@ using FinalProject.Database.Entity;
 using FinalProject.Database.Repository.Interface;
 using FinalProject.Shared.CustomExceptions;
 using FinalProject.Shared.DTOs;
+using FinalProject.Shared.Enums;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace FinalProject.Business.Service
 {
@@ -34,7 +36,7 @@ namespace FinalProject.Business.Service
         {
             if (username is not null)
             {
-                if (personalInformationDTO.Validate() && personalInformationDTO.PlaceOfResidence.Validate())
+                if (personalInformationDTO.Validate())
                 {
                     var personalInfo = mapper.Map<PersonalInformation>(personalInformationDTO);
                     var placeOfResidence = mapper.Map<PlaceOfResidence>(personalInformationDTO.PlaceOfResidence);
@@ -151,6 +153,45 @@ namespace FinalProject.Business.Service
             }
 
             if (!isDeleted) { personalInfoRepository.Delete(infoToDelete); }
+        }
+
+        public string AdminDelete(int idPi, IEnumerable<Claim> claims, out PersonalInformationAdminDTO? deletedPI)
+        {
+            deletedPI = null;
+            bool isDeleted = false;
+
+            var userRole = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)!.Value;
+            var userName = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)!.Value;
+
+            if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(userRole))
+            { throw new Exception("Failed to parse user role or username"); }
+
+            if (userRole.Equals(Roles.Admin.ToString()))
+            {
+                var piToDelete = personalInfoRepository.AdminGet(idPi);
+                deletedPI = mapper.Map<PersonalInformationAdminDTO>(piToDelete);
+                var user = piToDelete.User?.Username ?? throw new NoDataException("There is no data about user");
+
+                var infoToDelete = piToDelete.ProfilePicturePath ?? throw new Exception($"Given personal information does not have profile picture.");
+                try
+                {
+                    DeleteImage(infoToDelete);
+                }
+                catch
+                {
+                    personalInfoRepository.Delete(piToDelete);
+                    isDeleted = true;
+                }
+
+                if (!isDeleted)
+                {
+                    personalInfoRepository.Delete(piToDelete);
+                    return user;
+                }
+
+                return user;
+            }
+            else { throw new Exception($"User {userName} is not Admin"); }
         }
 
         public bool GetProfilePicture(int idPI, string username, out string msg, out string profilePicturePath)

@@ -41,7 +41,7 @@ namespace FinalProject.Business.Service
         {
             var role = userClaim.Value;
 
-            if (string.IsNullOrWhiteSpace(role)) { throw new Exception("User is not admin"); }
+            if (string.IsNullOrWhiteSpace(role) || role.Equals(Roles.User.ToString())) { throw new Exception("User is not admin"); }
 
             var users = userRepository.GetAll();
 
@@ -52,7 +52,7 @@ namespace FinalProject.Business.Service
         {
             var role = userClaim.Value;
 
-            if (string.IsNullOrWhiteSpace(role)) { throw new Exception("User is not admin"); }
+            if (string.IsNullOrWhiteSpace(role) || role.Equals(Roles.User.ToString())) { throw new Exception("User is not admin"); }
 
             var user = userRepository.Get(idU);
 

@@ -8,7 +8,7 @@ namespace FinalProject.Shared.DTOs
         public required string Username { get; set; }
         public required string Password { get; set; }
 
-        public readonly string passValidationRegex = @"^(?=.*[A-Z].*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d.*\d)(?=.*[\W_].*[\W_]).{12,}$";
+        private readonly string passValidationRegex = @"^(?=.*[A-Z].*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d.*\d)(?=.*[\W_].*[\W_]).{12,}$";
 
         public bool CheckUsername()
         {

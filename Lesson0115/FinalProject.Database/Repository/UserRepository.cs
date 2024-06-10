@@ -9,6 +9,10 @@ namespace FinalProject.Database.Repository
     {
         public void SignUp(User user)
         {
+            var userInDb = context.Users.FirstOrDefault(u => u.Username!.Equals(user.Username));
+
+            if (userInDb != null) { throw new Exception("User already exists."); }
+
             context.Users.Add(user);
             context.SaveChanges();
         }

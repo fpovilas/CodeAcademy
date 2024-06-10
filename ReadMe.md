@@ -660,8 +660,12 @@
 
 - Final Priject #6
 
-#### [Lesson 120 (2024-06-06)](/Lesson0115/)
+#### [Lesson 121 (2024-06-06)](/Lesson0115/)
 
 - Final Priject #7
+
+#### [Lesson 122 (2024-06-10)](/Lesson0115/)
+
+- Final Priject #8
     
 </details>

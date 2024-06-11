@@ -634,15 +634,15 @@
 
 #### [Lesson 115 (2024-05-28)](/Lesson0115/)
 
-- Final Priject #1
+- Final Project #1
 
 #### [Lesson 116 (2024-05-29)](/Lesson0115/)
 
-- Final Priject #2
+- Final Project #2
 
 #### [Lesson 117 (2024-05-30)](/Lesson0115/)
 
-- Final Priject #3
+- Final Project #3
 
 </details>
 <details>
@@ -650,22 +650,26 @@
 
 #### [Lesson 118 (2024-06-03)](/Lesson0115/)
 
-- Final Priject #4
+- Final Project #4
 
 #### [Lesson 119 (2024-06-04)](/Lesson0115/)
 
-- Final Priject #5
+- Final Project #5
 
 #### [Lesson 120 (2024-06-05)](/Lesson0115/)
 
-- Final Priject #6
+- Final Project #6
 
 #### [Lesson 121 (2024-06-06)](/Lesson0115/)
 
-- Final Priject #7
+- Final Project #7
 
 #### [Lesson 122 (2024-06-10)](/Lesson0115/)
 
-- Final Priject #8
+- Final Project #8
+
+#### [Lesson 123 (2024-06-11)](/Lesson0115/)
+
+- Final Project #9
     
 </details>

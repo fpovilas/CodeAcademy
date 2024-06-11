@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace FinalProject.Test.Data
 {
-    public class UserSpecimenBuilder : ISpecimenBuilder
+    public class UserServiceFailureSpecimenBuilder : ISpecimenBuilder
     {
         public object Create(object request, ISpecimenContext context)
         {
@@ -27,8 +27,8 @@ namespace FinalProject.Test.Data
             {
                 return new SignUpUserDTO
                 {
-                    Username = "Username123",
-                    Password = "PasswordS123!-"
+                    Username = "Username",
+                    Password = "Password"
                 };
             }
 

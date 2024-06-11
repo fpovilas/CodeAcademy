@@ -28,25 +28,67 @@ namespace FinalProject.Shared.DTOs
             else { throw new Exception($"Could not validate personal code: {PersonalCode} "); }
         }
 
+        // Returns true if Male if Female or Other returns false
+        private bool IsMale()
+        {
+            int genderNum = int.Parse(PersonalCode[..1]);
+            bool isMale = false;
+            switch (Gender.ToString())
+            {
+                case "Male":
+                    if (genderNum == 1 || genderNum == 3 || genderNum == 5) { isMale = true; }
+                    break;
+                default:
+                    isMale = false;
+                    break;
+            }
+
+            return isMale;
+        }
+
+        private bool IsFemale()
+        {
+            int genderNum = int.Parse(PersonalCode[..1]);
+            bool isFemale = false;
+            switch (Gender.ToString())
+            {
+                case "Female":
+                    if (genderNum == 2 || genderNum == 4 || genderNum == 6) { isFemale = false; }
+                    break;
+                default:
+                    isFemale = false;
+                    break;
+            }
+
+            return isFemale;
+        }
+
         private bool ValidatePersonalCode()
         {
-            List<int> firstRound = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
-            List<int> secondRound = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
             Dictionary<int, List<int>> rounds = new()
             {
-                { 0, firstRound},
-                { 1, secondRound}
+                { 0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]},
+                { 1, [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]}
             };
             int personalCodeLength = 11;
             int roundsNumber = 2;
             int sum;
             int controlNumber;
             bool validPersonalCode = false;
+            bool isMale = IsMale();
+            bool isFemale = IsFemale();
+            bool isOther = int.Parse(PersonalCode[..1]) == 9;
 
             if (PersonalCode.Length < 11)
-            { throw new Exception("Impossible to calculate."); }
+            { return false; }
 
             List<int> personalCodeToNumList = ToIntList(PersonalCode);
+
+            if (isOther)
+            { return true; }
+
+            if (isMale == isFemale)
+            { return false; }
 
             for (int j = 0; j < roundsNumber; j++)
             {
@@ -78,6 +120,7 @@ namespace FinalProject.Shared.DTOs
             if (birthDate.Equals(birthDateFromPersonalCode) && validPersonalCode)
             { validPersonalCode = true; }
             else { validPersonalCode = false; }
+
 
             return validPersonalCode;
         }

@@ -44,7 +44,7 @@ namespace FinalProject.Main.Controllers
             return Ok(jwt);
         }
 
-        // GET: api/User/All
+        // GET: api/User/AdminGetAll
         [Authorize(Roles = "Admin")]
         [HttpGet("AdminGetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -59,7 +59,9 @@ namespace FinalProject.Main.Controllers
                 if (userClaim is null)
                 { return BadRequest("Please log in."); }
 
-                return Ok(userService.GetAll(userClaim));
+                var value = userService.GetAll(userClaim);
+
+                return Ok(value);
             }
             catch (Exception ex)
             {
@@ -67,7 +69,7 @@ namespace FinalProject.Main.Controllers
             }
         }
 
-        // GET: api/User/GetById/5
+        // GET: api/User/AdminGetById/5
         [HttpGet("AdminGetById/{idU}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -86,7 +88,7 @@ namespace FinalProject.Main.Controllers
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
 
-        // DELETE: api/User/Delete
+        // DELETE: api/User/AdminDelete/5
         [HttpDelete("AdminDelete/{idU}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

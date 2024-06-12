@@ -136,7 +136,7 @@ namespace FinalProject.Business.Service
             return mapper.Map<PersonalInformationUpdateDTO>(pIR);
         }
 
-        public void Delete(int id, string username)
+        public string Delete(int id, string username)
         {
             bool isDeleted = false;
 
@@ -144,15 +144,22 @@ namespace FinalProject.Business.Service
 
             ICollection<PersonalInformation> personalInfoList = user.PersonalInformations ?? throw new Exception($"User does not have any personal info yet.");
 
-            var infoToDelete = personalInfoList.FirstOrDefault(pi => pi.Id == id) ?? throw new Exception($"Personal information with supplied Id does not exist in users personal info list.");
+            var infoToDelete = personalInfoList.FirstOrDefault(pi => pi.Id == id) ?? throw new NoDataException($"Personal information with supplied Id does not exist in users personal info list.");
             try { DeleteImage(infoToDelete.ProfilePicturePath!); }
             catch
             {
                 personalInfoRepository.Delete(infoToDelete);
                 isDeleted = true;
+                return $"{infoToDelete.Name} {infoToDelete.LastName}";
             }
 
-            if (!isDeleted) { personalInfoRepository.Delete(infoToDelete); }
+            if (!isDeleted)
+            {
+                personalInfoRepository.Delete(infoToDelete);
+                return $"{infoToDelete.Name} {infoToDelete.LastName}";
+            }
+
+            throw new NoDataException("No data was deleted.");
         }
 
         public string AdminDelete(int idPi, IEnumerable<Claim> claims, out PersonalInformationAdminDTO? deletedPI)
@@ -230,8 +237,7 @@ namespace FinalProject.Business.Service
             { Directory.CreateDirectory(imagePath); }
 
             var imgData = ImageHelper.Resize(imageBytes, 200, 200);
-            ImageHelper.SaveNoteImageThumbnail(imageFilePath, imgData);
-            File.WriteAllBytes(imageFilePath, imageBytes);
+            File.WriteAllBytes(imageFilePath, imgData);
 
             return imageFilePath;
         }

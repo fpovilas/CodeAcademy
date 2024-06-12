@@ -26,15 +26,8 @@ namespace FinalProject.Business.Helper
             imgSharp.Mutate(x => x.Resize(newWidth, newHeight));
 
             using MemoryStream outStream = new();
-            imgSharp.SaveAsPng(outStream);
+            imgSharp.SaveAsJpeg(outStream);
             return outStream.ToArray();
-        }
-
-        public static void SaveNoteImageThumbnail(string path, byte[] imageData)
-        {
-            using MemoryStream inStream = new(imageData);
-            using Image<Rgba32> imgSharp = Image.Load<Rgba32>(inStream);
-            imgSharp.SaveAsPng(path);
         }
     }
 }

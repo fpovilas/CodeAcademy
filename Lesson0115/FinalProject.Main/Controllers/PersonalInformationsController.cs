@@ -107,17 +107,18 @@ namespace FinalProject.Main.Controllers
         public IActionResult Delete(int idPI)
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            string returnedData = string.Empty;
             try
             {
                 if (!string.IsNullOrEmpty(username))
-                { personalInfoService.Delete(idPI, username); }
+                { returnedData = personalInfoService.Delete(idPI, username); }
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
-            return Ok("Successfully deleted");
+            return Ok($"Successfully deleted{(string.IsNullOrEmpty(returnedData) ? "" : " " + returnedData)} personal info");
         }
 
         // DELETE: api/PersonalInformations/AdminDelete

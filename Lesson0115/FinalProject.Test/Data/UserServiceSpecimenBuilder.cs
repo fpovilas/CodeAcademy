@@ -53,6 +53,16 @@ namespace FinalProject.Test.Data
                 return "Token";
             }
 
+            if (request is Type t6 && t6 == typeof(IEnumerable<Claim>))
+            {
+                IEnumerable<Claim> claims =
+                    [
+                        new Claim(ClaimTypes.Role, "Admin", ClaimValueTypes.String),
+                        new Claim(ClaimTypes.Name, "User", ClaimValueTypes.String),
+                    ];
+                return claims;
+            }
+
             return new NoSpecimen();
         }
     }

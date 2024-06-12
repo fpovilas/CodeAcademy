@@ -41,7 +41,7 @@ namespace FinalProject.Business.Service
         {
             var role = userClaim.Value;
 
-            if (string.IsNullOrWhiteSpace(role) || role.Equals(Roles.User.ToString())) { throw new Exception("User is not admin"); }
+            if (string.IsNullOrWhiteSpace(role) || role.Equals(Roles.User.ToString())) { throw new Exception("User is not admin."); }
 
             var users = userRepository.GetAll();
 
@@ -56,7 +56,9 @@ namespace FinalProject.Business.Service
 
             var user = userRepository.Get(idU);
 
-            return mapper.Map<UserAdminDTO>(user);
+            var mappedUser = mapper.Map<UserAdminDTO>(user);
+
+            return mappedUser;
         }
 
         public string Delete(int idU, IEnumerable<Claim> claims)

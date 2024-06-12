@@ -1,6 +1,3 @@
 @FinalProject.Main_HostAddress = http://localhost:5091
 
-GET {{FinalProject.Main_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ###

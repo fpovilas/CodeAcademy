@@ -6,6 +6,8 @@ namespace FinalProject.Business.Helper
 {
     public static class ImageHelper
     {
+        // Resizing keeps aspect ration so if file is not square it will take
+        // Bigger side gets scaled down and smaller side gets value that is set by user
         public static byte[] Resize(byte[] imageData, int width, int height)
         {
             using MemoryStream inStream = new(imageData);

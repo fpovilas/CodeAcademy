@@ -53,7 +53,7 @@ namespace FinalProject.Shared.DTOs
             switch (Gender.ToString())
             {
                 case "Female":
-                    if (genderNum == 2 || genderNum == 4 || genderNum == 6) { isFemale = false; }
+                    if (genderNum == 2 || genderNum == 4 || genderNum == 6) { isFemale = true; }
                     break;
                 default:
                     isFemale = false;

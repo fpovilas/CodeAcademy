@@ -4,7 +4,7 @@
 - Lesson057 - 074 ***SQL***
 - Lesson075 - 079 ***Software Testing***
 - Lesson080 - 114 ***API***
-- Lesson115 - 000 ***[Final Project](/Lesson0115/)***
+- Lesson115 - 125 ***[Final Project](/Lesson0115/)***
 
 ## Lessons sorted by month
 
@@ -676,5 +676,11 @@
 
 - Final Project #10
  - Presentation #1
+
+#### [Lesson 125 (2024-06-13)](/Lesson0115/)
+
+- Final Project #11
+ - Presentation #2
+    - Need to fix PersonalInformationUpdateDTO to validate correctly
     
 </details>

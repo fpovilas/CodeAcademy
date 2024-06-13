@@ -10,6 +10,7 @@ namespace FinalProject.Main.Controllers
     [ApiController]
     public class UserController(IUserService userService) : ControllerBase
     {
+        // POST: api/User/SignUp
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("SignUp")]
@@ -28,6 +29,7 @@ namespace FinalProject.Main.Controllers
             return Ok(user.Username);
         }
 
+        // POST: api/User/LogIn
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("LogIn")]

@@ -1,3 +1,5 @@
+## [Useful information](/UsefulInfomation.md)
+
 ## Lessons by Level
 - Lesson001 - 023 ***Basic C#***
 - Lesson024 - 056 ***Advanced C#***
